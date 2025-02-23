@@ -13,8 +13,8 @@
     }
   }
   
-  /* Tarjeta de la izquierda */
-  .sobre-mi__left {
+ /* Tarjeta de la izquierda con foto centrada */
+.sobre-mi__left {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(10.5px);
     -webkit-backdrop-filter: blur(10.5px);
@@ -23,16 +23,22 @@
     padding: 1.5rem;
     color: white;
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centra la imagen y el contenido */
+    text-align: center;  /* Centra el texto */
   }
   
   .sobre-mi__left img {
-    border-radius: 10px;
-    margin: 0 auto 1rem;
-    width: 280px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    width: 320px;
     height: 160px;
     object-fit: cover;
     border: 4px solid white;
   }
+
+  
   
   .sobre-mi__left h2 {
     text-align: center;
@@ -44,7 +50,11 @@
   .sobre-mi__left p {
     text-align: justify;
     line-height: 1.6;
+    max-width: 80%;  /* Limita el ancho del texto al 80% del contenedor */
+    margin: 0 auto;  /* Centra el texto horizontalmente */
+    text-align: justify;  /* Justifica el texto para mayor legibilidad */
   }
+  
   
   /* Tarjetas de estudios */
   .sobre-mi__right {
@@ -100,6 +110,7 @@
   }
   
   /* Cursos y certificaciones */
+  /* Tarjeta de certificados más corta horizontalmente */
   .sobre-mi__certifications {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(10.5px);
@@ -109,7 +120,9 @@
     padding: 1.5rem;
     color: white;
     position: relative;
-    z-index: 2; /* Eleva los elementos por encima del fondo */
+    z-index: 2;
+    max-width: 700px;  /* Limita el ancho de la tarjeta */
+    margin: 0 auto;    /* Centra la tarjeta horizontalmente */
   }
   
   .sobre-mi__certifications h3 {
@@ -146,4 +159,5 @@
     -webkit-text-fill-color: transparent;
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
+  
   

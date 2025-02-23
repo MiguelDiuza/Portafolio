@@ -1,0 +1,255 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+
+}
+
+/* Header con sombra degradada */
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  z-index: 3000; /* Encima de todo */
+}
+
+/* Contenido del header */
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Sombra debajo del header */
+.header-shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px; /* Más larga */
+  background: linear-gradient(to bottom, rgba(0, 0, 50, 0.8), rgba(0, 0, 50, 0)); /* Degradado de azul oscuro a transparente */
+  z-index: 2000; /* Debajo del header */
+  pointer-events: none; /* No interfiere con los clics */
+}
+
+
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: -120px 0 0 60px;
+}
+
+.header-left nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.header-left nav a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.header-left nav a:hover {
+  color: #bababa;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+}
+
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0 40px 0 0;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.card {
+  flex: 1 1 220px;
+  max-width: 250px;
+  min-width: 140px;
+  aspect-ratio: 12 / 18;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.31);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.1px);
+  -webkit-backdrop-filter: blur(8.1px);
+  border: 1px solid rgba(255, 255, 255, 0.31);
+}
+
+/* Main container ajustado */
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: block; /* Cambiado de flex a block */
+  background-image: url('/img/bgNEON.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+
+
+.intro {
+  width: 100vw;  /* Ocupa el ancho completo */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;  /* Para manejar posiciones absolutas dentro */
+  z-index: 1;
+  overflow: hidden;  /* Evita que la imagen sobresalga del contenedor */
+}
+
+.intro-content {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;  /* El texto estará por encima de la imagen */
+}
+
+.intro-text {
+  flex: 1;
+  padding-right: 20px;
+  z-index: 3;  /* Asegura que el texto esté por encima */
+}
+
+.intro-text h1 {
+  font-size: 5.8vw;
+  margin: 0;
+}
+
+.intro-text h2 {
+  font-size: 3vw;
+  margin: 20px 0;
+}
+
+.intro-text p {
+  font-size: 1.2vw;
+  margin-top: 10px;
+}
+
+/* Imagen en posición libre */
+.intro-image {
+  position: absolute;  /* Saca la imagen del flujo normal */
+  bottom: 0;  /* Ajusta la posición desde abajo */
+  right: 0;   /* Ajusta la posición desde la derecha */
+  z-index: 1;  /* Detrás del texto */
+  transform: translate(0%, 23%);  /* Ajuste fino de posición */
+}
+
+.intro-image img {
+  height: 110vh;  /* Ajusta el tamaño manualmente */
+  width: auto;
+  object-fit: contain;
+}
+
+
+/* Contenido principal */
+.content1 {
+  padding: 10px 50px;
+  background-image: url('../img/bgNeon2.png');
+}
+
+.icon-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.icon-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+}
+
+.icon-button.linkedin {
+  background-image: url('/loogos/linkedin.svg');
+}
+
+.icon-button.whatsapp {
+  background-image: url('/loogos/whatsapp.svg');
+  background-size: 120%;
+
+}
+
+.icon-button.behance {
+  background-image: url('/loogos/behance.svg');
+}
+
+/* Botón con forma exacta del SVG */
+.contact-button.con {
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.contact-button.con img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Efecto hover */
+.contact-button.con:hover img {
+  transform: scale(1.05);
+}
+

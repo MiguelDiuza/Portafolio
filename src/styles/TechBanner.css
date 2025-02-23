@@ -1,0 +1,53 @@
+/* Banner con fondo morado */
+.bottom-banner {
+  background: linear-gradient(90deg, #6a00f4, #9a00ff);
+  padding: 6px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Permite controlar el z-index */
+  z-index: 10;  /* Está por encima del contenido */
+}
+
+/* Contenedor de logos */
+.logo-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo general de los logos */
+.tech-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+  padding: 5px;
+}
+
+/* Animación al pasar el mouse */
+.tech-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Aumentar tamaño de Adobe y Unity */
+.logo-container img[alt="Adobe"],
+.logo-container img[alt="Unity"] {
+  width: 90px;
+  height: 90px;
+}
+
+/* Mantener logos en blanco */
+.logo-container img {
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+/* Estilo para el header */
+header {
+  position: relative;
+  z-index: 20;  /* Mantiene el header por encima del banner */
+}

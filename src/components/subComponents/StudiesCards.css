@@ -1,0 +1,77 @@
+.sobre-mi__studies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .study-card {
+    background: linear-gradient(135deg, #1e1e1e, #333);
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .study-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  
+  .study-card p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #bdbdbd;
+  }
+  
+  .study-card img {
+    width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .study-card button {
+    background: #00c853;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .study-card button:hover {
+    background: #00e676;
+  }
+  
+  /* Efecto de hover */
+  .study-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Efectos generados dinámicamente por JS */
+  .study-card::before,
+  .study-card::after {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .study-card:hover::before,
+  .study-card:hover::after {
+    opacity: 1;
+  }
+  

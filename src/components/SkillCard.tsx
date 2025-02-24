@@ -20,7 +20,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ skillName, percentage }) => {
 
   return (
     <div className={`skill-card ${isShrunk ? "shrink" : ""}`}>
-      <div className="skill-circle">
+      <div className="skill-circle" style={{ background: `conic-gradient(#6a5acd ${percentage}% , rgba(255, 255, 255, 0.1) ${percentage}% )` }}>
         <span className="skill-percentage">{percentage}%</span>
       </div>
       <div className="skill-name">{skillName}</div>

@@ -5,7 +5,7 @@ import "./StudiesCards.css";
 interface Study {
   title: string;
   years: string;
-  logo: string;
+  image: string; // Solo la imagen del pie
 }
 
 const StudiesCards: React.FC = () => {
@@ -22,7 +22,6 @@ const StudiesCards: React.FC = () => {
         const touchEvent = e.originalEvent as TouchEvent;
         pos = [touchEvent.touches[0].clientX, touchEvent.touches[0].clientY];
       }
-      
 
       const $card = $(this);
       const l = pos[0];
@@ -73,22 +72,28 @@ const StudiesCards: React.FC = () => {
     {
       title: "Bachiller Técnico en Arte Gráfico",
       years: "2012-2018",
-      logo: "/logos/institucion1.svg",
+      image: "/img/artImg.png", // Ruta de la imagen
     },
     {
       title: "Tecnólogo en Animación 3D",
       years: "2019-2021",
-      logo: "/logos/sena.svg",
+      image: "/img/senaImg.png", // Ruta de la imagen
     },
     {
       title: "Ingeniería Multimedia",
       years: "2021-2026",
-      logo: "/logos/uao.svg",
+      image: "/img/mulImg.png", // Ruta de la imagen
     },
     {
       title: "Especialización en IA",
       years: "En curso",
-      logo: "/logos/uao.svg",
+      image: "/img/iaImg.png", // Ruta de la imagen
+    },
+
+    {
+      title: "Cursos Adicionales",
+      years: "2013 - ∞",
+      image: "/img/cuImg.png", // Ruta de la imagen
     },
   ];
 
@@ -98,8 +103,9 @@ const StudiesCards: React.FC = () => {
         <div key={index} className="study-card">
           <h3>{study.title}</h3>
           <p>{study.years}</p>
-          <img src={study.logo} alt={study.title} />
-          <button>Ver más</button>
+          <div className="study-card-footer">
+            <img src={study.image} alt="Estudio" className="study-card-image" />
+          </div>
         </div>
       ))}
       <style className="hover"></style>

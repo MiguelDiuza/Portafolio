@@ -1,7 +1,7 @@
 .sobre-mi__studies {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Hacer las cartas más pequeñas */
+  gap: 50px; /* Aumentar el espacio entre las cartas */
   padding: 30px;
   justify-content: center;
 }
@@ -11,50 +11,57 @@
   background: rgba(255, 255, 255, 0.15); /* Efecto translúcido */
   backdrop-filter: blur(10px); /* Difuminar fondo */
   -webkit-backdrop-filter: blur(10px);
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  padding: 20px;
+  padding: 15px; /* Reducir el padding interno */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: white;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 210px; /* Tamaño reducido de las tarjetas */
 }
 
-/* Títulos y texto dentro de las tarjetas */
+/* Títulos dentro de las tarjetas */
 .study-card h3 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+  font-size: 1.2rem; /* Mantener tamaño de fuente pequeño */
+  margin-bottom: 5px; /* Reducir espacio debajo del título */
 }
 
+/* Párrafos dentro de las tarjetas */
 .study-card p {
-  font-size: 1rem;
-  margin-bottom: 15px;
+  font-size: 0.9rem; /* Mantener tamaño pequeño de fuente */
+  margin-bottom: 5px; /* Reducir margen inferior */
   color: #e0e0e0;
 }
 
-/* Imágenes en las tarjetas */
-.study-card img {
-  width: 60px;
+/* Contenedor para el botón y la imagen al final */
+.study-card-footer {
+  margin-top: auto; /* Empuja el contenido hacia el fondo */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar la imagen y el botón */
+  align-items: center;
+}
+
+/* Estilo del botón */
+
+
+
+/* Imagen centrada dentro de la tarjeta */
+.study-card-footer img {
+  width: 200px; /* Reducir el tamaño de la imagen */
   height: auto;
-  margin-bottom: 10px;
-}
-
-/* Botón */
-.study-card button {
-  background: #00c853;
-  border: none;
-  padding: 10px 20px;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.study-card button:hover {
-  background: #00e676;
+  margin-top: 6px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* Garantiza que la imagen se mantenga centrada */
 }
 
 /* Efecto hover */

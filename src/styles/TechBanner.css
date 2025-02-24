@@ -1,21 +1,29 @@
-/* Banner con fondo morado */
-.bottom-banner {
+/* Banner con el color morado que tenías antes */
+.infinity-banner {
   background: linear-gradient(90deg, #6a00f4, #9a00ff);
-  padding: 6px 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Permite controlar el z-index */
-  z-index: 10;  /* Está por encima del contenido */
+  padding: 8px 0;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
 }
 
-/* Contenedor de logos */
+/* Contenedor que agrupa los logos y aplica la animación */
 .logo-container {
   display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-  justify-content: center;
+  gap: 0;
+  animation: marquee 20s linear infinite; /* Animación continua */
+}
+
+/* Contenedor para los grupos de logos */
+.logos {
+  display: flex;
+  gap: 30px; /* Espacio entre logos dentro de un grupo */
   align-items: center;
+  height: 100%;
+  padding-left: 16px;
+  flex-shrink: 0; /* Para que los grupos no se compriman */
 }
 
 /* Estilo general de los logos */
@@ -23,9 +31,15 @@
   width: 50px;
   height: 50px;
   object-fit: contain;
-  filter: grayscale(100%);
+  filter: brightness(0) invert(1);  /* Hacer los logos blancos */
   transition: filter 0.3s ease, transform 0.3s ease;
   padding: 5px;
+}
+
+/* Logo más grande para Adobe y Unity */
+.large-logo {
+  width: 90px;
+  height: 90px;
 }
 
 /* Animación al pasar el mouse */
@@ -33,21 +47,29 @@
   transform: scale(1.1);
 }
 
-/* Aumentar tamaño de Adobe y Unity */
-.logo-container img[alt="Adobe"],
-.logo-container img[alt="Unity"] {
-  width: 90px;
-  height: 90px;
+/* Animación de desplazamiento horizontal (efecto de "marquee") */
+@keyframes marquee {
+  0% {
+    transform: translateX(0); /* Empezamos desde la posición inicial */
+  }
+  100% {
+    transform: translateX(-33.33%); /* Desplazamos el contenedor completamente */
+  }
 }
 
-/* Mantener logos en blanco */
-.logo-container img {
-  filter: brightness(0) invert(1);
-  transition: transform 0.3s ease;
+/* Ajuste para que los grupos se repitan correctamente sin espacios vacíos */
+.logo-container {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 300%; /* Aseguramos que haya tres grupos de logos en total */
 }
 
-/* Estilo para el header */
-header {
-  position: relative;
-  z-index: 20;  /* Mantiene el header por encima del banner */
+/* Solución para garantizar que todos los logos se repitan correctamente */
+.logo-container .logos {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding-left: 16px;
+  flex-shrink: 0;
+  width: 33.33%; /* Aseguramos que cada grupo de logos ocupe un tercio del contenedor */
 }

@@ -16,10 +16,10 @@
   
  /* Tarjeta de la izquierda con foto centrada */
 .sobre-mi__left {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(12.5px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.515);
+    backdrop-filter: blur(15.5px);
     -webkit-backdrop-filter: blur(1.5px);
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 1.5rem;
     color: white;
@@ -36,24 +36,28 @@
     width: 320px;
     height: 160px;
     object-fit: cover;
-    border: 4px solid white;
+    border: 2px solid rgb(255, 255, 255);
+    margin-bottom: 1.8rem;
+    box-shadow: 0 8px 32px 0 rgba(138, 49, 255, 0.515);
+
+
   }
 
   
   
-  .sobre-mi__left h2 {
+  .sobre-mi__left h1 {
     text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-size: 4.9rem;
+    margin-bottom: 1.3rem;
   }
   
   .sobre-mi__left p {
     text-align: justify;
-    line-height: 1.6;
+    line-height: 1.5;
     max-width: 80%;  /* Limita el ancho del texto al 80% del contenedor */
     margin: 0 auto;  /* Centra el texto horizontalmente */
     text-align: justify;  /* Justifica el texto para mayor legibilidad */
+    font-weight: bold;
   }
   
   

@@ -100,7 +100,7 @@ const App: React.FC = () => {
         <SobreMi />
       </div>
 
-      <div className="content1">
+      <div className="content2">
         <Proyectos />
       </div>
     </>

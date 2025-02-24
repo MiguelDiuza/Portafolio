@@ -16,7 +16,7 @@ const SobreMi = () => {
 
             {/* Sección derecha */}
             <div className="sobre-mi__right">
-                <h2 className="titulo-estudios">Estudios</h2>
+                <h2 className="titulo-estudios">Educacion</h2>
                 
                 {/* Componente de tarjetas de estudios */}
                 <StudiesCards />

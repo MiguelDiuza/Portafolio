@@ -1,0 +1,80 @@
+.skill-card {
+    width: 150px; /* Tamaño inicial más pequeño */
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    position: sticky;
+    top: 20px; /* Se mantiene en la parte superior */
+  }
+  
+  .skill-card.shrink {
+    width: 100px; /* Tamaño más pequeño proporcional */
+    height: 140px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+    transform: scale(0.85);
+  }
+  
+  .skill-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: conic-gradient(#6a5acd 0% 38%, rgba(255, 255, 255, 0.1) 38%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .skill-percentage {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .skill-name {
+    color: white;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .header-right {
+    display: flex;
+    justify-content: flex-end;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0 40px 0 0;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+  
+  .card {
+    flex: 1 1 220px;
+    max-width: 250px;
+    min-width: 140px;
+    aspect-ratio: 12 / 18;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.31);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.1px);
+    -webkit-backdrop-filter: blur(8.1px);
+    border: 1px solid rgba(255, 255, 255, 0.31);
+  }
+  

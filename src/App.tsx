@@ -3,6 +3,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import TechBanner from "./components/TechBanner"; // Importa el componente aquí
 import SobreMi from "./components/SobreMi";
+import SkillCard from "./components/SkillCard";
 
 
 const App: React.FC = () => {
@@ -36,9 +37,11 @@ const App: React.FC = () => {
           {/* Sección derecha */}
           <div className="header-right">
             <div className="card-container">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="card">{`Tarjeta ${index + 1}`}</div>
-              ))}
+              <SkillCard skillName="Frontend" percentage={75} />
+              <SkillCard skillName="Backend" percentage={60} />
+              <SkillCard skillName="UI/UX" percentage={85} />
+              <SkillCard skillName="3D/AR/VR" percentage={85} />
+              <SkillCard skillName="AI" percentage={85} />
             </div>
           </div>
         </div>

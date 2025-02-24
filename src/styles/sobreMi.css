@@ -147,7 +147,7 @@
   
   .titulo-estudios {
     font-size: 6rem;
-    font-weight: bold;
+    font-weight: 800; /* Extra bold */
     color: #ffffff;
     text-transform: uppercase;
     text-align: center;

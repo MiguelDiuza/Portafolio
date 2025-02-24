@@ -1,4 +1,3 @@
-
 /* Estilos generales */
 body {
   margin: 0;
@@ -7,9 +6,6 @@ body {
 
 }
 
-/* Header con sombra degradada */
-/* Header */
-/* Header */
 .header {
   position: fixed;
   top: 0;
@@ -37,7 +33,7 @@ body {
   left: 0;
   width: 100%;
   height: 30px; /* Ajusta el tamaño del degradado inferior */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)); /* Degradado negro a transparente */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)); /* Degradado negro a transparente */
   z-index: 2000; /* Debajo del header */
   pointer-events: none; /* No interfiere con los clics */
 }

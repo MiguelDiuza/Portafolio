@@ -4,6 +4,8 @@ import "./App.css";
 import TechBanner from "./components/TechBanner"; // Importa el componente aquí
 import SobreMi from "./components/SobreMi";
 import SkillCard from "./components/SkillCard";
+import Proyectos from "./components/Proyectos";
+
 
 
 const App: React.FC = () => {
@@ -96,6 +98,10 @@ const App: React.FC = () => {
       {/* Contenido principal */}
       <div className="content1">
         <SobreMi />
+      </div>
+
+      <div className="content1">
+        <Proyectos />
       </div>
     </>
   );

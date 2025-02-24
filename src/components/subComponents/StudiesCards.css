@@ -1,77 +1,84 @@
 .sobre-mi__studies {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
-    gap: 30px;
-    padding: 30px;
-  }
-  
-  .study-card {
-    background: linear-gradient(135deg, #1e1e1e, #333);
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .study-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-  }
-  
-  .study-card p {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    color: #bdbdbd;
-  }
-  
-  .study-card img {
-    width: 60px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .study-card button {
-    background: #00c853;
-    border: none;
-    padding: 10px 20px;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .study-card button:hover {
-    background: #00e676;
-  }
-  
-  /* Efecto de hover */
-  .study-card:hover {
-    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* Efectos generados dinámicamente por JS */
-  .study-card::before,
-  .study-card::after {
-    content: "";
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    top: -25%;
-    left: -25%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
-    transform: rotate(45deg);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .study-card:hover::before,
-  .study-card:hover::after {
-    opacity: 1;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+  gap: 30px;
+  padding: 30px;
+  justify-content: center;
+}
+
+/* Tarjetas de estudio con efecto vidrio */
+.study-card {
+  background: rgba(255, 255, 255, 0.15); /* Efecto translúcido */
+  backdrop-filter: blur(10px); /* Difuminar fondo */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Títulos y texto dentro de las tarjetas */
+.study-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.study-card p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #e0e0e0;
+}
+
+/* Imágenes en las tarjetas */
+.study-card img {
+  width: 60px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Botón */
+.study-card button {
+  background: #00c853;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.study-card button:hover {
+  background: #00e676;
+}
+
+/* Efecto hover */
+.study-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 20px 30px rgba(255, 255, 255, 0.4);
+}
+
+/* Efectos de luz dinámica */
+.study-card::before,
+.study-card::after {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -25%;
+  left: -25%;
+  background: radial-gradient(circle, rgba(247, 233, 233, 0.13), transparent);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.study-card:hover::before,
+.study-card:hover::after {
+  opacity: 1;
+}

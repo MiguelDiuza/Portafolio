@@ -17,16 +17,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.fade-on-scroll {
+  transition: opacity 0.3s ease;
+}
+
+
 /* Estilos generales */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--bg-dark);
   color: var(--text-color-light);
+  overflow-y: scroll; /* Asegura el scroll vertical */
 }
+
 
 /* Enlaces */
 a {

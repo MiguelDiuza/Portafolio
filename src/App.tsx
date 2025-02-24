@@ -37,11 +37,11 @@ const App: React.FC = () => {
           {/* Sección derecha */}
           <div className="header-right">
             <div className="card-container">
-              <SkillCard skillName="Frontend" percentage={75} />
-              <SkillCard skillName="Backend" percentage={60} />
-              <SkillCard skillName="UI/UX" percentage={85} />
-              <SkillCard skillName="3D/AR/VR" percentage={85} />
-              <SkillCard skillName="AI" percentage={85} />
+              <SkillCard skillName="Frontend" percentage={65} />
+              <SkillCard skillName="Backend" percentage={38} />
+              <SkillCard skillName="UI/UX" percentage={70} />
+              <SkillCard skillName="3D/AR/VR" percentage={65} />
+              <SkillCard skillName="AI" percentage={45} />
             </div>
           </div>
         </div>

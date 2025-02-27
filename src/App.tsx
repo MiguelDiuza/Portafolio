@@ -5,7 +5,8 @@ import TechBanner from "./components/TechBanner"; // Importa el componente aquí
 import SobreMi from "./components/SobreMi";
 import SkillCard from "./components/SkillCard";
 import Proyectos from "./components/Proyectos";
-
+import Footer from "./components/Footer";
+import Video from "./components/Video";
 
 
 const App: React.FC = () => {
@@ -50,7 +51,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Contenedor principal de la página */}
-      <div className="main-container">
+      <div id="inicio" className="main-container">
         <section className="intro">
           {/* División para los títulos e imagen */}
           <div className="intro-content">
@@ -65,10 +66,11 @@ const App: React.FC = () => {
                   <button className="contact-button con" aria-label="Contact">
                     <img src="/loogos/contactame.svg" alt="Contact" />
                   </button>
+
                   <button
                     className="icon-button linkedin"
                     aria-label="LinkedIn"
-                    onClick={() => window.open("https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit", "_blank")}
+                    onClick={() => window.open("https://www.linkedin.com/in/miguel-diuza-ab13501a0/", "_blank")}
                   ></button>
                   <button
                     className="icon-button whatsapp"
@@ -81,28 +83,50 @@ const App: React.FC = () => {
                     onClick={() => window.open("https://www.behance.net/migueldiuza1", "_blank")}
                   ></button>
                 </div>
+              </div>
 
+              {/* Sección separada para el botón de video */}
+              <div className="video-button-container">
+                <button
+                  className="contact-button video-button"
+                  aria-label="Video"
+                  onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth" })}
+                >
+                  <img src="/img/boton_Video.svg" alt="Video" />
+                </button>
               </div>
             </div>
           </div>
+
+          {/* Imagen de la intro */}
           <div className="intro-image">
             <img src="/img/person.png" alt="person" />
           </div>
         </section>
       </div>
 
+
       {/* Banner de tecnologías */}
       <TechBanner />
 
-
       {/* Contenido principal */}
-      <div className="content1">
+      <div id="sobre-mi" className="content1">
         <SobreMi />
       </div>
 
-      <div className="content2">
+      <div id="proyectos" className="content2">
         <Proyectos />
       </div>
+
+      <div id="video">
+        <Video />
+      </div>
+
+      <footer id="contacto" className="footer-container">
+        <div className="footer-content">
+          <Footer />
+        </div>
+      </footer>
     </>
   );
 };

@@ -1,0 +1,106 @@
+/* Propiedad personalizada para la rotación */
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+/* Variables globales para modificar tamaño */
+:root {
+  --video-width: 760px;
+  --video-height: 515px;
+}
+
+.video-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.video-title {
+  font-size: 3.875rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: -0.5rem; /* Reduce el espacio debajo del título */
+}
+
+.video-subtitle {
+  color: #d1d5db;
+  font-size: 1.2rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-top: 0rem; /* Reduce el espacio superior del subtítulo */
+  margin-bottom: 1rem;
+}
+
+
+/* Estilo del cuadro con borde animado */
+.video-card {
+  background: #191c29;
+  width: var(--video-width);
+  height: var(--video-height);
+  padding: 5px;
+  position: relative;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 3rem;
+}
+
+/* Efecto de borde animado */
+.video-card::before {
+  content: "";
+  width: 104%;
+  height: 104%;
+  border-radius: 10px;
+  background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+  position: absolute;
+  z-index: -1;
+  top: -2%;
+  left: -2%;
+  animation: spin 2.5s linear infinite;
+}
+
+/* Efecto de iluminación */
+.video-card::after {
+  position: absolute;
+  content: "";
+  top: 10%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  filter: blur(30px);
+  /* Mayor blur para efecto de luz */
+  background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+  opacity: 0.8;
+  /* Ajusta la opacidad para más brillo */
+  transition: opacity 0.5s;
+  animation: spin 2.5s linear infinite;
+}
+
+/* Animación de rotación del borde e iluminación */
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+/* Estilo del iframe para ocupar todo el cuadro */
+.iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}

@@ -1,4 +1,8 @@
 /* Estilos generales */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -149,10 +153,13 @@ body {
   max-width: 1400px;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
+  padding: 40px 20px 10px; /* Aumenta el espacio superior y reduce el inferior */
   position: relative;
-  z-index: 2;  /* El texto estará por encima de la imagen */
+  z-index: 2; /* El texto estará por encima de la imagen */
+  margin-top: 100px; /* Ajusta la cantidad según necesites */
+  margin-bottom: 0px; /* Reduce el espacio inferior */
 }
+
 
 .intro-text {
   flex: 1;
@@ -167,7 +174,7 @@ body {
 
 .intro-text h2 {
   font-size: 3vw;
-  margin: 20px 0;
+  margin: 0px 0;
 }
 
 .intro-text p {
@@ -262,3 +269,29 @@ body {
   transform: scale(1.05);
 }
 
+.video-button-container {
+  display: flex;
+  justify-content: flex-start; /* Alinea el botón a la izquierda */
+  margin-top: 20px; /* Espacio respecto a la sección de contacto */
+  margin-bottom: 0px; /* Reduce el espacio debajo del botón */
+  width: 100%;
+  padding-left: 1px; /* Ajusta la distancia desde el borde izquierdo */
+}
+
+.video-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 0px; /* Asegura que no haya margen extra */
+}
+
+.video-button img {
+  width: 320px;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.video-button:hover img {
+  transform: scale(1.1);
+}

@@ -1,0 +1,55 @@
+.footer-container {
+    background: linear-gradient(180deg, #1a1a1a, #000);
+    padding: 20px 15px;
+    text-align: center;
+    color: #fff;
+    border-radius: 90px 90px 0 0;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px; /* Elimina los espacios entre los textos */
+  }
+  
+  h3 {
+    font-size: 38px;
+    font-weight: bold;
+    color: #e0e0e0;
+    margin: 5px 0; /* Espacio mínimo entre textos */
+  }
+  
+  .name {
+    font-size: 30px;
+    color: #cfcfcf;
+    margin: 2px 0;
+  }
+  
+  .phone {
+    font-size: 36px;
+    font-weight: bold;
+    color: #b084f6;
+    margin: 2px 0;
+  }
+  
+  .email {
+    color: #b084f6;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 2px 0;
+    font-size: 23px;
+  }
+  
+  .location {
+    font-size: 20px;
+    color: #aaa;
+    margin: 2px 0;
+  }
+  
+  .footer-icons {
+    display: flex;
+    gap: 20px; /* Menor espacio entre íconos */
+    margin-top: 10px;
+  }
+  

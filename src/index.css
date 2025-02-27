@@ -27,7 +27,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--bg-dark);
+  background-color: black;
   color: var(--text-color-light);
   overflow-y: scroll; /* Asegura el scroll vertical */
 }

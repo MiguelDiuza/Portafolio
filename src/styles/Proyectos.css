@@ -1,0 +1,269 @@
+:root {
+    --color-purple: #8B5CF6;
+    --color-pink: #7648ec;
+    --color-gray: #9CA3AF;
+    --color-black: #1F2937;
+    /* Mantiene el tamaño ajustado */
+}
+
+.app {
+    max-width: 100vw;
+    text-align: center;
+    color: white;
+}
+
+.proyectos-title {
+    font-size: 5.5rem; /* Ajusta el tamaño según lo necesites */
+    font-weight: 800; /* Extra bold */
+    text-align: center; /* Opcional: mantiene alineado */
+    margin-bottom: 20px;
+    margin-top: 70px;
+
+
+  }
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    
+}
+
+.carousel {
+    position: relative;
+    width: 380px;
+    height: 500px;
+    perspective: 800px;
+    transform-style: preserve-3d;
+    margin: 0 auto;
+}
+
+.proyectos-card-container {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    transform:
+        rotateY(calc(var(--offset) * 45deg)) scaleY(calc(1 + var(--abs-offset) * -0.3)) translateZ(calc(var(--abs-offset) * -25rem)) translateX(calc(var(--direction) * -4rem));
+    filter: blur(calc(var(--abs-offset) * 0.7rem));
+    transition: all 0.3s ease-out;
+}
+
+.proyecto-card {
+    position: absolute;
+    width: 380px; /* Ajusta según sea necesario */
+    height: 500px; /* Ajusta según sea necesario */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px; /* Ajusta el contenido más abajo */
+    
+    /* Fondo con degradado */
+    background: linear-gradient(
+        to bottom, 
+        rgb(79, 79, 79) 0%,  /* Gris con 100% opacidad arriba */
+        rgba(0, 0, 0, 0.9) 100%    /* Negro con 95% opacidad abajo */
+    );
+
+    /* Efecto de cristal */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    /* Opcional: Bordes semitransparentes para más efecto cristal */
+    border: 1px solid rgba(198, 198, 198, 0.651);
+}
+
+
+.image-container {
+    position: relative;
+    height: 60%;
+    /* Ajusta la altura de la imagen dentro de la carta */
+    width: 90%;
+    /* Hace la imagen más pequeña dentro de la carta */
+    border-radius: 20px;
+    /* Aplica esquinas redondeadas a la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Baja la imagen */
+
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
+    border-radius: 20px;
+}
+
+
+
+
+.card-icon-overlay {
+    position: absolute;
+    top: 180px;
+    /* Ajusta la posición verticalmente */
+    right: 25px;
+    /* Mantiene el icono a la derecha */
+    width: 80px;
+    /* Aumenta el ancho del icono */
+    height: 80px;
+    /* Aumenta la altura para que sea proporcional */
+    z-index: 2;
+    /* Asegura que esté sobre la imagen */
+}
+
+
+
+.proyecto-card h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0 0 0.7em;
+    color: white;
+    margin-bottom: 1px;
+
+}
+
+.card-content {
+    text-align: right;
+    /* Alinea todo a la izquierda */
+    padding: 15px;
+}
+
+.card-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #ccc;
+    margin-bottom: 1px;
+    /* Menos espacio entre subtítulo y título */
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 2px;
+    /* Menos espacio antes de la fecha */
+}
+
+.card-date {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: center;
+    display: block;
+    /* Para centrar en su propio espacio */
+    margin-top: 5px;
+    /* Ajuste de separación */
+}
+
+
+.proyecto-nav {
+    color: white;
+    font-size: 3rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    z-index: 2;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+.proyecto-nav.left {
+    left: -14.5rem;
+}
+
+.proyecto-nav.right {
+    right: -14.5rem;
+}
+
+.proyecto-nav:hover {
+    transform: scale(1.15);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 🔥 Dropdown Estilizado */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+  
+  .dropdown-button {
+    background: rgba(30, 30, 30, 0.9);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .dropdown-button:hover {
+    background: rgba(50, 50, 50, 0.9);
+  }
+  
+  .dropdown-icon {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 8px 0;
+    list-style: none;
+    z-index: 100;
+
+  }
+  
+  .dropdown-menu li {
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .dropdown-menu li:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Animación de dropdown */
+  .dropdown-menu {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  

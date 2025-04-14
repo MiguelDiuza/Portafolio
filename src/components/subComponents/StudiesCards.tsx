@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import "./StudiesCards.css";
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 interface Study {
   title: string;
   years: string;
-  image: string; // Solo la imagen del pie
+  image: string;
+  pdf?: string;
+  description?: string;
 }
 
 const StudiesCards: React.FC = () => {
+  const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
+
   useEffect(() => {
     let x: ReturnType<typeof setTimeout>;
     const $cards = $(".study-card");
@@ -68,46 +74,88 @@ const StudiesCards: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = selectedStudy ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedStudy]);
+
   const studies: Study[] = [
     {
       title: "Bachiller Técnico en Arte Gráfico",
       years: "2012-2018",
-      image: "/img/artImg.png", // Ruta de la imagen
+      image: "/img/artImg.png",
+      pdf: "/pdfs/art.pdf",
+      description: "Estudio técnico enfocado en procesos gráficos, diseño y producción impresa.",
     },
     {
       title: "Tecnólogo en Animación 3D",
       years: "2019-2021",
-      image: "/img/senaImg.png", // Ruta de la imagen
+      image: "/img/senaImg.png",
+      pdf: "/pdfs/An3d.pdf",
+      description: "Formación profesional en modelado, rigging, animación y postproducción 3D.",
     },
     {
       title: "Ingeniería Multimedia",
       years: "2021-2026",
-      image: "/img/mulImg.png", // Ruta de la imagen
+      image: "/img/mulImg.png",
+      pdf: "/pdfs/IngMultimedia.pdf",
+      description: "Carrera universitaria enfocada en desarrollo de software multimedia e interacción.",
     },
     {
       title: "Especialización en IA",
       years: "En curso",
-      image: "/img/iaImg.png", // Ruta de la imagen
+      image: "/img/iaImg.png",
+      pdf: "/pdfs/extra.pdf",
+      description: "Estudios de posgrado sobre aprendizaje automático, redes neuronales y big data.",
     },
-
     {
       title: "Cursos Adicionales",
       years: "2013 - ∞",
-      image: "/img/cuImg.png", // Ruta de la imagen
+      image: "/img/cuImg.png",
+      pdf: "/pdfs/extra.pdf",
+      description: "Colección de cursos cortos en áreas como diseño, desarrollo, animación y más.",
     },
   ];
 
   return (
     <div className="sobre-mi__studies">
       {studies.map((study, index) => (
-        <div key={index} className="study-card">
+        <div key={index} className="study-card" onClick={() => setSelectedStudy(study)}>
           <h3>{study.title}</h3>
           <p>{study.years}</p>
           <div className="study-card-footer">
-            <img src={study.image} alt="Estudio" className="study-card-image" />
+            <img src={study.image} alt={`Imagen de ${study.title}`} className="study-card-image" />
           </div>
         </div>
       ))}
+
+      {selectedStudy && (
+        <div
+          className="study-modal-overlay"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelectedStudy(null)}
+        >
+          <div className="study-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={() => setSelectedStudy(null)}>✖</button>
+            <h2>{selectedStudy.title}</h2>
+            <p><strong>{selectedStudy.years}</strong></p>
+            {selectedStudy.description && <p>{selectedStudy.description}</p>}
+            {selectedStudy.pdf ? (
+              <iframe
+                src={selectedStudy.pdf}
+                title={`PDF de ${selectedStudy.title}`}
+                className="pdf-viewer"
+              ></iframe>
+            ) : (
+              <p>No hay PDF disponible para este estudio.</p>
+            )}
+          </div>
+        </div>
+      )}
+
       <style className="hover"></style>
     </div>
   );

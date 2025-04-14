@@ -25,11 +25,10 @@
 /* Estilos generales */
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 100vh;
   min-height: 100vh;
   background-color: black;
   color: var(--text-color-light);
-  overflow-y: scroll; /* Asegura el scroll vertical */
 }
 
 
@@ -79,6 +78,11 @@ h1 {
   -webkit-text-fill-color: transparent;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
+
+html, body {
+  overflow-x: hidden;
+}
+
 
 /* Contenedor principal (para limitar el alcance de los estilos) */
 /*.main-container {

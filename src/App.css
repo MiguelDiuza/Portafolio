@@ -3,20 +3,15 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  overflow-x: hidden;
 
-}
+
 
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to bottom, rgb(12, 1, 29) 50%, rgba(0, 0, 0, 0)); /* Fondo negro con degradado hacia abajo */
-  padding: 10px;
+  background: linear-gradient(to bottom, rgb(12, 1, 29) 30%, rgba(0, 0, 0, 0)); /* Fondo negro con degradado hacia abajo */
   display: flex;
   justify-content: center;
   z-index: 3000; /* Encima de todo */
@@ -45,8 +40,6 @@ body {
 
 .header-content {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -54,6 +47,7 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+  top: 10px;
   margin-left: 60px;
   margin-top: -70px; /* Ajusta el valor según lo necesites */
 
@@ -77,17 +71,16 @@ body {
 }
 
 .logo {
-  width: 50px;
+  width: 35px;
   height: auto;
   object-fit: contain;
 }
 
 .header-right {
   display: flex;
+  top: 10px;
   justify-content: flex-end;
   background-color: transparent;
-  padding: 10px;
-  border-radius: 10px;
   margin: 0 40px 0 0;
   position: relative; /* Se mantiene en su lugar */
 }
@@ -201,7 +194,9 @@ body {
 /* Contenido principal */
 .content1 {
   padding: 10px 50px;
-  background-image: url('../img/bgNeon2b.png');
+  background-image: 
+    linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 40%),
+    url('../img/bgNeon2b.png'); /* Fondo con sombra negra */
   background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -295,3 +290,5 @@ body {
 .video-button:hover img {
   transform: scale(1.1);
 }
+
+

@@ -49,9 +49,6 @@
   display: flex;
   justify-content: flex-end;
   background-color: transparent;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 0 40px 0 0;
 }
 
 .card-container {

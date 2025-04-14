@@ -1,0 +1,24 @@
+<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_i_34_24)">
+<rect x="0.223389" width="109.663" height="109.663" rx="54.8314" fill="white"/>
+</g>
+<g clip-path="url(#clip0_34_24)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M21.7795 69.7716C21.0137 68.3025 21.6005 66.4742 23.0863 65.6999L70.7817 40.8435C72.2509 40.0778 74.0464 40.6319 74.8036 42.0845L77.0486 46.3911C77.8144 47.8602 77.2277 49.6885 75.7418 50.4628L28.0464 75.3192C26.5772 76.0849 24.7817 75.5309 24.0245 74.0782L21.7795 69.7716Z" fill="#454545"/>
+<path d="M67.8359 77.4152C70.1617 78.0722 71.2108 78.1806 72.0315 77.7561C72.9642 77.2738 74.0314 74.583 79.097 59.8742C82.3448 50.3366 85.0754 41.8104 85.1816 40.9186L85.32 39.2662L83.6866 38.5765C82.8044 38.2423 74.2689 35.6359 64.721 32.8091C50.7839 28.7186 47.2022 27.8277 46.4188 28.2329C45.6726 28.6188 45.1554 29.6302 44.4417 31.9987C43.8739 33.8267 43.6053 35.593 43.795 35.9599C43.9664 36.3827 50.0642 38.39 58.9747 41.0815L73.8502 45.5236L68.8214 60.1205C64.9489 71.376 63.9247 74.8814 64.2852 75.5784C64.6077 76.2021 65.7535 76.7719 67.8359 77.4152Z" fill="#454545"/>
+</g>
+<defs>
+<filter id="filter0_i_34_24" x="-26.7766" y="-27" width="163.663" height="163.663" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="-3" dy="14"/>
+<feGaussianBlur stdDeviation="6.3"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_34_24"/>
+</filter>
+<clipPath id="clip0_34_24">
+<rect width="74.5515" height="74.5515" fill="white" transform="translate(38.8301 104.826) rotate(-117.347)"/>
+</clipPath>
+</defs>
+</svg>

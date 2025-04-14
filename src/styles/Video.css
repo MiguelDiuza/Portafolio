@@ -7,17 +7,56 @@
 
 /* Variables globales para modificar tamaño */
 :root {
-  --video-width: 760px;
+  --video-width: 910px;
   --video-height: 515px;
 }
 
+/* Animación de flotación */
+@keyframes floating {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+/* Contenedor del video */
 .video-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 1rem;
+  margin-top: 5rem;
+  position: relative; /* Para que los elementos hijos con position: absolute se ubiquen correctamente */
 }
+
+/* Fondos flotantes */
+.floating-image {
+  position: absolute;
+  z-index: 0; /* Se mantiene detrás de todo pero sobre el fondo */
+  width: 500px; /* Ajusta el tamaño según lo necesites */
+  opacity: 0.8; /* Para que no opaquen demasiado el contenido */
+  animation: floating 6s ease-in-out infinite;
+  pointer-events: none; /* Evita que interfiera con la interacción del usuario */
+}
+
+/* Posición específica de cada imagen */
+.floating-image-1 {
+  top: -50px;
+  left: -80px;
+}
+
+.floating-image-2 {
+  bottom: -50px;
+  right: -35px;
+  animation-delay: 2s; /* Para que se muevan en tiempos distintos */
+}
+
 
 .video-title {
   font-size: 3.875rem;
@@ -41,15 +80,16 @@
   background: #191c29;
   width: var(--video-width);
   height: var(--video-height);
-  padding: 5px;
+  padding: 8px;
   position: relative;
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   cursor: pointer;
   margin-bottom: 3rem;
+  overflow: hidden; /* Evita que la animación sobresalga demasiado */
 }
 
 /* Efecto de borde animado */
@@ -60,7 +100,7 @@
   border-radius: 10px;
   background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
   position: absolute;
-  z-index: -1;
+  z-index: 1; /* Lo colocamos por encima del fondo */
   top: -2%;
   left: -2%;
   animation: spin 2.5s linear infinite;
@@ -73,18 +113,25 @@
   top: 10%;
   left: 0;
   right: 0;
-  z-index: -1;
+  z-index: 1; /* También lo subimos para que no quede oculto */
   height: 100%;
   width: 100%;
   margin: 0 auto;
   transform: scale(0.8);
   filter: blur(30px);
-  /* Mayor blur para efecto de luz */
   background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
   opacity: 0.8;
-  /* Ajusta la opacidad para más brillo */
   transition: opacity 0.5s;
   animation: spin 2.5s linear infinite;
+}
+
+/* Asegurar que el iframe no cubra la animación */
+.iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  position: relative;
+  z-index: 2; /* Se mantiene por encima del borde animado */
 }
 
 /* Animación de rotación del borde e iluminación */

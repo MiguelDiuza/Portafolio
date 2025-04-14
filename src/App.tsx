@@ -7,6 +7,10 @@ import SkillCard from "./components/SkillCard";
 import Proyectos from "./components/Proyectos";
 import Footer from "./components/Footer";
 import Video from "./components/Video";
+import Skills from "./components/Skills";
+
+
+
 
 
 const App: React.FC = () => {
@@ -116,6 +120,10 @@ const App: React.FC = () => {
 
       <div id="proyectos" className="content2">
         <Proyectos />
+      </div>
+
+      <div id="proyectos" className="content2">
+        <Skills />
       </div>
 
       <div id="video">

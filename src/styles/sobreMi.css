@@ -34,17 +34,14 @@
     border-radius: 6px;
     margin-bottom: 1rem;
     width: 320px;
-    height: 160px;
+    height: 200px;
     object-fit: cover;
     border: 2px solid rgb(255, 255, 255);
+    border-radius: 15px;
     margin-bottom: 1.8rem;
     box-shadow: 0 8px 32px 0 rgba(138, 49, 255, 0.515);
-
-
   }
 
-  
-  
   .sobre-mi__left h1 {
     text-align: center;
     font-size: 4.9rem;
@@ -57,7 +54,6 @@
     max-width: 80%;  /* Limita el ancho del texto al 80% del contenedor */
     margin: 0 auto;  /* Centra el texto horizontalmente */
     text-align: justify;  /* Justifica el texto para mayor legibilidad */
-    font-weight: bold;
   }
   
   
@@ -96,11 +92,12 @@
   }
   
   .study-card img {
-    width: 48px;
-    height: 48px;
-    align-self: flex-end;
-    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    display: block;         /* Elimina el pequeño espacio debajo de la imagen */
+    object-fit: cover;
   }
+  
   
   .study-card button {
     font-size: 0.75rem;

@@ -1,9 +1,10 @@
 .sobre-mi__studies {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Hacer las cartas más pequeñas */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Hacer las cartas más pequeñas */
   gap: 50px; /* Aumentar el espacio entre las cartas */
-  padding: 30px;
+  padding: 15px;
   justify-content: center;
+  justify-items: center;
 }
 
 /* Tarjetas de estudio con efecto vidrio */
@@ -13,7 +14,7 @@
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  padding: 15px; /* Reducir el padding interno */
+  padding: 0px; /* Reducir el padding interno */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: white;
@@ -23,45 +24,41 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 210px; /* Tamaño reducido de las tarjetas */
+  height: 240px; /* Tamaño reducido de las tarjetas */
 }
 
 /* Títulos dentro de las tarjetas */
 .study-card h3 {
   font-size: 1.2rem; /* Mantener tamaño de fuente pequeño */
-  margin-bottom: 5px; /* Reducir espacio debajo del título */
+  margin: 0px, 0px;
+  padding: 10px;
 }
 
 /* Párrafos dentro de las tarjetas */
 .study-card p {
-  font-size: 0.9rem; /* Mantener tamaño pequeño de fuente */
-  margin-bottom: 5px; /* Reducir margen inferior */
+  font-size: 0.9rem;
   color: #e0e0e0;
+  margin: 1px 0; /* Solo 2px arriba y abajo */
 }
+
 
 /* Contenedor para el botón y la imagen al final */
 .study-card-footer {
-  margin-top: auto; /* Empuja el contenido hacia el fondo */
-  text-align: center;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrar la imagen y el botón */
+  justify-content: center;
   align-items: center;
+  width: 100%; /*  Ocupa todo el ancho de la tarjeta */
+  text-align: center;
 }
-
-/* Estilo del botón */
-
 
 
 /* Imagen centrada dentro de la tarjeta */
 .study-card-footer img {
-  width: 200px; /* Reducir el tamaño de la imagen */
+  width: 100%;     /*  Ocupa todo el ancho del contenedor */
   height: auto;
-  margin-top: 6px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  /* Garantiza que la imagen se mantenga centrada */
 }
 
 /* Efecto hover */
@@ -88,4 +85,64 @@
 .study-card:hover::before,
 .study-card:hover::after {
   opacity: 1;
+}
+
+.study-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85); /* fondo oscuro semi-transparente */
+  border: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* asegurar que esté por encima de todo */
+}
+
+.study-modal {
+  position: relative;
+  background: rgba(0, 0, 0, 0.7); /* Efecto translúcido */  width: 60vw;
+  backdrop-filter: blur(10px); /* Difuminar fondo */
+  height: 70vh;
+  padding: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.study-modal h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+.study-modal p {
+  margin: 0.5rem 0;
+}
+
+.pdf-viewer {
+  flex-grow: 1;
+  width: 100%;
+  border: 20;
+  margin-top: 1rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s;
+}
+
+.close-button:hover {
+  transform: scale(1.2);
+  color: red;
 }

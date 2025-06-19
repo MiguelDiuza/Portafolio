@@ -98,7 +98,7 @@ const StudiesCards: React.FC = () => {
     },
     {
       title: "Ingeniería Multimedia",
-      years: "2021-2026",
+      years: "En espera del <br> diploma, mayo 2026",
       image: "/img/mulImg.png",
       pdf: "/pdfs/IngMultimedia.pdf",
       description: "Carrera universitaria enfocada en desarrollo de software multimedia e interacción.",

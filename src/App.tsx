@@ -10,9 +10,6 @@ import Video from "./components/Video";
 import Skills from "./components/Skills";
 
 
-
-
-
 const App: React.FC = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
 

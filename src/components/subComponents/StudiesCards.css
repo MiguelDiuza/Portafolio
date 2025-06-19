@@ -93,7 +93,8 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85); /* fondo oscuro semi-transparente */
+  background-color: rgba(0, 0, 0, 0.232); /* fondo oscuro semi-transparente */
+  backdrop-filter: blur(20px); /* Difuminar fondo */
   border: 20px;
   display: flex;
   justify-content: center;
@@ -103,15 +104,17 @@
 
 .study-modal {
   position: relative;
-  background: rgba(0, 0, 0, 0.7); /* Efecto translúcido */  width: 60vw;
-  backdrop-filter: blur(10px); /* Difuminar fondo */
-  height: 70vh;
+  background: rgba(0, 0, 0, 0.555); /* Efecto translúcido */  width: 50vw;
+  backdrop-filter: blur(20px); /* Difuminar fondo */
+  height: 80vh;
   padding: 1rem;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; 
 }
 
 .study-modal h2 {
@@ -122,12 +125,6 @@
   margin: 0.5rem 0;
 }
 
-.pdf-viewer {
-  flex-grow: 1;
-  width: 100%;
-  border: 20;
-  margin-top: 1rem;
-}
 
 .close-button {
   position: absolute;
@@ -145,4 +142,14 @@
 .close-button:hover {
   transform: scale(1.2);
   color: red;
+}
+.pdf-viewer {
+  width: 80%;
+  height: 70%;
+  min-height: 400px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+  flex-grow: 1;
 }

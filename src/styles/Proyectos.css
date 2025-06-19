@@ -53,7 +53,7 @@
     position: absolute;
     width: 380px; /* Ajusta según sea necesario */
     height: 500px; /* Ajusta según sea necesario */
-    border-radius: 10px; /* Bordes redondeados */
+    border-radius: 30px; /* Bordes redondeados */
     overflow: hidden;
     text-align: center;
     color: white;
@@ -89,6 +89,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    top: 10px;
     /* Baja la imagen */
 
 }
@@ -105,19 +106,41 @@
 
 
 .card-icon-overlay {
-    position: absolute;
-    top: 180px;
-    /* Ajusta la posición verticalmente */
-    right: 25px;
-    /* Mantiene el icono a la derecha */
-    width: 80px;
-    /* Aumenta el ancho del icono */
-    height: 80px;
-    /* Aumenta la altura para que sea proporcional */
-    z-index: 2;
-    /* Asegura que esté sobre la imagen */
+  position: absolute;
+  top: 180px;
+  right: 25px;
+  width: 88px;
+  height: 88px;
+  z-index: 2;
+  background-color: white;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
 }
 
+/* Imagen centrada y contenida */
+.card-icon-overlay img {
+  width: 100%; /* ⬅️ Esto ajusta el tamaño del icono DENTRO del botón */
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Hover: botón crece y se oscurece */
+.card-icon-overlay:hover {
+  background-color: #e5e5e5; /* Gris claro */
+  transform: scale(1.1);
+}
+
+/* Active: más oscuro y botón se encoge */
+.card-icon-overlay:active {
+  background-color: #c7c7c7; /* Gris más oscuro */
+  transform: scale(0.95);
+}
 
 
 .proyecto-card h2 {
@@ -267,3 +290,102 @@
     opacity: 1;
   }
   
+  .project-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px); /* Difumina el fondo */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.project-modal {
+  background: rgba(30, 30, 30, 0.8); /* fondo translúcido oscuro */
+  color: white;
+  max-width: 800px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px); /* Efecto glassmorphism */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.close-button:hover {
+  transform: scale(1.2);
+  color: #ff4d4d;
+}
+
+.tech-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 1.5rem 0;
+  justify-content: center;
+}
+
+.tech-icons img {
+  height: 40px;
+  width: 40px;
+  filter: brightness(0) invert(1); /* Convierte a blanco */
+  transition: transform 0.3s;
+}
+
+.tech-icons img:hover {
+  transform: scale(1.5);
+}
+
+.project-images {
+  display: flex;
+  justify-content: space-between; /* distribuye el espacio entre las imágenes */
+  gap: 20px; /* o 0 si quieres sin separación */
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden; /* oculta scroll */
+}
+
+.project-images img {
+  border-radius: 10px;
+  object-fit: cover;
+  width: 48%; /* cada imagen ocupa casi la mitad */
+  height: auto;
+  max-height: 250px;
+}
+
+
+
+.project-link-button {
+  background-color: #7e5bef;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  transition: background 0.3s ease;
+  text-align: center;
+}
+
+.project-link-button:hover {
+  background-color: #a855f7;
+  color: black;
+}

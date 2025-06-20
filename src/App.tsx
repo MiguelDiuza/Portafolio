@@ -65,7 +65,7 @@ const App: React.FC = () => {
               <div className="contact-buttons">
                 <div className="icon-buttons">
                   <button className="contact-button con" aria-label="Contact">
-                    <img src="https://drive.google.com/drive/folders/1-LF7PMHx9ib2P1HA6Tql1Z-Y5c6eX-E5" alt="Contact" />
+                    <img src="https://drive.google.com/file/d/1WXlFIO4WzRTarhnJHjUXeFA6jaOgIogA/view?usp=drive_link" alt="Contact" />
 
                   </button>
 
@@ -94,7 +94,7 @@ const App: React.FC = () => {
                   aria-label="Video"
                   onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth" })}
                 >
-                  <img src="https://drive.google.com/drive/folders/1-LF7PMHx9ib2P1HA6Tql1Z-Y5c6eX-E5" alt="Video" />
+                  <img src="https://drive.google.com/file/d/1JAXTaP0dilkFXY7zmmC0JW-0UhcxrgFc/view?usp=drive_link" alt="Video" />
 
                 </button>
               </div>
@@ -103,7 +103,7 @@ const App: React.FC = () => {
 
           {/* Imagen de la intro */}
           <div className="intro-image">
-            <img src="https://drive.google.com/drive/folders/1-LF7PMHx9ib2P1HA6Tql1Z-Y5c6eX-E5" alt="person" />
+            <img src="https://drive.google.com/file/d/1LQ9eEaGcmv-4g1gVdqJLgv9blsHPuOO4/view?pli=1" alt="person" />
           </div>
         </section>
       </div>

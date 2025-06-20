@@ -196,7 +196,7 @@ html {
   padding: 10px 50px;
   background-image: 
     linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 40%),
-    url('../img/bgNeon2b.png'); /* Fondo con sombra negra */
+    url('/public/img/bgNeon2b.png'); /* Fondo con sombra negra */
   background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */

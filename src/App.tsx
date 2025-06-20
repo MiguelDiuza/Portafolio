@@ -93,7 +93,7 @@ const App: React.FC = () => {
                   aria-label="Video"
                   onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth" })}
                 >
-                  <img src="./img/boton_Video.svg" alt="Video" />
+                  <img src="img/boton_Video.svg" alt="Video" />
                 </button>
               </div>
             </div>
@@ -101,7 +101,7 @@ const App: React.FC = () => {
 
           {/* Imagen de la intro */}
           <div className="intro-image">
-            <img src="./img/person.png" alt="person" />
+            <img src="img/person.png" alt="person" />
           </div>
         </section>
       </div>

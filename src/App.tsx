@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Video from "./components/Video";
 import Skills from "./components/Skills";
 
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
 const App: React.FC = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
@@ -65,7 +66,7 @@ const App: React.FC = () => {
               <div className="contact-buttons">
                 <div className="icon-buttons">
                   <button className="contact-button con" aria-label="Contact">
-                    <img src="loogos/contactame.svg" alt="Contact" />
+                    <img src={asset("loogos/contactame.svg")} alt="Contact" />
 
                   </button>
 
@@ -94,7 +95,8 @@ const App: React.FC = () => {
                   aria-label="Video"
                   onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth" })}
                 >
-                  <img src="https://drive.google.com/drive/folders/1-LF7PMHx9ib2P1HA6Tql1Z-Y5c6eX-E5" alt="Video" />
+                  <img src={asset("img/boton_Video.svg")} alt="Video" />
+
 
                 </button>
               </div>
@@ -103,7 +105,7 @@ const App: React.FC = () => {
 
           {/* Imagen de la intro */}
           <div className="intro-image">
-            <img src="https://drive.google.com/drive/folders/1-LF7PMHx9ib2P1HA6Tql1Z-Y5c6eX-E5"alt="person" />
+            <img src={asset("img/person.png")} alt="person" />
           </div>
         </section>
       </div>

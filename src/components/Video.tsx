@@ -8,12 +8,12 @@ const Video: React.FC = () => {
     <div className="video-container">
       {/* Imágenes flotantes */}
       <img
-        src="/img/form.png"
+        src="./img/form.png"
         alt="Floating Shape 1"
         className="floating-image floating-image-1"
       />
       <img
-        src="/img/form2.png"
+        src="./img/form2.png"
         alt="Floating Shape 2"
         className="floating-image floating-image-2"
       />

@@ -34,16 +34,16 @@ const proyectosData: Proyecto[] = [
     id: 1,
     title: "E-commerce",
     subtitle: "Tienda Camisas",
-    image: "/img/po1.jpg",
-    icon: "/loogos/mas.svg",
+    image: "./img/po1.jpg",
+    icon: "./loogos/mas.svg",
     idCategoria: "Web",
     description: "Proyecto de e-commerce con carrito, pasarela de pagos y panel de administración.",
     technologies: [
-      { name: "React", logo: "/loogos/react.svg" },
-      { name: "Node.js", logo: "/loogos/Javascript.svg" },
-      { name: "MongoDB", logo: "/loogos/mysql.svg" }
+      { name: "React", logo: "./loogos/react.svg" },
+      { name: "Node.js", logo: "./loogos/Javascript.svg" },
+      { name: "MongoDB", logo: "./loogos/mysql.svg" }
     ],
-    images: ["/img/po1.jpg", "/img/po2.jpg"],
+    images: ["./img/po1.jpg", "./img/po2.jpg"],
     link: "https://www.bershka.com/"
   },
 
@@ -51,32 +51,32 @@ const proyectosData: Proyecto[] = [
     id: 2,
     title: "Videojuego",
     subtitle: "Videojuego para web",
-    image: "/img/po3.jpg",
-    icon: "/loogos/mas.svg",
+    image: "./img/po3.jpg",
+    icon: "./loogos/mas.svg",
     idCategoria: "Web",
     description: "Proyecto de videojuegos en una aplicacion web codificado en c++ con el motor de juegos unity.",
     technologies: [
-      { name: "React", logo: "/loogos/react.svg" },
-      { name: "Node.js", logo: "/loogos/Javascript.svg" },
-      { name: "MongoDB", logo: "/loogos/mysql.svg" }
+      { name: "React", logo: "./loogos/react.svg" },
+      { name: "Node.js", logo: "./loogos/Javascript.svg" },
+      { name: "MongoDB", logo: "./loogos/mysql.svg" }
     ],
-    images: ["/img/po2.jpg", "/img/po2.jpg"],
+    images: ["./img/po2.jpg", "./img/po2.jpg"],
     link: "https://juancarmonal2004.wixsite.com/sombra-furtiva"
   },
   {
     id: 3,
     title: "Web E-comerce",
     subtitle: "Tienda de plantillas de Diseño ",
-    image: "/img/po3.jpg",
-    icon: "/loogos/mas.svg",
+    image: "./img/po3.jpg",
+    icon: "./loogos/mas.svg",
     idCategoria: "Web",
     description: "Proyecto sobre venta de plantillas de diseño con una pasarela de pagos incluida",
     technologies: [
-      { name: "React", logo: "/loogos/react.svg" },
-      { name: "Javascript", logo: "/loogos/Javascript.svg" },
-      { name: "MySql", logo: "/loogos/mysql.svg" }
+      { name: "React", logo: "./loogos/react.svg" },
+      { name: "Javascript", logo: "./loogos/Javascript.svg" },
+      { name: "MySql", logo: "./loogos/mysql.svg" }
     ],
-    images: ["/img/po3.jpg"],
+    images: ["./img/po3.jpg"],
     link: "https://www.designi.com.br/"
   },
 
@@ -84,32 +84,32 @@ const proyectosData: Proyecto[] = [
     id: 4,
     title: " Web IA",
     subtitle: "Chatbot de Atención al Cliente",
-    image: "/img/po4.jpg",
-    icon: "/loogos/mas.svg",
+    image: "./img/po4.jpg",
+    icon: "./loogos/mas.svg",
     idCategoria: "IA",
     description: "chat bot de atencion al cliente usando AI.",
     technologies: [
-      { name: "React", logo: "/loogos/react.svg" },
-      { name: "Node.js", logo: "/loogos/Javascript.svg" },
-      { name: "MongoDB", logo: "/loogos/mysql.svg" }
+      { name: "React", logo: "./loogos/react.svg" },
+      { name: "Node.js", logo: "./loogos/Javascript.svg" },
+      { name: "MongoDB", logo: "./loogos/mysql.svg" }
     ],
-    images: ["/img/po1.jpg", "/img/po2.jpg"],
+    images: ["./img/po1.jpg", "./img/po2.jpg"],
     link: "https://www.deepseek.com/"
   },
   {
     id: 5,
     title: "Web comida rapida",
     subtitle: "Plataforma de comidas",
-    image: "/img/po5.jpg",
-    icon: "/loogos/mas.svg",
+    image: "./img/po5.jpg",
+    icon: "./loogos/mas.svg",
     idCategoria: "Web",
     description: "aplicacion web para una empresa de comidas rapidas",
     technologies: [
-      { name: "React", logo: "/loogos/react.svg" },
-      { name: "Node.js", logo: "/loogos/Javascript.svg" },
-      { name: "MongoDB", logo: "/loogos/mysql.svg" }
+      { name: "React", logo: "./loogos/react.svg" },
+      { name: "Node.js", logo: "./loogos/Javascript.svg" },
+      { name: "MongoDB", logo: "./loogos/mysql.svg" }
     ],
-    images: ["/img/po1.jpg", "/img/po2.jpg"],
+    images: ["./img/po1.jpg", "./img/po2.jpg"],
     link: "https://www.mcdonalds.com.co/"
   },
 

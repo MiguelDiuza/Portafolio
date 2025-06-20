@@ -119,7 +119,7 @@ html {
   padding: 0;
   margin: 0;
   display: block; /* Cambiado de flex a block */
-  background-image: url('/img/bgNEON.png');
+  background-image: url('/public/img/bgNEON.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -228,17 +228,17 @@ html {
 }
 
 .icon-button.linkedin {
-  background-image: url('/loogos/linkedin.svg');
+  background-image: url('/public/loogos/linkedin.svg');
 }
 
 .icon-button.whatsapp {
-  background-image: url('/loogos/whatsapp.svg');
+  background-image: url('/public/loogos/whatsapp.svg');
   background-size: 120%;
 
 }
 
 .icon-button.behance {
-  background-image: url('/loogos/behance.svg');
+  background-image: url('/public/loogos/behance.svg');
 }
 
 /* Botón con forma exacta del SVG */

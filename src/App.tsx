@@ -66,6 +66,8 @@ const App: React.FC = () => {
                 <div className="icon-buttons">
                   <button className="contact-button con" aria-label="Contact">
                     <img src="./loogos/contactame.svg" alt="Contact" />
+                                                  <img src={`${import.meta.env.BASE_URL}public//loogos/contactame.svg`} alt="Contact" />
+
                   </button>
 
                   <button
@@ -93,7 +95,8 @@ const App: React.FC = () => {
                   aria-label="Video"
                   onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth" })}
                 >
-                  <img src="img/boton_Video.svg" alt="Video" />
+                  <img src={`${import.meta.env.BASE_URL}public/img/boton_Video.svg`} alt="Video" />
+
                 </button>
               </div>
             </div>

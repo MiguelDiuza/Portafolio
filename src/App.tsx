@@ -101,7 +101,7 @@ const App: React.FC = () => {
 
           {/* Imagen de la intro */}
           <div className="intro-image">
-            <img src="img/person.png" alt="person" />
+            <img src="/public/img/person.png" alt="person" />
           </div>
         </section>
       </div>

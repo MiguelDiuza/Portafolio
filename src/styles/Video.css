@@ -151,3 +151,40 @@
   height: 100%;
   border-radius: 5px;
 }
+
+@media (max-width: 768px) {
+  :root {
+    --video-width: 100%;
+    --video-height: auto;
+  }
+
+  .video-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* Mantiene proporción de video */
+  }
+
+  .video-title {
+    font-size: 2rem;
+  }
+
+  .video-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+  }
+
+  .floating-image {
+    width: 250px; /* Reducción de tamaño en móviles */
+    opacity: 0.6;
+  }
+
+  .floating-image-1 {
+    top: -30px;
+    left: -30px;
+  }
+
+  .floating-image-2 {
+    bottom: -30px;
+    right: -30px;
+  }
+}

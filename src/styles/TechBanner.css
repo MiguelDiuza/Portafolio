@@ -1,6 +1,6 @@
 /* Banner con el color morado que tenías antes */
 .infinity-banner {
-  background: linear-gradient(90deg, #6a00f4, #9a00ff);
+  background: linear-gradient(90deg, #6966FF, #6200CB);
   display: flex;
   padding: 8px 0;
   position: relative;
@@ -72,4 +72,26 @@
   padding-left: 16px;
   flex-shrink: 0;
   width: 33.33%; /* Aseguramos que cada grupo de logos ocupe un tercio del contenedor */
+}
+
+@media (max-width: 768px) {
+  .tech-logo {
+    width: 35px;
+    height: 35px;
+    padding: 3px;
+  }
+
+  .large-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logos {
+    gap: 20px;
+    padding-left: 10px;
+  }
+
+  .infinity-banner {
+    padding: 6px 0;
+  }
 }

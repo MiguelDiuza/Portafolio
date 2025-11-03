@@ -8,6 +8,8 @@ import Proyectos from "./components/Proyectos";
 import Footer from "./components/Footer";
 import Video from "./components/Video";
 import Skills from "./components/Skills";
+/*idiomas import S from "./components/idiomas";*/
+
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 

@@ -162,4 +162,48 @@
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
   
-  
+  @media (max-width: 768px) {
+  .sobre-mi {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .sobre-mi__left img {
+    width: 100%;
+    height: auto;
+  }
+
+  .sobre-mi__left h1 {
+    font-size: 2.5rem;
+  }
+
+  .sobre-mi__left p {
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .sobre-mi__studies {
+    grid-template-columns: 1fr; /* Una columna en lugar de dos */
+  }
+
+  .titulo-estudios {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .sobre-mi__certifications {
+    padding: 1rem;
+  }
+
+  .study-card h3 {
+    font-size: 1rem;
+  }
+
+  .study-card p {
+    font-size: 0.8rem;
+  }
+
+  .sobre-mi__certifications h3 {
+    font-size: 1rem;
+  }
+}

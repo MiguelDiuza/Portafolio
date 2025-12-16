@@ -1,26 +1,22 @@
 .skill-card {
-  width: 150px; /* Tamaño inicial más pequeño */
+  width: 150px;
   height: 200px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease-in-out;
-  position: sticky;
-  top: 20px; /* Se mantiene en la parte superior */
+  /* Removed sticky and top as parent controls layout */
 }
 
 .skill-card.shrink {
-  width: 100px; /* Tamaño más pequeño proporcional */
+  width: 100px;
   height: 140px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
   transform: scale(0.85);
+  /* Glass effect adjustment for shrunk state if needed */
+  backdrop-filter: blur(15px);
 }
+
+
 
 .skill-circle {
   width: 70px;
@@ -73,4 +69,89 @@
   backdrop-filter: blur(8.1px);
   -webkit-backdrop-filter: blur(8.1px);
   border: 1px solid rgba(255, 255, 255, 0.31);
+}
+
+
+/* ... Tus estilos anteriores ... */
+
+/* --- ESTILOS PARA LA TARJETA ATERRIZADA (EXPANDIDA) --- */
+.skill-card.large-card {
+  /* Hacemos la tarjeta más angosta como pediste */
+  width: 220px !important; 
+  min-width: 220px !important; /* Forzamos que no se estire a 280px */
+  min-height: 380px; /* Un poco más alta para que quepa todo sin aplastar el círculo */
+  padding: 1.5rem;
+  justify-content: flex-start; /* Alineamos todo hacia arriba */
+  gap: 15px; /* Espacio entre el círculo, el nombre y la barra */
+}
+
+/* Aseguramos que el círculo no se aplaste ni desaparezca */
+.skill-card.large-card .skill-circle {
+  flex-shrink: 0; /* OBLIGATORIO: Evita que el círculo desaparezca si falta espacio */
+  width: 80px;    /* Un poco más grande en la versión expandida (opcional) */
+  height: 80px;
+  margin-bottom: 5px;
+}
+
+.skill-card.large-card .skill-name {
+  font-size: 1.2rem; /* Nombre un poco más grande */
+  margin-bottom: 10px;
+}
+
+/* Contenedor interno que rota */
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+  transform-style: preserve-3d;
+}
+
+/* Estado rotado */
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Caras de la tarjeta (Frente y Reverso) */
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px; /* Importante para que coincida con el borde de la tarjeta */
+}
+
+/* Ajuste específico para el frente */
+.flip-front {
+  justify-content: flex-start; /* Alineación que ya teníamos */
+  padding-top: 1.5rem;
+  z-index: 2;
+}
+
+/* Ajuste específico para el reverso */
+.flip-back {
+  background: rgba(30, 30, 40, 0.95); /* Un fondo un poco más oscuro para leer bien */
+  color: white;
+  transform: rotateY(180deg); /* Ya está volteado por defecto */
+  justify-content: center;
+  padding: 1.5rem;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5); /* Sombra interna para profundidad */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo para las barras/items del reverso */
+.subskill-item {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 5px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 0.85rem;
+  text-align: center;
+  border-left: 4px solid #6a5acd; /* Detalle de color */
 }

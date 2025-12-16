@@ -4,8 +4,6 @@ html {
 }
 
 
-
-
 .header {
   position: fixed;
   top: 0;
@@ -31,8 +29,8 @@ html {
   top: 100%;
   left: 0;
   width: 100%;
-  height: 30px; /* Ajusta el tamaño del degradado inferior */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)); /* Degradado negro a transparente */
+  height: 40px; /* Ajusta el tamaño del degradado inferior */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)); /* Degradado negro a transparente */
   z-index: 2000; /* Debajo del header */
   pointer-events: none; /* No interfiere con los clics */
 }
@@ -47,10 +45,11 @@ html {
   display: flex;
   align-items: center;
   gap: 20px;
-  top: 10px;
-  margin-left: 60px;
-  margin-top: -70px; /* Ajusta el valor según lo necesites */
+  /* Eliminamos top y margin-top negativos que ocultaban el contenido */
+  margin-left: 40px; 
+  height: 100%; /* Asegura que ocupe la altura del header para centrarse verticalmente */
 
+  padding-top: 20px; /* Ajusta este valor (ej. 30px) si quieres bajarlo más */
 }
 
 .header-left nav {
@@ -85,6 +84,34 @@ html {
   position: relative; /* Se mantiene en su lugar */
 }
 
+/* Contenedor flotante para las tarjetas fuera del header */
+/* Contenedor flotante para las tarjetas fuera del header */
+.floating-skills-container {
+  position: fixed;
+  top: 20px; /* Espacio desde el techo para que no se corten */
+  right: 0;
+  height: auto; /* Dejamos que la altura se ajuste al contenido */
+  display: flex;
+  align-items: flex-start; /* Alineación superior evita el corte hacia arriba */
+  justify-content: flex-end;
+  padding-right: 2rem;
+  gap: 15px;
+  /* Importante: Z-index mayor que el header (3000) para que se vean completas y sean clickeables */
+  z-index: 3100; 
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Habilitar clicks en las tarjetas dentro del contenedor */
+.floating-skills-container > * {
+  pointer-events: auto;
+}
+
+/* Ajuste cuando se hace sticky */
+.floating-skills-container.sticky-mode {
+  top: 10px; /* Se pegan un poco más arriba al hacer scroll */
+  /* No limitamos la altura aquí para evitar cortes */
+}
 
 .card-container {
   display: flex;
@@ -125,8 +152,6 @@ html {
   background-repeat: no-repeat;
   position: relative;
 }
-
-
 
 .intro {
   width: 100vw;  /* Ocupa el ancho completo */
@@ -196,12 +221,38 @@ html {
   padding: 10px 50px;
   background-image: 
     linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 40%),
-    url('/public/img/bgNeon2b.png'); /* Fondo con sombra negra */
+    url('/public/img/bg2.jpg'); /* Fondo con sombra negra */
   background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   min-height: 100vh; /* Asegura que la sección ocupe al menos toda la altura de la pantalla */
 }
+
+/* En tu archivo app.css o index.css */
+.contentE {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; /* Se queda atrás */
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1; /* Se pone adelante */
+  width: 100%;
+  height: 100%;
+}
+
 
 
 .icon-buttons {
@@ -291,6 +342,119 @@ html {
   transform: scale(1.1);
 }
 
+.large-card {
+  /* 1. TAMAÑO Y ESPACIO */
+  /* Ajusta el ancho según prefieras, o déjalo automático */
+  width: 280px; 
+  min-height: 380px; 
+  margin: 10px; /* Espacio entre tarjetas si se apilan */
+  padding: 20px; /* Espacio interno para el contenido */
+
+  /* 2. FONDO OSCURO (Dark Glass) */
+  /* Usamos negro con opacidad baja (0.6) para oscurecer el video de fondo */
+  background: rgba(10, 10, 10, 0.65); 
+  
+  /* 3. EFECTO BORROSO (Blur) */
+  backdrop-filter: blur(24px); 
+  -webkit-backdrop-filter: blur(24px);
+
+  /* 4. BORDES REDONDEADOS */
+  border-radius: 24px;
+
+  /* 5. BORDES Y BRILLOS (La magia) */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Borde base casi invisible */
+  
+  box-shadow: 
+    /* Sombra profunda externa (da efecto de elevación 3D) */
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    
+    /* BRILLO INTERNO (Esquina Superior Izquierda) */
+    /* Esto crea ese "borde de luz" nítido */
+    inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+    
+    /* Sombra Interna (Esquina Inferior Derecha) para dar volumen */
+    inset -1px -1px 0 rgba(0, 0, 0, 0.5);
+
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* EFECTO HOVER (Opcional: se ilumina un poco al pasar el mouse) */
+.large-card:hover {
+  transform: translateY(-5px);
+  background: rgba(10, 10, 10, 0.75);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.5), /* El brillo se hace más fuerte */
+    inset -1px -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* --- DEGRADADOS DE LUZ (Estilo que enviaste) --- */
+/* Esto dibuja la línea de luz que se desvanece en la parte superior */
+.large-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+}
+
+/* Esto dibuja la línea de luz que se desvanece en el lado izquierdo */
+.large-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+}
+
+/* Esta clase convierte cualquier imagen (SVG o PNG) en blanco puro */
+.icon-white {
+  filter: brightness(0) invert(1);
+  /* Explicación: 
+     1. brightness(0) lo vuelve negro puro.
+     2. invert(1) invierte el negro a blanco puro.
+  */
+  
+  /* Opcional: Si quieres que sea un poco transparente */
+  opacity: 0.9; 
+  
+  /* Asegúrate de darles un tamaño si no lo tienen */
+  width: 30px; 
+  height: 30px;
+  object-fit: contain;
+}
+
+/* Esto busca todas las imágenes dentro de una tarjeta expandida (large-card) */
+.skill-card.large-card img {
+  /* 1. EL TRUCO PARA EL BLANCO PURO */
+  filter: brightness(0) invert(1);
+  /* Explicación:
+     brightness(0) -> Vuelve la imagen negra sólida (silueta).
+     invert(1)     -> Invierte el negro a blanco puro.
+  */
+
+  /* 2. Estilo para que se vean bien sobre el vidrio */
+  opacity: 0.85; /* Un poco de transparencia para integrarse con el glass */
+  width: 40px;   /* Ajusta este tamaño según necesites */
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.2s ease, opacity 0.2s;
+}
+
+/* Opcional: Que brillen más al pasar el mouse sobre el icono */
+.skill-card.large-card img:hover {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.tech-icon {
+  filter: brightness(0) invert(1);
+  /* ... resto de estilos */
+}
 
 /* 📱 Responsividad básica para pantallas pequeñas */
 @media (max-width: 768px) {

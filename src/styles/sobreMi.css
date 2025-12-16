@@ -1,168 +1,177 @@
-
 /* Estilo general de la sección */
 .sobre-mi {
-    display: flex;
-    flex-direction: column;
-    gap: 5.5rem;
-    padding: 3rem;
-    position: relative; /* Asegura el contexto de apilamiento */
-  }
-  
-  @media (min-width: 1024px) {
-    .sobre-mi {
-      flex-direction: row;
-    }
-  }
-  
- /* Tarjeta de la izquierda con foto centrada */
-.sobre-mi__left {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.515);
-    backdrop-filter: blur(15.5px);
-    -webkit-backdrop-filter: blur(1.5px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    padding: 1.5rem;
-    color: white;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* Centra la imagen y el contenido */
-    text-align: center;  /* Centra el texto */
-  }
-  
-  .sobre-mi__left img {
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    width: 320px;
-    height: 200px;
-    object-fit: cover;
-    border: 2px solid rgb(255, 255, 255);
-    border-radius: 15px;
-    margin-bottom: 1.8rem;
-    box-shadow: 0 8px 32px 0 rgba(138, 49, 255, 0.515);
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 5.5rem;
+  padding: 3rem;
+  position: relative;
+  /* Asegura el contexto de apilamiento */
+}
 
-  .sobre-mi__left h1 {
-    text-align: center;
-    font-size: 4.9rem;
-    margin-bottom: 1.3rem;
+@media (min-width: 1024px) {
+  .sobre-mi {
+    flex-direction: row;
   }
+}
+
+/* Tarjeta de la izquierda con foto centrada */
+.sobre-mi__left {
+  /* Glass effect handled by .glass-panel class */
+  padding: 1.5rem;
+  color: white;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra la imagen y el contenido */
+  text-align: center;
+  /* Centra el texto */
+}
+
+.sobre-mi__left img {
+  /* Tamaño: Define el ancho y deja que la altura se ajuste sola */
+  width: 320px; 
+  height: auto; 
   
-  .sobre-mi__left p {
-    text-align: justify;
-    line-height: 1.5;
-    max-width: 80%;  /* Limita el ancho del texto al 80% del contenedor */
-    margin: 0 auto;  /* Centra el texto horizontalmente */
-    text-align: justify;  /* Justifica el texto para mayor legibilidad */
-  }
+  /* Eliminar bordes y estilos de "cuadro" */
+  border: none;
+  border-radius: 0; /* Opcional: si la imagen ya es transparente no necesitas redondear bordes */
+  margin-bottom: 1rem;
   
-  
-  /* Tarjetas de estudios */
-  .sobre-mi__right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .sobre-mi__studies {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  
-  .study-card {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10.5px);
-    border-radius: 10px;
-    padding: 1rem;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .study-card h3 {
-    font-weight: bold;
-    font-size: 1.125rem;
-  }
-  
-  .study-card p {
-    font-size: 0.875rem;
-  }
-  
-  .study-card img {
-    width: 100%;
-    height: auto;
-    display: block;         /* Elimina el pequeño espacio debajo de la imagen */
-    object-fit: cover;
-  }
-  
-  
-  .study-card button {
-    font-size: 0.75rem;
-    text-decoration: underline;
-    margin-top: 0.5rem;
-    align-self: flex-start;
-    cursor: pointer;
-  }
-  
-  .study-card button:hover {
-    color: #81c3ff;
-  }
-  
-  /* Cursos y certificaciones */
-  /* Tarjeta de certificados más corta horizontalmente */
-  .sobre-mi__certifications {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10.5px);
-    -webkit-backdrop-filter: blur(10.5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    padding: 1.5rem;
-    color: white;
-    position: relative;
-    z-index: 2;
-    max-width: 700px;  /* Limita el ancho de la tarjeta */
-    margin: 0 auto;    /* Centra la tarjeta horizontalmente */
-  }
-  
-  .sobre-mi__certifications h3 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  .sobre-mi__certifications button {
-    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-    border-radius: 9999px;
-    padding: 0.5rem 1rem;
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-  }
-  
-  .sobre-mi__certifications button:hover {
-    transform: scale(1.05);
-  }
-  
-  .titulo-estudios {
-    font-size: 6rem;
-    font-weight: 800; /* Extra bold */
-    color: #ffffff;
-    text-transform: uppercase;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 4px;
-    letter-spacing: 1px;
-    background: linear-gradient(90deg, #ffffff, #3a7bd5);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  }
-  
-  @media (max-width: 768px) {
+  /* Asegura que se vea la imagen completa */
+  object-fit: contain; 
+  background-color: transparent;
+
+  /* TRUCO PRO: Usar drop-shadow en lugar de box-shadow */
+  /* Esto crea una sombra que sigue la silueta de tu foto PNG, no un cuadrado */
+  filter: drop-shadow(0 8px 16px rgba(138, 49, 255, 0.515));
+}
+
+.sobre-mi__left h1 {
+  text-align: center;
+  font-size: 4.9rem;
+  margin-bottom: 1.3rem;
+}
+
+.sobre-mi__left p {
+  text-align: justify;
+  line-height: 1.5;
+  max-width: 80%;
+  /* Limita el ancho del texto al 80% del contenedor */
+  margin: 0 auto;
+  /* Centra el texto horizontalmente */
+  text-align: justify;
+  /* Justifica el texto para mayor legibilidad */
+}
+
+
+/* Tarjetas de estudios */
+.sobre-mi__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sobre-mi__studies {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.study-card {
+  /* Glass effect handled by .glass-panel class */
+  padding: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.study-card h3 {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.study-card p {
+  font-size: 0.875rem;
+}
+
+.study-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+
+.study-card button {
+  font-size: 0.75rem;
+  text-decoration: underline;
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+.study-card button:hover {
+  color: #81c3ff;
+}
+
+/* Cursos y certificaciones */
+/* Tarjeta de certificados más corta horizontalmente */
+.sobre-mi__certifications {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10.5px);
+  -webkit-backdrop-filter: blur(10.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 1.5rem;
+  color: white;
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  /* Limita el ancho de la tarjeta */
+  margin: 0 auto;
+  /* Centra la tarjeta horizontalmente */
+}
+
+.sobre-mi__certifications h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.sobre-mi__certifications button {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.sobre-mi__certifications button:hover {
+  transform: scale(1.05);
+}
+
+.titulo-estudios {
+  font-size: 6rem;
+  font-weight: 800;
+  /* Extra bold */
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #ffffff, #3a7bd5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
   .sobre-mi {
     padding: 2rem 1rem;
     gap: 2rem;
@@ -183,7 +192,8 @@
   }
 
   .sobre-mi__studies {
-    grid-template-columns: 1fr; /* Una columna en lugar de dos */
+    grid-template-columns: 1fr;
+    /* Una columna en lugar de dos */
   }
 
   .titulo-estudios {

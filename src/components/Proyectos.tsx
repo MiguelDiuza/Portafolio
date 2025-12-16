@@ -68,9 +68,9 @@ const proyectosData: Proyecto[] = [
 
   {
     id: 3,
-    title: "Web E-comerce",
-    subtitle: "Tienda de plantillas de Diseño ",
-    image: `${base}img/po3.jpg`,
+    title: "Web AI de Diseño",
+    subtitle: "Ai de diseño entrenada y desplegada en web",
+    image: `${base}img/aiFly.jpg`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
     description: "Proyecto sobre venta de plantillas de diseño con una pasarela de pagos incluida",
@@ -119,29 +119,37 @@ const proyectosData: Proyecto[] = [
 ];
 
 
-
-
-
 const Card: React.FC<CardProps> = ({ title, subtitle, image, icon, onIconClick }) => (
   <div className="proyecto-card">
-    <div className="image-container relative">
-      {/* Icono como botón */}
-      <button
-        className="card-icon-overlay"
-        onClick={onIconClick}
-        aria-label={`Más sobre ${title}`}
-      >
-        <img src={icon} alt={`icono ${title}`} />
-      </button>
+    {/* --- CAPAS DE NEÓN (Decorativas) --- */}
+    <div className="shine shine-top"></div>
+    <div className="shine shine-bottom"></div>
+    <div className="glow glow-top"></div>
+    <div className="glow glow-bottom"></div>
+    <div className="glow glow-bright glow-top"></div>
+    <div className="glow glow-bright glow-bottom"></div>
 
-      {/* Imagen principal */}
-      <img src={image} alt={title} className="card-image w-full h-auto" />
-    </div>
+    {/* --- CONTENIDO REAL (Envuelto para z-index) --- */}
+    <div className="inner-content">
+      <div className="image-container">
+        {/* Icono como botón */}
+        <button
+          className="card-icon-overlay"
+          onClick={onIconClick}
+          aria-label={`Más sobre ${title}`}
+        >
+          <img src={icon} alt={`icono ${title}`} />
+        </button>
 
-    <div className="card-content p-4">
-      <p className="card-subtitle text-sm text-gray-500">{subtitle}</p>
-      <h2 className="card-title text-lg font-semibold">{title}</h2>
-      <p className="card-date text-xs text-gray-400">2025</p>
+        {/* Imagen principal */}
+        <img src={image} alt={title} className="card-image" />
+      </div>
+
+      <div className="card-content">
+        <p className="card-subtitle">{subtitle}</p>
+        <h2 className="card-title">{title}</h2>
+        <p className="card-date">2025</p>
+      </div>
     </div>
   </div>
 );

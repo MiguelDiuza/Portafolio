@@ -1,300 +1,419 @@
 :root {
-    --color-purple: #8B5CF6;
-    --color-pink: #7648ec;
-    --color-gray: #9CA3AF;
-    --color-black: #1F2937;
-    /* Mantiene el tamaño ajustado */
+  /* --- COLORES CONFIGURABLES --- */
+  --hue1: 255; /* Base violeta */
+  --hue2: 270; /* Base morada oscura */
+  
+  /* Colores exactos solicitados para gradientes */
+  --color-neon-1: #6966FF; 
+  --color-neon-2: #6200CB;
+
+  --border: 1px;
+  --radius: 30px;
+  --border-color: rgba(255, 255, 255, 0.15);
 }
 
+/* Le decimos al navegador que estas variables son colores y deben animarse suavemente */
+@property --anim-color-1 {
+  syntax: '<color>';
+  initial-value: #6966FF; /* Tu color azul/violeta original */
+  inherits: true;
+}
+
+@property --anim-color-2 {
+  syntax: '<color>';
+  initial-value: #6200CB; /* Tu color morado original */
+  inherits: true;
+}
+
+/* --- FONDO GLOBAL DE LA SECCIÓN --- */
 .app {
-    max-width: 100vw;
-    text-align: center;
-    color: white;
+  max-width: 100vw;
+  text-align: center;
+  color: white;
+  position: relative;
+  min-height: 110vh;
+  background-color: #08090d;
+  overflow: hidden; /* Importante para el pseudo-elemento */
+  animation: cicloColorNeones 15s infinite linear;
+}
+
+.app::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  
+  background-image: 
+    /* 1. NUEVA SOMBRA (Capa superior) 
+       Va de negro -> transparente -> transparente -> negro */
+    linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.9) 100%),
+    
+    /* 2. TU IMAGEN DE FONDO (Capa media) */
+    url('/public/img/bg2.jpg'), 
+    
+    /* 3. TUS COLORES ANIMADOS (Capa inferior) */
+    linear-gradient(to right in oklab, var(--anim-color-1), var(--anim-color-2));
+    
+  background-size: cover;
+  background-position: center;
+  
+  /* IMPORTANTE: Ajuste de mezcla */
+  /* 'normal' para la sombra (para que sea negra real), 
+     'hard-light' (o overlay) para mezclar la imagen con los colores */
+  background-blend-mode: normal, hard-light;
+  
+  /* Invertir horizontalmente */
+  transform: scaleX(-1);
+  opacity: 0.6; 
+  z-index: 0;
+}
+
+/* Asegurar que el contenido esté sobre el fondo */
+.proyectos-title, .carousel-container, .dropdown {
+  position: relative;
+  z-index: 1;
 }
 
 .proyectos-title {
-    font-size: 5.5rem; /* Ajusta el tamaño según lo necesites */
-    font-weight: 800; /* Extra bold */
-    text-align: center; /* Opcional: mantiene alineado */
-    margin-bottom: 20px;
-    margin-top: 70px;
+  font-size: 5.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  margin-top: 70px;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
 
-
-  }
-
+/* --- CARRUSEL 3D (Lógica Original Mantenida) --- */
 .carousel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 .carousel {
-    position: relative;
-    width: 380px;
-    height: 500px;
-    perspective: 800px;
-    transform-style: preserve-3d;
-    margin: 0 auto;
+  position: relative;
+  width: 380px;
+  height: 500px;
+  perspective: 800px;
+  transform-style: preserve-3d;
+  margin: 0 auto;
 }
 
 .proyectos-card-container {
-    position: absolute;
-    width: 100%;
-    height: 90%;
-    transform:
-        rotateY(calc(var(--offset) * 45deg)) scaleY(calc(1 + var(--abs-offset) * -0.3)) translateZ(calc(var(--abs-offset) * -25rem)) translateX(calc(var(--direction) * -4rem));
-    filter: blur(calc(var(--abs-offset) * 0.7rem));
-    transition: all 0.3s ease-out;
+  position: absolute;
+  width: 100%;
+  height: 90%; /* Ajuste visual */
+  transform:
+    rotateY(calc(var(--offset) * 45deg)) 
+    scaleY(calc(1 + var(--abs-offset) * -0.3)) 
+    translateZ(calc(var(--abs-offset) * -25rem)) 
+    translateX(calc(var(--direction) * -4rem));
+  filter: blur(calc(var(--abs-offset) * 0.7rem));
+  transition: all 0.3s ease-out;
+  display: flex;
+  justify-content: center; /* Centrar tarjeta en contenedor */
 }
 
+/* --- ESTILO VISUAL DE LA TARJETA (Glass + Neon) --- */
 .proyecto-card {
-    position: absolute;
-    width: 380px; /* Ajusta según sea necesario */
-    height: 500px; /* Ajusta según sea necesario */
-    border-radius: 30px; /* Bordes redondeados */
-    overflow: hidden;
-    text-align: center;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px; /* Ajusta el contenido más abajo */
+  position: relative;
+  width: 380px;
+  height: 500px;
+  border-radius: var(--radius);
+  border: var(--border) solid var(--border-color);
+  
+  /* Fondo Cristal Oscuro */
+  background: 
+    linear-gradient(235deg, rgba(105, 102, 255, 0.1), transparent 33%), 
+    linear-gradient(45deg , rgba(98, 0, 203, 0.15), transparent 33%), 
+    rgba(15, 20, 30, 0.7); /* Base oscura semi-transparente */
     
-    /* Fondo con degradado */
-    background: linear-gradient(
-        to bottom, 
-        rgb(79, 79, 79) 0%,  /* Gris con 100% opacidad arriba */
-        rgba(0, 0, 0, 0.9) 100%    /* Negro con 95% opacidad abajo */
-    );
-
-    /* Efecto de cristal */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    
-    /* Opcional: Bordes semitransparentes para más efecto cristal */
-    border: 1px solid rgba(198, 198, 198, 0.651);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Wrapper interno para asegurar que el contenido esté sobre el neón */
+.inner-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
+/* --- NEÓN POTENTE (Estilos Nuevos) --- */
+
+.shine, .glow {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  opacity: 0;
+}
+
+.shine-top, .glow-top {
+  opacity: 5;
+  top: 0; left: 0;
+}
+
+.shine-bottom, .glow-bottom {
+  opacity: 5;
+  bottom: 0; right: 0;
+  transform: rotate(180deg);
+}
+
+/* Borde fino y brillante */
+.shine {
+  z-index: 1;
+  border: 1px solid transparent;
+  mask: linear-gradient(transparent), linear-gradient(black);
+  mask-clip: padding-box, border-box;
+  mask-composite: subtract;
+  
+  background: conic-gradient(
+    from -45deg at -20% -20%, 
+    transparent 0%, 
+    var(--color-neon-1) 10%, 
+    transparent 50%
+  ) border-box;
+}
+
+.shine-bottom {
+    background: conic-gradient(
+    from -45deg at -20% -20%, 
+    transparent 0%, 
+    var(--color-neon-2) 10%, 
+    transparent 50%
+  ) border-box;
+}
+
+/* Resplandor ambiental fuerte */
+.glow {
+  z-index: 1;
+  inset: 0;
+  background: radial-gradient(circle at top left, 
+    var(--color-neon-1) 0%, 
+    transparent 35%);
+  filter: blur(45px) brightness(1,5);
+  mix-blend-mode: screen; 
+  opacity: 0.5;
+}
+
+.glow-bottom {
+  background: radial-gradient(circle at top left, 
+    var(--color-neon-2) 0%, 
+    transparent 45%);
+}
+
+/* Núcleo de luz intenso (Sable de luz) */
+.glow-bright {
+  z-index: 3;
+  border-top: 5px solid white;
+  border-left: 5px solid white;
+  filter: blur(5px) drop-shadow(0 0 10px var(--color-neon-1));
+  mask: linear-gradient(135deg, black 15%, transparent 50%);
+  width: 60%;
+  height: 40%;
+  opacity: 0.8;
+}
+
+.glow-bright.glow-bottom {
+    border-top-color: var(--color-neon-2);
+    border-left-color: var(--color-neon-2);
+    filter: blur(5px) drop-shadow(0 0 10px var(--color-neon-2));
+}
+
+/* --- CONTENIDO INTERNO TARJETA --- */
 .image-container {
-    position: relative;
-    height: 60%;
-    /* Ajusta la altura de la imagen dentro de la carta */
-    width: 90%;
-    /* Hace la imagen más pequeña dentro de la carta */
-    border-radius: 20px;
-    /* Aplica esquinas redondeadas a la imagen */
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    top: 10px;
-    /* Baja la imagen */
-
+  position: relative;
+  height: 60%;
+  width: 90%;
+  margin: 15px auto 0;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
-    border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  /* Eliminé el clip-path complejo para que se vea más limpio con el cristal, pero puedes volver a ponerlo si gustas */
 }
-
-
-
 
 .card-icon-overlay {
   position: absolute;
-  top: 180px;
-  right: 25px;
-  width: 88px;
-  height: 88px;
-  z-index: 2;
-  background-color: white;
-  border-radius: 9999px;
+  top: 85%; /* Ajustado */
+  right: 10px;
+  width: 60px; /* Ajustado para que no sea gigante */
+  height: 60px;
+  z-index: 20;
+  background-color: rgb(41, 41, 41);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  overflow: hidden;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  padding: 10px;
   cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-/* Imagen centrada y contenida */
 .card-icon-overlay img {
-  width: 100%; /* ⬅️ Esto ajusta el tamaño del icono DENTRO del botón */
+  width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* Hover: botón crece y se oscurece */
 .card-icon-overlay:hover {
-  background-color: #e5e5e5; /* Gris claro */
   transform: scale(1.1);
 }
 
-/* Active: más oscuro y botón se encoge */
-.card-icon-overlay:active {
-  background-color: #c7c7c7; /* Gris más oscuro */
-  transform: scale(0.95);
-}
-
-
-.proyecto-card h2 {
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0 0 0.7em;
-    color: white;
-    margin-bottom: 1px;
-
-}
-
 .card-content {
-    text-align: right;
-    /* Alinea todo a la izquierda */
-    padding: 15px;
+  text-align: left; /* Queda mejor en diseño moderno */
+  padding: 20px 25px;
+  margin-top: 10px;
 }
 
 .card-subtitle {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #ccc;
-    margin-bottom: 1px;
-    /* Menos espacio entre subtítulo y título */
+  font-size: 0.9rem;
+  color: rgb(223, 223, 255);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
 }
 
 .card-title {
-    font-size: 2rem;
-    font-weight: 900;
-    color: white;
-    margin-bottom: 2px;
-    /* Menos espacio antes de la fecha */
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  line-height: 1.1;
 }
 
 .card-date {
-    font-size: 0.9rem;
-    color: #888;
-    text-align: center;
-    display: block;
-    /* Para centrar en su propio espacio */
-    margin-top: 5px;
-    /* Ajuste de separación */
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 10px;
+  display: block;
 }
 
-
+/* --- BOTONES DE NAVEGACIÓN --- */
 .proyecto-nav {
-    color: white;
-    font-size: 3rem;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 50%;
-    z-index: 2;
-    cursor: pointer;
-    user-select: none;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
-}
-
-.proyecto-nav.left {
-    left: -14.5rem;
-}
-
-.proyecto-nav.right {
-    right: -14.5rem;
+  color: white;
+  font-size: 3rem;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  z-index: 10;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
 .proyecto-nav:hover {
-    transform: scale(1.15);
-    background: rgba(255, 255, 255, 0.2);
+  background: var(--color-neon-1);
+  box-shadow: 0 0 20px var(--color-neon-1);
+  border-color: transparent;
 }
+
+.proyecto-nav.left { left: -14.5rem; }
+.proyecto-nav.right { right: -14.5rem; }
 
 /* 🔥 Dropdown Estilizado */
 .dropdown {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 15px;
-    margin-bottom: 30px;
-    margin-top: 10px;
-  }
-  
-  .dropdown-button {
-    background: rgba(30, 30, 30, 0.9);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 10px 20px;
-    border-radius: 15px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  .dropdown-button:hover {
-    background: rgba(50, 50, 50, 0.9);
-  }
-  
-  .dropdown-icon {
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: rgba(30, 30, 30, 0.95);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    padding: 8px 0;
-    list-style: none;
-    z-index: 100;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  z-index: 50;
+}
 
-  }
-  
-  .dropdown-menu li {
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    transition: background 0.2s ease-in-out;
-  }
-  
-  .dropdown-menu li:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-  
-  /* Animación de dropdown */
-  .dropdown-menu {
-    transform: scaleY(0);
-    transform-origin: top;
-    opacity: 0;
-    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
-  }
-  
-  .dropdown:hover .dropdown-menu {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  
-  .project-modal-overlay {
+.dropdown-button {
+  background: rgba(30, 30, 30, 0.9);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.dropdown-button:hover {
+  background: rgba(50, 50, 50, 0.9);
+}
+
+.dropdown-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(30, 30, 30, 0.95);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 8px 0;
+  list-style: none;
+  z-index: 100;
+
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  transition: background 0.2s ease-in-out;
+}
+
+.dropdown-menu li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animación de dropdown */
+.dropdown-menu {
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.dropdown:hover .dropdown-menu {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.project-modal-overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px); /* Difumina el fondo */
+  backdrop-filter: blur(20px);
+  /* Difumina el fondo */
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -303,7 +422,8 @@
 }
 
 .project-modal {
-  background: rgba(30, 30, 30, 0.8); /* fondo translúcido oscuro */
+  background: rgba(30, 30, 30, 0.8);
+  /* fondo translúcido oscuro */
   color: white;
   max-width: 800px;
   width: 100%;
@@ -311,7 +431,8 @@
   border-radius: 15px;
   position: relative;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px); /* Efecto glassmorphism */
+  backdrop-filter: blur(20px);
+  /* Efecto glassmorphism */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -346,7 +467,8 @@
 .tech-icons img {
   height: 40px;
   width: 40px;
-  filter: brightness(0) invert(1); /* Convierte a blanco */
+  filter: brightness(0) invert(1);
+  /* Convierte a blanco */
   transition: transform 0.3s;
 }
 
@@ -356,17 +478,21 @@
 
 .project-images {
   display: flex;
-  justify-content: space-between; /* distribuye el espacio entre las imágenes */
-  gap: 20px; /* o 0 si quieres sin separación */
+  justify-content: space-between;
+  /* distribuye el espacio entre las imágenes */
+  gap: 20px;
+  /* o 0 si quieres sin separación */
   width: 100%;
   flex-wrap: nowrap;
-  overflow: hidden; /* oculta scroll */
+  overflow: hidden;
+  /* oculta scroll */
 }
 
 .project-images img {
   border-radius: 10px;
   object-fit: cover;
-  width: 48%; /* cada imagen ocupa casi la mitad */
+  width: 48%;
+  /* cada imagen ocupa casi la mitad */
   height: auto;
   max-height: 250px;
 }
@@ -388,4 +514,22 @@
 .project-link-button:hover {
   background-color: #a855f7;
   color: black;
+}
+
+@keyframes cicloColorNeones {
+  0%, 100% {
+    /* Estado inicial: Tus colores originales (Azul/Violeta y Morado) */
+    --anim-color-1: #6966FF; 
+    --anim-color-2: #6200CB;
+  }
+  33% {
+    /* Estado medio 1: Morado y Rosa Fuerte */
+    --anim-color-1: #8A2EFF; 
+    --anim-color-2: #FF0080;
+  }
+  66% {
+    /* Estado medio 2: Rosa Fuerte y Azul Vibrante */
+    --anim-color-1: #FF0080; 
+    --anim-color-2: #0070F3;
+  }
 }

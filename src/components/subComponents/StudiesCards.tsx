@@ -80,51 +80,51 @@ const StudiesCards: React.FC = () => {
     };
   }, [selectedStudy]);
 
-const base = import.meta.env.BASE_URL;
+  const base = import.meta.env.BASE_URL;
 
-const studies: Study[] = [
-  {
-    title: "Bachiller Técnico en Arte Gráfico",
-    years: "2012-2018",
-    image: `${base}img/artImg.png`,
-    pdf: `${base}pdfs/art.pdf`,
-    description: "Estudio técnico enfocado en procesos gráficos, diseño y producción impresa.",
-  },
-  {
-    title: "Tecnólogo en Animación 3D",
-    years: "2019-2021",
-    image: `${base}img/senaImg.png`,
-    pdf: `${base}pdfs/An3d.pdf`,
-    description: "Formación profesional en modelado, rigging, animación y postproducción 3D.",
-  },
-  {
-    title: "Ingeniería Multimedia",
-    years: "En espera del <br> diploma, mayo 2026",
-    image: `${base}img/mulImg.png`,
-    pdf: `${base}pdfs/IngMultimedia.pdf`,
-    description: "Carrera universitaria enfocada en desarrollo de software multimedia e interacción.",
-  },
-  {
-    title: "Especialización en IA",
-    years: "En curso",
-    image: `${base}img/iaImg.png`,
-    pdf: `${base}pdfs/extra.pdf`,
-    description: "Estudios de posgrado sobre aprendizaje automático, redes neuronales y big data.",
-  },
-  {
-    title: "Cursos Adicionales",
-    years: "2013 - ∞",
-    image: `${base}img/cuImg.png`,
-    pdf: `${base}pdfs/extra.pdf`,
-    description: "Colección de cursos cortos en áreas como diseño, desarrollo, animación y más.",
-  },
-];
+  const studies: Study[] = [
+    {
+      title: "Bachiller Técnico en Arte Gráfico",
+      years: "2012-2018",
+      image: `${base}img/artImg.png`,
+      pdf: `${base}pdfs/art.pdf`,
+      description: "Estudio técnico enfocado en procesos gráficos, diseño y producción impresa.",
+    },
+    {
+      title: "Tecnólogo en Animación 3D",
+      years: "2019-2021",
+      image: `${base}img/senaImg.png`,
+      pdf: `${base}pdfs/An3d.pdf`,
+      description: "Formación profesional en modelado, rigging, animación y postproducción 3D.",
+    },
+    {
+      title: "Ingeniería Multimedia",
+      years: "En espera del <br> diploma, mayo 2026",
+      image: `${base}img/mulImg.png`,
+      pdf: `${base}pdfs/IngMultimedia.pdf`,
+      description: "Carrera universitaria enfocada en desarrollo de software multimedia e interacción.",
+    },
+    {
+      title: "Especialización en IA",
+      years: "En curso",
+      image: `${base}img/iaImg.png`,
+      pdf: `${base}pdfs/extra.pdf`,
+      description: "Estudios de posgrado sobre aprendizaje automático, redes neuronales y big data.",
+    },
+    {
+      title: "Cursos Adicionales",
+      years: "2013 - ∞",
+      image: `${base}img/cuImg.png`,
+      pdf: `${base}pdfs/extra.pdf`,
+      description: "Colección de cursos cortos en áreas como diseño, desarrollo, animación y más.",
+    },
+  ];
 
 
   return (
     <div className="sobre-mi__studies">
       {studies.map((study, index) => (
-        <div key={index} className="study-card" onClick={() => setSelectedStudy(study)}>
+        <div key={index} className="study-card glass-panel" onClick={() => setSelectedStudy(study)}>
           <h3>{study.title}</h3>
           <p>{study.years}</p>
           <div className="study-card-footer">
@@ -140,7 +140,7 @@ const studies: Study[] = [
           aria-modal="true"
           onClick={() => setSelectedStudy(null)}
         >
-          <div className="study-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="study-modal glass-panel" onClick={(e) => e.stopPropagation()}>
             <button className="close-button" onClick={() => setSelectedStudy(null)}>✖</button>
             <h2>{selectedStudy.title}</h2>
             <p><strong>{selectedStudy.years}</strong></p>

@@ -1,7 +1,9 @@
 .sobre-mi__studies {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Hacer las cartas más pequeñas */
-  gap: 50px; /* Aumentar el espacio entre las cartas */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  /* Hacer las cartas más pequeñas */
+  gap: 50px;
+  /* Aumentar el espacio entre las cartas */
   padding: 15px;
   justify-content: center;
   justify-items: center;
@@ -9,27 +11,25 @@
 
 /* Tarjetas de estudio con efecto vidrio */
 .study-card {
-  background: rgba(255, 255, 255, 0.15); /* Efecto translúcido */
-  backdrop-filter: blur(10px); /* Difuminar fondo */
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  padding: 0px; /* Reducir el padding interno */
+  /* Glass effect handled by .glass-panel class */
+  padding: 0px;
+  /* Reducir el padding interno */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: white;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 240px; /* Tamaño reducido de las tarjetas */
+  height: 240px;
+  /* Tamaño reducido de las tarjetas */
 }
 
 /* Títulos dentro de las tarjetas */
 .study-card h3 {
-  font-size: 1.2rem; /* Mantener tamaño de fuente pequeño */
+  font-size: 1.2rem;
+  /* Mantener tamaño de fuente pequeño */
   margin: 0px, 0px;
   padding: 10px;
 }
@@ -38,7 +38,8 @@
 .study-card p {
   font-size: 0.9rem;
   color: #e0e0e0;
-  margin: 1px 0; /* Solo 2px arriba y abajo */
+  margin: 1px 0;
+  /* Solo 2px arriba y abajo */
 }
 
 
@@ -49,14 +50,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%; /*  Ocupa todo el ancho de la tarjeta */
+  width: 100%;
+  /*  Ocupa todo el ancho de la tarjeta */
   text-align: center;
 }
 
 
 /* Imagen centrada dentro de la tarjeta */
 .study-card-footer img {
-  width: 100%;     /*  Ocupa todo el ancho del contenedor */
+  width: 100%;
+  /*  Ocupa todo el ancho del contenedor */
   height: auto;
   display: block;
 }
@@ -93,28 +96,30 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.232); /* fondo oscuro semi-transparente */
-  backdrop-filter: blur(20px); /* Difuminar fondo */
+  background-color: rgba(0, 0, 0, 0.232);
+  /* fondo oscuro semi-transparente */
+  backdrop-filter: blur(20px);
+  /* Difuminar fondo */
   border: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* asegurar que esté por encima de todo */
+  z-index: 9999;
+  /* asegurar que esté por encima de todo */
 }
 
 .study-modal {
   position: relative;
-  background: rgba(0, 0, 0, 0.555); /* Efecto translúcido */  width: 50vw;
-  backdrop-filter: blur(20px); /* Difuminar fondo */
+  /* Glass effect handled by .glass-panel class */
+  width: 50vw;
   height: 80vh;
   padding: 1rem;
-  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; 
+  justify-content: center;
+  /* Centra verticalmente */
+  align-items: center;
 }
 
 .study-modal h2 {
@@ -143,6 +148,7 @@
   transform: scale(1.2);
   color: red;
 }
+
 .pdf-viewer {
   width: 80%;
   height: 70%;

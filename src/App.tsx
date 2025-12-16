@@ -1,36 +1,76 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import TechBanner from "./components/TechBanner"; // Importa el componente aquí
+import TechBanner from "./components/TechBanner";
 import SobreMi from "./components/SobreMi";
 import SkillCard from "./components/SkillCard";
 import Proyectos from "./components/Proyectos";
 import Footer from "./components/Footer";
 import Video from "./components/Video";
-import Skills from "./components/Skills";
-/*idiomas import S from "./components/idiomas";*/
-
+import ExperienceSection from "./components/ExperienceSection";
+import { LayoutGroup } from "framer-motion";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
+const skillsData = [
+  { name: "Frontend", percentage: 70 },
+  { name: "Backend", percentage: 58 },
+  { name: "UI/UX", percentage: 70 },
+  { name: "3D/AR/VR", percentage: 65 },
+  { name: "AI", percentage: 55 },
+];
+
 const App: React.FC = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
+  const [showSkillsInBody, setShowSkillsInBody] = useState<boolean>(false);
+  const skillsSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 100);
+      // Cambiamos a sticky un poco antes para suavizar
+      setIsSticky(window.scrollY > 50);
     };
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowSkillsInBody(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: "-100px 0px 0px 0px" }
+    );
+
+    if (skillsSectionRef.current) {
+      observer.observe(skillsSectionRef.current);
+    }
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <>
-      {/* Encabezado fijo con dos secciones */}
+    <LayoutGroup>
+      {/* 1. CONTENEDOR FLOTANTE INDEPENDIENTE 
+        Está fuera del header, fixed en la pantalla.
+      */}
+      {!showSkillsInBody && (
+        <div className={`floating-skills-container ${isSticky ? "sticky-mode" : ""}`}>
+          {skillsData.map((skill) => (
+            <SkillCard
+              key={skill.name}
+              skillName={skill.name}
+              percentage={skill.percentage}
+              layoutId={`skill-${skill.name}`}
+              isShrunk={isSticky} // Mantiene la lógica de encogerse
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Encabezado fijo (Ahora solo navegación) */}
       <header className={`header ${isSticky ? "sticky" : ""}`}>
         <div className="header-content">
-          {/* Sección izquierda */}
           <div className="header-left">
             <nav>
               <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -40,38 +80,26 @@ const App: React.FC = () => {
               <a href="#contacto">Contáctame</a>
             </nav>
           </div>
-
-          {/* Sección derecha */}
-          <div className="header-right">
-            <div className="card-container">
-              <SkillCard skillName="Frontend" percentage={65} />
-              <SkillCard skillName="Backend" percentage={38} />
-              <SkillCard skillName="UI/UX" percentage={70} />
-              <SkillCard skillName="3D/AR/VR" percentage={65} />
-              <SkillCard skillName="AI" percentage={45} />
-            </div>
-          </div>
+          
+          {/* El lado derecho queda vacío para mantener el espacio si usas flex space-between */}
+          <div className="header-right" style={{ width: '60%' }}></div>
         </div>
       </header>
 
       {/* Contenedor principal de la página */}
       <div id="inicio" className="main-container">
         <section className="intro">
-          {/* División para los títulos e imagen */}
           <div className="intro-content">
             <div className="intro-text">
               <h1>INGENIERO <br /> MULTIMEDIA</h1>
               <h2>MIGUEL ANGEL DIUZA M.</h2>
               <p>Diseñador UI/UX | Front-End & Full-Stack Developer | IA Developer</p>
 
-              {/* Contenedor de los botones */}
               <div className="contact-buttons">
                 <div className="icon-buttons">
                   <button className="contact-button con" aria-label="Contact">
                     <img src={asset("loogos/contactame.svg")} alt="Contact" />
-
                   </button>
-
                   <button
                     className="icon-button linkedin"
                     aria-label="LinkedIn"
@@ -90,7 +118,6 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Sección separada para el botón de video */}
               <div className="video-button-container">
                 <button
                   className="contact-button video-button"
@@ -98,35 +125,30 @@ const App: React.FC = () => {
                   onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth" })}
                 >
                   <img src={asset("img/boton_Video.svg")} alt="Video" />
-
-
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Imagen de la intro */}
           <div className="intro-image">
             <img src={asset("img/person.png")} alt="person" />
           </div>
         </section>
       </div>
 
-
-      {/* Banner de tecnologías */}
       <TechBanner />
 
-      {/* Contenido principal */}
       <div id="sobre-mi" className="content1">
         <SobreMi />
+      </div>
+            {/* Sección de Experiencia (A donde viajan las tarjetas) */}
+
+      <div id="sobre-mi" className="contentE">
+        <ExperienceSection />
       </div>
 
       <div id="proyectos" className="content2">
         <Proyectos />
-      </div>
-
-      <div id="proyectos" className="content2">
-        <Skills />
       </div>
 
       <div id="video">
@@ -138,7 +160,7 @@ const App: React.FC = () => {
           <Footer />
         </div>
       </footer>
-    </>
+    </LayoutGroup>
   );
 };
 

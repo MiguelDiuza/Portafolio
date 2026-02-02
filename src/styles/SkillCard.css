@@ -8,12 +8,18 @@
   /* Removed sticky and top as parent controls layout */
 }
 
+/* Estilo base para las tarjetas cuando están flotando en el header (antes y después de encogerse) */
+.floating-skills-container .skill-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
 .skill-card.shrink {
   width: 100px;
   height: 140px;
   transform: scale(0.85);
-  /* Glass effect adjustment for shrunk state if needed */
-  backdrop-filter: blur(15px);
 }
 
 
@@ -77,24 +83,29 @@
 /* --- ESTILOS PARA LA TARJETA ATERRIZADA (EXPANDIDA) --- */
 .skill-card.large-card {
   /* Hacemos la tarjeta más angosta como pediste */
-  width: 220px !important; 
-  min-width: 220px !important; /* Forzamos que no se estire a 280px */
-  min-height: 380px; /* Un poco más alta para que quepa todo sin aplastar el círculo */
+  width: 220px !important;
+  min-width: 220px !important;
+  min-height: 600px;
+  /* Un poco más altas para mejor distribución */
   padding: 1.5rem;
-  justify-content: flex-start; /* Alineamos todo hacia arriba */
-  gap: 15px; /* Espacio entre el círculo, el nombre y la barra */
+  justify-content: flex-start;
+  gap: 5px;
+  /* Espacio reducido */
 }
 
 /* Aseguramos que el círculo no se aplaste ni desaparezca */
 .skill-card.large-card .skill-circle {
-  flex-shrink: 0; /* OBLIGATORIO: Evita que el círculo desaparezca si falta espacio */
-  width: 80px;    /* Un poco más grande en la versión expandida (opcional) */
+  flex-shrink: 0;
+  /* OBLIGATORIO: Evita que el círculo desaparezca si falta espacio */
+  width: 80px;
+  /* Un poco más grande en la versión expandida (opcional) */
   height: 80px;
   margin-bottom: 5px;
 }
 
 .skill-card.large-card .skill-name {
-  font-size: 1.2rem; /* Nombre un poco más grande */
+  font-size: 1.2rem;
+  /* Nombre un poco más grande */
   margin-bottom: 10px;
 }
 
@@ -104,7 +115,8 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Efecto rebote suave */
   transform-style: preserve-3d;
 }
 
@@ -114,33 +126,40 @@
 }
 
 /* Caras de la tarjeta (Frente y Reverso) */
-.flip-front, .flip-back {
+.flip-front,
+.flip-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden;
+  /* Safari */
   backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 20px; /* Importante para que coincida con el borde de la tarjeta */
+  border-radius: 20px;
+  /* Importante para que coincida con el borde de la tarjeta */
 }
 
 /* Ajuste específico para el frente */
 .flip-front {
-  justify-content: flex-start; /* Alineación que ya teníamos */
+  justify-content: flex-start;
+  /* Alineación que ya teníamos */
   padding-top: 1.5rem;
   z-index: 2;
 }
 
 /* Ajuste específico para el reverso */
 .flip-back {
-  background: rgba(30, 30, 40, 0.95); /* Un fondo un poco más oscuro para leer bien */
+  background: rgba(30, 30, 40, 0.95);
+  /* Un fondo un poco más oscuro para leer bien */
   color: white;
-  transform: rotateY(180deg); /* Ya está volteado por defecto */
+  transform: rotateY(180deg);
+  /* Ya está volteado por defecto */
   justify-content: center;
   padding: 1.5rem;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.5); /* Sombra interna para profundidad */
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  /* Sombra interna para profundidad */
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -153,5 +172,6 @@
   width: 100%;
   font-size: 0.85rem;
   text-align: center;
-  border-left: 4px solid #6a5acd; /* Detalle de color */
+  border-left: 4px solid #6a5acd;
+  /* Detalle de color */
 }

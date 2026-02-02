@@ -3,7 +3,7 @@ import { LayoutGroup } from 'framer-motion';
 import SkillCard from './SkillCard';
 
 // 1. CONFIGURACIÓN DE RUTAS Y DATOS
-const base = import.meta.env.BASE_URL || "/"; 
+const base = import.meta.env.BASE_URL || "/";
 
 // Función auxiliar para generar ruta de logo
 const getLogo = (name: string) => `${base}loogos/${name}`;
@@ -54,11 +54,12 @@ const skillsData = [
     name: "AI",
     percentage: 55,
     techs: [
-      { src: getLogo("yolo.svg"), alt: "YOLO" },
+      { src: getLogo("python.svg"), alt: "Reg Log" },
       { src: getLogo("pytorch.svg"), alt: "PyTorch" },
       { src: getLogo("sc.svg"), alt: "Scikit" },
-      { src: getLogo("robo.png"), alt: "Roboflow" },
-      { src: getLogo("python.svg"), alt: "Reg. Log." }
+      { src: getLogo("robo.png"), alt: "roboflow" },
+      { src: getLogo("yolo.svg"), alt: "YOLO" },
+      { src: getLogo("n8n.png"), alt: "N8N" }
     ]
   },
 ];
@@ -130,7 +131,7 @@ const ExperienceSection: React.FC = () => {
               position: 'relative'
             }}
           >
-            <h1 style={{ marginBottom: '2rem', fontSize: '4.5rem' }}>
+            <h1 className="section-title">
               Mis Habilidades
             </h1>
 
@@ -148,6 +149,19 @@ const ExperienceSection: React.FC = () => {
                 />
               ))}
             </div>
+
+            {/* TARJETA ANCHA DE DIFERENCIADOR */}
+            {showSkillsInBody && (
+              <div className="glass-panel wide-differentiator-card">
+                <h2>Más allá de la Ingeniería Convencional</h2>
+                <p>
+                  Mi perfil profesional trasciende la ingeniería tradicional. Como Ingeniero Multimedia, combino una sólida formación técnica y algorítmica con la versatilidad multimodal que exige la industria actual. Esta convergencia me permite liderar proyectos en diversas fronteras tecnológicas: desde el diseño de experiencias de usuario de alto impacto (UI/UX) y el desarrollo de tecnologías inmersivas (Realidad Aumentada y Videojuegos).
+                </p>
+                <p style={{ marginTop: '1.5rem' }}>
+                  Además, mi especialización en Inteligencia Artificial potencia mi capacidad para diseñar, entrenar e implementar modelos avanzados que resuelven problemas complejos, integrándolos de manera armoniosa en ecosistemas informáticos escalables y multidisciplinarios. Mi enfoque no solo busca la funcionalidad, sino la creación de valor a través de la armonía entre la técnica y la experiencia del usuario.
+                </p>
+              </div>
+            )}
           </div>
 
         </LayoutGroup>

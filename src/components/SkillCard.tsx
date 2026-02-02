@@ -14,23 +14,23 @@ interface SkillCardProps {
   className?: string;
   isShrunk?: boolean;
   isExpanded?: boolean;
-  techs?: TechItem[]; 
+  techs?: TechItem[];
 }
 
-const SkillCard: React.FC<SkillCardProps> = ({ 
-  skillName, 
-  percentage, 
-  layoutId, 
-  className, 
-  isShrunk, 
+const SkillCard: React.FC<SkillCardProps> = ({
+  skillName,
+  percentage,
+  layoutId,
+  className,
+  isShrunk,
   isExpanded,
-  techs 
+  techs
 }) => {
   return (
     <motion.div
       className={`skill-card glass-panel ${className || ""} ${isShrunk ? "shrink" : ""}`}
       layoutId={layoutId}
-      layout 
+      layout
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: isShrunk ? 0.85 : 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
@@ -38,9 +38,9 @@ const SkillCard: React.FC<SkillCardProps> = ({
       style={{
         // AQUI CAMBIAMOS EL TAMAÑO DE LA TARJETA ATERRIZADA
         // 200px de ancho y 240px de alto aprox para que sea compacta
-        width: isExpanded ? '200px' : undefined, 
-        minHeight: isExpanded ? '240px' : undefined, 
-        
+        width: isExpanded ? '200px' : undefined,
+        minHeight: isExpanded ? '240px' : undefined,
+
         flexDirection: 'column',
         display: 'flex',
         justifyContent: isExpanded ? 'center' : 'center', // Centrado vertical
@@ -53,9 +53,9 @@ const SkillCard: React.FC<SkillCardProps> = ({
           <span className="skill-percentage">{percentage}%</span>
         </div>
       )}
-      
+
       {/* El nombre siempre visible, pero si está expandida le damos un poco más de tamaño */}
-      <div className="skill-name" style={{ fontSize: isExpanded ? '1.3rem' : '1rem', marginBottom: isExpanded ? '15px' : '0' }}>
+      <div className="skill-name" style={{ fontSize: isExpanded ? '1.3rem' : '1rem', marginBottom: isExpanded ? '5px' : '0' }}>
         {skillName}
       </div>
 
@@ -68,44 +68,53 @@ const SkillCard: React.FC<SkillCardProps> = ({
           style={{ width: '100%', textAlign: 'center' }}
         >
           {/* BARRA DE PROGRESO (GRUESA) */}
-          <div style={{ 
-              height: '12px', // Barra bien gruesa
-              background: '#333', 
-              borderRadius: '6px', 
-              overflow: 'hidden', 
-              marginBottom: '20px', // Espacio hacia los iconos
-              marginTop: '5px'
+          <div style={{
+            height: '12px', // Barra bien gruesa
+            background: '#333',
+            borderRadius: '6px',
+            overflow: 'hidden',
+            marginBottom: '20px', // Espacio hacia los iconos
+            marginTop: '5px'
           }}>
-            <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${percentage}%` }}
               transition={{ delay: 0.4, duration: 1 }}
-              style={{ height: '100%', background: '#6a5acd' }} 
+              style={{ height: '100%', background: '#6a5acd' }}
             />
           </div>
 
           {/* ICONOS DE TECNOLOGÍAS (MÁS GRANDES) */}
           {techs && techs.length > 0 && (
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                {techs.map((tech, index) => (
-                    <div 
-                        key={index} 
-                        style={{ 
-                            // 3. AQUI AGRANDAMOS LOS ICONOS
-                            width: '45px',  // Antes 30px
-                            height: '45px', // Antes 30px
-                            background: 'rgba(255,255,255,0.1)', 
-                            borderRadius: '50%', 
-                            padding: '8px', 
-                            display:'flex', 
-                            alignItems:'center', 
-                            justifyContent:'center' 
-                        }} 
-                        title={tech.alt}
-                    >
-                        <img src={tech.src} alt={tech.alt} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                    </div>
-                ))}
+            <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {techs.map((tech, index) => (
+                <div key={index} style={{ textAlign: 'center' }}>
+                  <div
+                    style={{
+                      width: '45px',
+                      height: '45px',
+                      background: 'rgba(255,255,255,0.1)',
+                      borderRadius: '50%',
+                      padding: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '5px'
+                    }}
+                    title={tech.alt}
+                  >
+                    <img
+                      src={tech.src}
+                      alt={tech.alt}
+                      className="icon-white"
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    />
+                  </div>
+                  <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', display: 'block' }}>
+                    {tech.alt}
+                  </span>
+                </div>
+              ))}
             </div>
           )}
 

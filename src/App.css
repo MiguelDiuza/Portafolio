@@ -1,21 +1,15 @@
-/* Estilos generales */
-html {
-  scroll-behavior: smooth;
-}
-
-
+/* --- HEADER --- */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to bottom, rgb(12, 1, 29) 30%, rgba(0, 0, 0, 0)); /* Fondo negro con degradado hacia abajo */
+  background: linear-gradient(to bottom, rgb(12, 1, 29) 30%, rgba(0, 0, 0, 0));
   display: flex;
   justify-content: center;
-  z-index: 3000; /* Encima de todo */
+  z-index: 3000;
 }
 
-/* Contenido del header */
 .header-content {
   width: 100%;
   display: flex;
@@ -23,33 +17,24 @@ html {
   align-items: center;
 }
 
-/* Sombra debajo del header */
 .header-shadow {
   position: fixed;
   top: 100%;
   left: 0;
   width: 100%;
-  height: 40px; /* Ajusta el tamaño del degradado inferior */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)); /* Degradado negro a transparente */
-  z-index: 2000; /* Debajo del header */
-  pointer-events: none; /* No interfiere con los clics */
-}
-
-
-.header-content {
-  width: 100%;
-  align-items: center;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  z-index: 2000;
+  pointer-events: none;
 }
 
 .header-left {
   display: flex;
   align-items: center;
   gap: 20px;
-  /* Eliminamos top y margin-top negativos que ocultaban el contenido */
-  margin-left: 40px; 
-  height: 100%; /* Asegura que ocupe la altura del header para centrarse verticalmente */
-
-  padding-top: 20px; /* Ajusta este valor (ej. 30px) si quieres bajarlo más */
+  margin-left: 40px;
+  height: 100%;
+  padding-top: 20px;
 }
 
 .header-left nav {
@@ -62,7 +47,6 @@ html {
   text-decoration: none;
   color: #ffffff;
   font-weight: bold;
-  transition: color 0.3s ease;
 }
 
 .header-left nav a:hover {
@@ -81,72 +65,55 @@ html {
   justify-content: flex-end;
   background-color: transparent;
   margin: 0 40px 0 0;
-  position: relative; /* Se mantiene en su lugar */
+  position: relative;
 }
 
-/* Contenedor flotante para las tarjetas fuera del header */
-/* Contenedor flotante para las tarjetas fuera del header */
+/* --- SKILLS FLOTANTES --- */
+.floating-skill-card.large-card {
+  /* Hacemos la tarjeta más angosta como pediste */
+  width: 220px !important;
+  min-width: 220px !important;
+  min-height: 480px;
+  /* Más altas para mejor distribución */
+  padding: 1.5rem;
+  justify-content: flex-start;
+  gap: 10px;
+  /* Espacio reducido */
+}
+
 .floating-skills-container {
   position: fixed;
-  top: 20px; /* Espacio desde el techo para que no se corten */
+  top: 20px;
   right: 0;
-  height: auto; /* Dejamos que la altura se ajuste al contenido */
+  height: auto;
   display: flex;
-  align-items: flex-start; /* Alineación superior evita el corte hacia arriba */
+  align-items: flex-start;
   justify-content: flex-end;
   padding-right: 2rem;
   gap: 15px;
-  /* Importante: Z-index mayor que el header (3000) para que se vean completas y sean clickeables */
-  z-index: 3100; 
+  z-index: 3100;
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
-/* Habilitar clicks en las tarjetas dentro del contenedor */
-.floating-skills-container > * {
+.floating-skills-container>* {
   pointer-events: auto;
 }
 
-/* Ajuste cuando se hace sticky */
 .floating-skills-container.sticky-mode {
-  top: 10px; /* Se pegan un poco más arriba al hacer scroll */
-  /* No limitamos la altura aquí para evitar cortes */
+  top: 10px;
 }
 
-.card-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  position: relative; /* Se mantiene estable */
-}
-
-
-.card {
-  flex: 1 1 220px;
-  max-width: 250px;
-  min-width: 140px;
-  aspect-ratio: 12 / 18;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  background: rgba(255, 255, 255, 0.31);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.1px);
-  -webkit-backdrop-filter: blur(8.1px);
-  border: 1px solid rgba(255, 255, 255, 0.31);
-}
-
-/* Main container ajustado */
+/* --- CONTENEDORES PRINCIPALES --- */
 .main-container {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   padding: 0;
   margin: 0;
-  display: block; /* Cambiado de flex a block */
-  background-image: url('/public/img/bgNEON.png');
+  display: block;
+  background-image:
+    linear-gradient(to bottom, transparent 80%, rgba(8, 9, 13, 1) 100%),
+    url('/img/bgNeon.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -154,15 +121,15 @@ html {
 }
 
 .intro {
-  width: 100vw;  /* Ocupa el ancho completo */
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  position: relative;  /* Para manejar posiciones absolutas dentro */
+  position: relative;
   z-index: 1;
-  overflow: hidden;  /* Evita que la imagen sobresalga del contenedor */
+  overflow: hidden;
 }
 
 .intro-content {
@@ -171,18 +138,17 @@ html {
   max-width: 1400px;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 20px 10px; /* Aumenta el espacio superior y reduce el inferior */
+  padding: 40px 20px 10px;
   position: relative;
-  z-index: 2; /* El texto estará por encima de la imagen */
-  margin-top: 100px; /* Ajusta la cantidad según necesites */
-  margin-bottom: 0px; /* Reduce el espacio inferior */
+  z-index: 2;
+  margin-top: 100px;
+  margin-bottom: 0px;
 }
-
 
 .intro-text {
   flex: 1;
   padding-right: 20px;
-  z-index: 3;  /* Asegura que el texto esté por encima */
+  z-index: 3;
 }
 
 .intro-text h1 {
@@ -192,7 +158,7 @@ html {
 
 .intro-text h2 {
   font-size: 3vw;
-  margin: 0px 0;
+  margin: 0;
 }
 
 .intro-text p {
@@ -200,35 +166,33 @@ html {
   margin-top: 10px;
 }
 
-/* Imagen en posición libre */
 .intro-image {
-  position: absolute;  /* Saca la imagen del flujo normal */
-  bottom: 0;  /* Ajusta la posición desde abajo */
-  right: 0;   /* Ajusta la posición desde la derecha */
-  z-index: 1;  /* Detrás del texto */
-  transform: translate(0%, 23%);  /* Ajuste fino de posición */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  transform: translate(0%, 23%);
 }
 
 .intro-image img {
-  height: 110vh;  /* Ajusta el tamaño manualmente */
+  height: 110vh;
   width: auto;
   object-fit: contain;
 }
 
-
-/* Contenido principal */
+/* --- SECCIONES DE CONTENIDO --- */
 .content1 {
   padding: 10px 50px;
-  background-image: 
-    linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 40%),
-    url('/public/img/bg2.jpg'); /* Fondo con sombra negra */
-  background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  min-height: 100vh; /* Asegura que la sección ocupe al menos toda la altura de la pantalla */
+  background-image:
+    linear-gradient(to top, rgba(8, 9, 13, 0.8) 0%, transparent 20%),
+    linear-gradient(to bottom, rgba(8, 9, 13, 1) 0%, transparent 10%),
+    url('/img/bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
-/* En tu archivo app.css o index.css */
 .contentE {
   position: relative;
   min-height: 100vh;
@@ -243,18 +207,17 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0; /* Se queda atrás */
+  z-index: 0;
 }
 
 .content-wrapper {
   position: relative;
-  z-index: 1; /* Se pone adelante */
+  z-index: 1;
   width: 100%;
   height: 100%;
 }
 
-
-
+/* --- BOTONES E ICONOS --- */
 .icon-buttons {
   display: flex;
   gap: 20px;
@@ -279,20 +242,18 @@ html {
 }
 
 .icon-button.linkedin {
-  background-image: url('/public/loogos/linkedin.svg');
+  background-image: url('/loogos/linkedin.svg');
 }
 
 .icon-button.whatsapp {
-  background-image: url('/public/loogos/whatsapp.svg');
+  background-image: url('/loogos/whatsapp.svg');
   background-size: 120%;
-
 }
 
 .icon-button.behance {
-  background-image: url('/public/loogos/behance.svg');
+  background-image: url('/loogos/behance.svg');
 }
 
-/* Botón con forma exacta del SVG */
 .contact-button.con {
   width: auto;
   height: auto;
@@ -310,18 +271,17 @@ html {
   transition: transform 0.3s ease;
 }
 
-/* Efecto hover */
 .contact-button.con:hover img {
   transform: scale(1.05);
 }
 
 .video-button-container {
   display: flex;
-  justify-content: flex-start; /* Alinea el botón a la izquierda */
-  margin-top: 20px; /* Espacio respecto a la sección de contacto */
-  margin-bottom: 0px; /* Reduce el espacio debajo del botón */
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 0px;
   width: 100%;
-  padding-left: 1px; /* Ajusta la distancia desde el borde izquierdo */
+  padding-left: 1px;
 }
 
 .video-button {
@@ -329,7 +289,7 @@ html {
   border: none;
   cursor: pointer;
   display: block;
-  margin-bottom: 0px; /* Asegura que no haya margen extra */
+  margin-bottom: 0px;
 }
 
 .video-button img {
@@ -342,121 +302,52 @@ html {
   transform: scale(1.1);
 }
 
-.large-card {
-  /* 1. TAMAÑO Y ESPACIO */
-  /* Ajusta el ancho según prefieras, o déjalo automático */
-  width: 280px; 
-  min-height: 380px; 
-  margin: 10px; /* Espacio entre tarjetas si se apilan */
-  padding: 20px; /* Espacio interno para el contenido */
+/* --- DIFERENCIADOR --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
 
-  /* 2. FONDO OSCURO (Dark Glass) */
-  /* Usamos negro con opacidad baja (0.6) para oscurecer el video de fondo */
-  background: rgba(10, 10, 10, 0.65); 
-  
-  /* 3. EFECTO BORROSO (Blur) */
-  backdrop-filter: blur(24px); 
-  -webkit-backdrop-filter: blur(24px);
-
-  /* 4. BORDES REDONDEADOS */
-  border-radius: 24px;
-
-  /* 5. BORDES Y BRILLOS (La magia) */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Borde base casi invisible */
-  
-  box-shadow: 
-    /* Sombra profunda externa (da efecto de elevación 3D) */
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    
-    /* BRILLO INTERNO (Esquina Superior Izquierda) */
-    /* Esto crea ese "borde de luz" nítido */
-    inset 1px 1px 0 rgba(255, 255, 255, 0.3),
-    
-    /* Sombra Interna (Esquina Inferior Derecha) para dar volumen */
-    inset -1px -1px 0 rgba(0, 0, 0, 0.5);
-
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* EFECTO HOVER (Opcional: se ilumina un poco al pasar el mouse) */
-.large-card:hover {
-  transform: translateY(-5px);
-  background: rgba(10, 10, 10, 0.75);
-  box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.8),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.5), /* El brillo se hace más fuerte */
-    inset -1px -1px 0 rgba(0, 0, 0, 0.5);
+.wide-differentiator-card {
+  margin-top: 3rem;
+  padding: 3rem 4.5rem;
+  width: 90%;
+  max-width: 1220px;
+  /* Alineado con el ancho de las 5 tarjetas (5*220 + 4*30) */
+  text-align: left;
+  animation: fadeInUp 0.8s ease-out;
 }
 
-/* --- DEGRADADOS DE LUZ (Estilo que enviaste) --- */
-/* Esto dibuja la línea de luz que se desvanece en la parte superior */
-.large-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+.wide-differentiator-card h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  background: linear-gradient(90deg, #fff, #6966FF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
 }
 
-/* Esto dibuja la línea de luz que se desvanece en el lado izquierdo */
-.large-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+.wide-differentiator-card p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 100%;
+  margin: 0;
+  text-align: justify;
 }
 
-/* Esta clase convierte cualquier imagen (SVG o PNG) en blanco puro */
-.icon-white {
-  filter: brightness(0) invert(1);
-  /* Explicación: 
-     1. brightness(0) lo vuelve negro puro.
-     2. invert(1) invierte el negro a blanco puro.
-  */
-  
-  /* Opcional: Si quieres que sea un poco transparente */
-  opacity: 0.9; 
-  
-  /* Asegúrate de darles un tamaño si no lo tienen */
-  width: 30px; 
-  height: 30px;
-  object-fit: contain;
-}
 
-/* Esto busca todas las imágenes dentro de una tarjeta expandida (large-card) */
-.skill-card.large-card img {
-  /* 1. EL TRUCO PARA EL BLANCO PURO */
-  filter: brightness(0) invert(1);
-  /* Explicación:
-     brightness(0) -> Vuelve la imagen negra sólida (silueta).
-     invert(1)     -> Invierte el negro a blanco puro.
-  */
 
-  /* 2. Estilo para que se vean bien sobre el vidrio */
-  opacity: 0.85; /* Un poco de transparencia para integrarse con el glass */
-  width: 40px;   /* Ajusta este tamaño según necesites */
-  height: 40px;
-  object-fit: contain;
-  transition: transform 0.2s ease, opacity 0.2s;
-}
-
-/* Opcional: Que brillen más al pasar el mouse sobre el icono */
-.skill-card.large-card img:hover {
-  opacity: 1;
-  transform: scale(1.15);
-  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-}
-
-.tech-icon {
-  filter: brightness(0) invert(1);
-  /* ... resto de estilos */
-}
-
-/* 📱 Responsividad básica para pantallas pequeñas */
+/* --- RESPONSIVIDAD --- */
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
@@ -482,12 +373,6 @@ html {
     margin: 10px 20px;
   }
 
-  .card-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-
   .intro {
     flex-direction: column;
     justify-content: flex-start;
@@ -499,11 +384,6 @@ html {
     flex-direction: column;
     padding: 0 20px;
     align-items: center;
-    text-align: center;
-  }
-
-  .intro-text {
-    padding-right: 0;
   }
 
   .intro-text h1 {

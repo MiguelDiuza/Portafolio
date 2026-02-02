@@ -7,6 +7,8 @@ const TechBanner = () => {
     { src: `${base}loogos/blender.svg`, alt: "Blender" },
     { src: `${base}loogos/Adobe.svg`, alt: "Adobe" },
     { src: `${base}loogos/Unity.svg`, alt: "Unity" },
+    { src: `${base}loogos/yolo.svg`, alt: "YOLO" },
+    { src: `${base}loogos/pytorch.svg`, alt: "PyTorch" },
     { src: `${base}loogos/mysql.svg`, alt: "MySQL" },
     { src: `${base}loogos/java.svg`, alt: "Java" },
     { src: `${base}loogos/python.svg`, alt: "Python" },
@@ -14,6 +16,10 @@ const TechBanner = () => {
     { src: `${base}loogos/html5.svg`, alt: "HTML5" },
     { src: `${base}loogos/Javascript.svg`, alt: "JavaScript" },
     { src: `${base}loogos/react.svg`, alt: "React" },
+    { src: `${base}loogos/c++.svg`, alt: "C++" },
+    { src: `${base}loogos/sc.svg`, alt: "Scikit" },
+    { src: `${base}loogos/robo.png`, alt: "Roboflow" },
+    { src: `${base}loogos/figma.svg`, alt: "Figma" },
   ];
 
 

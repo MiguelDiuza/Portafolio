@@ -1,6 +1,7 @@
-import React, { useState, CSSProperties } from "react";
+import React, { useState, CSSProperties, useEffect } from "react";
 import { TiChevronLeftOutline, TiChevronRightOutline } from "react-icons/ti";
 import { IoIosArrowDown } from "react-icons/io";
+import { FaGithub } from "react-icons/fa";
 import "../styles/Proyectos.css";
 
 const MAX_VISIBILITY = 3;
@@ -24,11 +25,13 @@ interface Proyecto {
   description?: string;
   technologies?: { name: string; logo: string }[];
   images?: string[];
+  video?: string;
   link?: string;
+  repo?: string;
 }
 
 
-// 📌 Datos de prueba con categorías específicas
+
 const base = import.meta.env.BASE_URL;
 
 const proyectosData: Proyecto[] = [
@@ -45,25 +48,29 @@ const proyectosData: Proyecto[] = [
       { name: "Node.js", logo: `${base}loogos/Javascript.svg` },
       { name: "MongoDB", logo: `${base}loogos/mysql.svg` }
     ],
-    images: [`${base}img/po1.jpg`, `${base}img/po2.jpg`],
-    link: "https://www.bershka.com/"
+    images: [`${base}img/po1.jpg`],
+    video: `${base}img/Bg3.mp4`,
+    link: "https://www.bershka.com/",
+    repo: "https://github.com/"
   },
 
   {
     id: 2,
-    title: "Videojuego",
-    subtitle: "Videojuego para web",
-    image: `${base}img/po3.jpg`,
+    title: "Machinery Web",
+    subtitle: "Machinery Management Web",
+    image: `${base}img/im1.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
     description: "Proyecto de videojuegos en una aplicacion web codificado en c++ con el motor de juegos unity.",
     technologies: [
-      { name: "React", logo: `${base}loogos/react.svg` },
-      { name: "Node.js", logo: `${base}loogos/Javascript.svg` },
-      { name: "MongoDB", logo: `${base}loogos/mysql.svg` }
+      { name: "HTML", logo: `${base}loogos/html.svg` },
+      { name: "JS", logo: `${base}loogos/Javascript.svg` },
+      { name: "CSS", logo: `${base}loogos/css.svg` }
     ],
-    images: [`${base}img/po2.jpg`, `${base}img/po2.jpg`],
-    link: "https://juancarmonal2004.wixsite.com/sombra-furtiva"
+    images: [`${base}img/im1.png`],
+    video: `${base}img/vip.mp4`,
+    link: "https://www.vipwelleurope.es",
+    repo: "https://github.com/MiguelDiuza/VipWell"
   },
 
   {
@@ -79,8 +86,10 @@ const proyectosData: Proyecto[] = [
       { name: "Javascript", logo: `${base}loogos/Javascript.svg` },
       { name: "MySql", logo: `${base}loogos/mysql.svg` }
     ],
-    images: [`${base}img/po3.jpg`],
-    link: "https://www.designi.com.br/"
+    images: [`${base}img/aiFly.jpg`],
+    video: `${base}img/Bg3.mp4`,
+    link: "https://www.designi.com.br/",
+    repo: "https://github.com/"
   },
 
   {
@@ -96,26 +105,51 @@ const proyectosData: Proyecto[] = [
       { name: "Node.js", logo: `${base}loogos/Javascript.svg` },
       { name: "MongoDB", logo: `${base}loogos/mysql.svg` }
     ],
-    images: [`${base}img/po1.jpg`, `${base}img/po2.jpg`],
-    link: "https://www.deepseek.com/"
+    images: [`${base}img/po4.jpg`],
+    video: `${base}img/Bg3.mp4`,
+    link: "https://www.deepseek.com/",
+    repo: "https://github.com/"
   },
 
   {
     id: 5,
-    title: "Web comida rapida",
-    subtitle: "Plataforma de comidas",
-    image: `${base}img/po5.jpg`,
+    title: "App de gestión",
+    subtitle: "Gestión de tareas del hogar",
+    image: `${base}img/app.jpg`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
     description: "aplicacion web para una empresa de comidas rapidas",
     technologies: [
-      { name: "React", logo: `${base}loogos/react.svg` },
-      { name: "Node.js", logo: `${base}loogos/Javascript.svg` },
-      { name: "MongoDB", logo: `${base}loogos/mysql.svg` }
+      { name: "HTML", logo: `${base}loogos/html.svg` },
+      { name: "JS", logo: `${base}loogos/Javascript.svg` },
+      { name: "CSS", logo: `${base}loogos/css.svg` }
     ],
-    images: [`${base}img/po1.jpg`, `${base}img/po2.jpg`],
-    link: "https://www.mcdonalds.com.co/"
+    images: [`${base}img/app2.jpg`],
+    video: `${base}img/Bg3.mp4`,
+    repo: "https://github.com/MiguelDiuza/AppAndroid"
+  },
+  {
+    id: 6,
+    title: "Video juego web",
+    subtitle: "Videojuego en web desarrollado en Unity",
+    image: `${base}img/som.png`,
+    icon: `${base}loogos/mas.svg`,
+    idCategoria: "Web",
+    description: "Videojuego en web desarrollado en Unity",
+    technologies: [
+      { name: "UNITY", logo: `${base}loogos/unity.png` },
+      { name: "BLENDER", logo: `${base}loogos/blender.svg` },
+      { name: "C++", logo: `${base}loogos/c++.svg` },
+      { name: "HTML", logo: `${base}loogos/html.svg` },
+      { name: "JS", logo: `${base}loogos/Javascript.svg` },
+      { name: "CSS", logo: `${base}loogos/css.svg` }
+    ],
+    images: [`${base}img/sombra.png`],
+    video: `${base}img/G.mp4`,
+    link: "https://www.mcdonalds.com.co/",
+    repo: "https://github.com/MiguelDiuza/SombraFur"
   }
+
 ];
 
 
@@ -233,11 +267,22 @@ const CategoryDropdown: React.FC<{ onSelect: (category: string) => void }> = ({ 
 
 const Proyectos: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("Web");
-  const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null); // 👈 Agregado
+  const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null);
+
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedProject]);
 
   return (
     <div className="app">
-      <h1 className="proyectos-title">Mis Proyectos</h1>
+      <h1 className="section-title">Mis Proyectos</h1>
 
       <CategoryDropdown onSelect={setSelectedCategory} />
 
@@ -261,41 +306,75 @@ const Proyectos: React.FC = () => {
 
       {/* Modal básico para mostrar detalles del proyecto */}
       {selectedProject && (
-        <div className="project-modal-overlay">
-          <div className="project-modal">
+        <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
+          <div className="modal-content glass-panel" onClick={(e) => e.stopPropagation()}>
             <button
-              className="close-button"
+              className="modal-close"
               onClick={() => setSelectedProject(null)}
               aria-label="Cerrar modal"
             >
               ✖
             </button>
 
-            <h2>{selectedProject.title}</h2>
-            <p>{selectedProject.description}</p>
+            <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
+              {selectedProject.title}
+            </h2>
+
+            <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '0.8rem', fontSize: '1rem', lineHeight: '1.4' }}>
+              {selectedProject.description}
+            </p>
 
             <div className="tech-icons">
               {selectedProject.technologies?.map((tech) => (
-                <img key={tech.name} src={tech.logo} alt={tech.name} title={tech.name} />
+                <img key={tech.name} src={tech.logo} alt={tech.name} title={tech.name} className="icon-white" />
               ))}
             </div>
 
-            <div className="project-images">
-              {selectedProject.images?.map((img, index) => (
-                <img key={index} src={img} alt={`Imagen ${index + 1}`} />
-              ))}
+            <div className="project-media">
+              <div className="media-container">
+                {selectedProject.images && selectedProject.images.length > 0 ? (
+                  <img src={selectedProject.images[0]} alt={selectedProject.title} />
+                ) : (
+                  <img src={selectedProject.image} alt={selectedProject.title} />
+                )}
+              </div>
+              <div className="media-container">
+                {selectedProject.video ? (
+                  <video
+                    src={selectedProject.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                ) : (
+                  <div className="video-placeholder">Video no disponible</div>
+                )}
+              </div>
             </div>
 
-            {selectedProject.link && (
-              <a
-                href={selectedProject.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-link-button"
-              >
-                Ver Proyecto
-              </a>
-            )}
+            <div className="modal-actions">
+              {selectedProject.link && (
+                <a
+                  href={selectedProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link-button"
+                >
+                  Ver Proyecto
+                </a>
+              )}
+              {selectedProject.repo && (
+                <a
+                  href={selectedProject.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-repo-button"
+                >
+                  <FaGithub className="github-icon" /> Repositorio
+                </a>
+              )}
+            </div>
           </div>
         </div>
       )}

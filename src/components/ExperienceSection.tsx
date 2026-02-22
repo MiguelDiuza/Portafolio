@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { LayoutGroup } from 'framer-motion';
 import SkillCard from './SkillCard';
-import BackgroundAI from './backgroundAi';
+import BackgroundAI from './BackgroundAI';
 
 // 1. CONFIGURACIÓN DE RUTAS Y DATOS
 const base = import.meta.env.BASE_URL || "/";

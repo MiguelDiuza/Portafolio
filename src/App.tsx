@@ -23,6 +23,7 @@ const skillsData = [
 const App: React.FC = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [showSkillsInBody, setShowSkillsInBody] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const skillsSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,13 +75,34 @@ const App: React.FC = () => {
           <div className="header-left">
             <nav>
               <img src={viteLogo} className="logo" alt="Vite logo" />
-              <a href="#inicio">Inicio</a>
-              <a href="#sobre-mi">Sobre mí</a>
-              <a href="#proyectos">Proyectos</a>
-              <a href="#contacto">Contáctame</a>
+              <a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
+              <a href="#sobre-mi" onClick={() => setMenuOpen(false)}>Sobre mí</a>
+              <a href="#proyectos" onClick={() => setMenuOpen(false)}>Proyectos</a>
+              <a href="#contacto" onClick={() => setMenuOpen(false)}>Contáctame</a>
             </nav>
           </div>
-          
+
+          {/* Botón Hamburguesa */}
+          <button
+            className={`hamburger ${menuOpen ? "active" : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menú"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          {/* Menú Mobile */}
+          {menuOpen && (
+            <nav className="mobile-menu">
+              <a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
+              <a href="#sobre-mi" onClick={() => setMenuOpen(false)}>Sobre mí</a>
+              <a href="#proyectos" onClick={() => setMenuOpen(false)}>Proyectos</a>
+              <a href="#contacto" onClick={() => setMenuOpen(false)}>Contáctame</a>
+            </nav>
+          )}
+
           {/* El lado derecho queda vacío para mantener el espacio si usas flex space-between */}
           <div className="header-right" style={{ width: '60%' }}></div>
         </div>
@@ -141,7 +163,7 @@ const App: React.FC = () => {
       <div id="sobre-mi" className="content1">
         <SobreMi />
       </div>
-            {/* Sección de Experiencia (A donde viajan las tarjetas) */}
+      {/* Sección de Experiencia (A donde viajan las tarjetas) */}
 
       <div id="sobre-mi" className="contentE">
         <ExperienceSection />

@@ -74,9 +74,13 @@ const StudiesCards: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = selectedStudy ? "hidden" : "unset";
+    if (selectedStudy) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "auto";
     };
   }, [selectedStudy]);
 

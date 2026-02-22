@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { LayoutGroup } from 'framer-motion';
 import SkillCard from './SkillCard';
+import BackgroundAI from './backgroundAi';
 
 // 1. CONFIGURACIÓN DE RUTAS Y DATOS
 const base = import.meta.env.BASE_URL || "/";
@@ -90,12 +91,9 @@ const ExperienceSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="contentE">
+    <section style={{ position: 'relative', overflow: 'hidden' }} className="contentE">
       {/* 1. EL VIDEO DE FONDO */}
-      <video className="bg-video" autoPlay loop muted playsInline>
-        {/* Usamos la variable base + nombre del archivo (Mayúsculas importan) */}
-        <source src={`${base}img/BG3.mp4`} type="video/mp4" />
-      </video>
+      <BackgroundAI />
 
       {/* 2. EL CONTENIDO */}
       <div className="content-wrapper">

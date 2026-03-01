@@ -26,9 +26,13 @@ const skillsData = [
     percentage: 58,
     techs: [
       { src: getLogo("python.svg"), alt: "Python" },
-      { src: getLogo("java.svg"), alt: "Java" },
+      { src: getLogo("nodejs.webp"), alt: "NodeJS" },
+      { src: getLogo("api.svg"), alt: "APIs" },
       { src: getLogo("mysql.svg"), alt: "MySQL" },
-      { src: getLogo("api.svg"), alt: "APIs" }
+      { src: getLogo("java.svg"), alt: "Java" },
+      { src: getLogo("postgresql.svg"), alt: "Postgre" }
+
+
     ]
   },
   {

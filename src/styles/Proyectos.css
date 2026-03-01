@@ -523,17 +523,18 @@
   font-style: italic;
 }
 
-.modal-actions {
+.project-links {
   display: flex;
   gap: 15px;
   margin-top: 1rem;
   /* Reducido al mínimo */
   width: 100%;
+  flex-wrap: wrap;
 }
 
-.project-link-button,
-.project-repo-button {
+.project-links a {
   flex: 1;
+  min-width: 140px;
   padding: 12px 20px;
   border-radius: 12px;
   font-weight: 700;
@@ -548,29 +549,31 @@
   letter-spacing: 0.5px;
 }
 
-.project-link-button {
-  background: linear-gradient(135deg, var(--color-neon-1), var(--color-neon-2));
-  color: white;
-  box-shadow: 0 5px 15px rgba(105, 102, 255, 0.3);
-}
-
-.project-link-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(105, 102, 255, 0.5);
-  filter: brightness(1.1);
-}
-
-.project-repo-button {
+/* Botones de links con fondo degradado */
+.project-links a:has(svg) {
   background: rgba(255, 255, 255, 0.08);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
 }
 
-.project-repo-button:hover {
+.project-links a:has(svg):hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones con emojis (primer y segundo enlace) */
+.project-links a:not(:has(svg)) {
+  background: linear-gradient(135deg, var(--color-neon-1), var(--color-neon-2));
+  color: white;
+  box-shadow: 0 5px 15px rgba(105, 102, 255, 0.3);
+}
+
+.project-links a:not(:has(svg)):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(105, 102, 255, 0.5);
+  filter: brightness(1.1);
 }
 
 .github-icon {

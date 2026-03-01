@@ -1,4 +1,4 @@
-import '../styles/AboutMe.css';
+import '../styles/SobreMi.css';
 import StudiesCards from './subComponents/StudiesCards';
 
 const SobreMi = () => {

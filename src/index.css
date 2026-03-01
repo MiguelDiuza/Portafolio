@@ -138,7 +138,7 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-.modal-actions {
+.project-links {
   display: flex;
   gap: 1.5rem;
   justify-content: center;
@@ -388,7 +388,7 @@ body {
     aspect-ratio: 16/9;
   }
 
-  .modal-actions {
+  .project-links {
     flex-direction: column;
     width: 100%;
     gap: 1rem;

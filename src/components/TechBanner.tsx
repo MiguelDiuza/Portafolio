@@ -20,6 +20,8 @@ const TechBanner = () => {
     { src: `${base}loogos/sc.svg`, alt: "Scikit" },
     { src: `${base}loogos/robo.png`, alt: "Roboflow" },
     { src: `${base}loogos/figma.svg`, alt: "Figma" },
+    { src: `${base}loogos/nodejs.webp`, alt: "NodeJS" },
+    { src: `${base}loogos/postgresql.svg`, alt: "PostgreSQL" },
   ];
 
 

@@ -27,9 +27,10 @@ interface Proyecto {
   images?: string[];
   video?: string;
   link?: string;
+  link2?: string;   // segundo sitio
   repo?: string;
+  repo2?: string;   // segundo repositorio
 }
-
 
 
 const base = import.meta.env.BASE_URL;
@@ -42,17 +43,23 @@ const proyectosData: Proyecto[] = [
     image: `${base}img/mot.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description: "Proyecto de e-commerce con carrito, pasarela de pagos y panel de administración.",
+    description:
+      "Proyecto de e-commerce con carrito, pasarela de pagos y panel de administración.",
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
       { name: "CSS", logo: `${base}loogos/css.svg` }
     ],
     images: [`${base}img/mot.png`],
-    video: `${base}img/Bg3.mp4`,
+    video: `${base}img/motion.mp4`,
+
+    // 👇 ahora sí bien definidos
     link: "https://motiondreamstudio.com/",
-    repo: "https://github.com/MiguelDiuza/MotionDreamStudio"
+    link2: "https://admin.motiondreamstudio.com/",
+    repo: "https://github.com/MiguelDiuza/MotionDreamStudio",
+    repo2: "https://github.com/MiguelDiuza/MotionDreamStudio-Backend"
   },
+
 
   {
     id: 2,
@@ -353,25 +360,28 @@ const Proyectos: React.FC = () => {
               </div>
             </div>
 
-            <div className="modal-actions">
+            <div className="project-links">
               {selectedProject.link && (
-                <a
-                  href={selectedProject.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-link-button"
-                >
-                  Ver Proyecto
+                <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
+                  Ver Sitio
                 </a>
               )}
+
+              {selectedProject.link2 && (
+                <a href={selectedProject.link2} target="_blank" rel="noopener noreferrer">
+                  Ver Panel
+                </a>
+              )}
+
               {selectedProject.repo && (
-                <a
-                  href={selectedProject.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-repo-button"
-                >
-                  <FaGithub className="github-icon" /> Repositorio
+                <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">
+                  <FaGithub /> Repo
+                </a>
+              )}
+
+              {selectedProject.repo2 && (
+                <a href={selectedProject.repo2} target="_blank" rel="noopener noreferrer">
+                  <FaGithub /> Backend
                 </a>
               )}
             </div>

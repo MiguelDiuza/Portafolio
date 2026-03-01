@@ -37,21 +37,21 @@ const base = import.meta.env.BASE_URL;
 const proyectosData: Proyecto[] = [
   {
     id: 1,
-    title: "E-commerce",
-    subtitle: "Tienda Camisas",
-    image: `${base}img/po1.jpg`,
+    title: "Studio Web",
+    subtitle: "Studio de diseño web",
+    image: `${base}img/mot.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
     description: "Proyecto de e-commerce con carrito, pasarela de pagos y panel de administración.",
     technologies: [
-      { name: "React", logo: `${base}loogos/react.svg` },
-      { name: "Node.js", logo: `${base}loogos/Javascript.svg` },
-      { name: "MongoDB", logo: `${base}loogos/mysql.svg` }
+      { name: "HTML", logo: `${base}loogos/html.svg` },
+      { name: "JS", logo: `${base}loogos/Javascript.svg` },
+      { name: "CSS", logo: `${base}loogos/css.svg` }
     ],
-    images: [`${base}img/po1.jpg`],
+    images: [`${base}img/mot.png`],
     video: `${base}img/Bg3.mp4`,
-    link: "https://www.bershka.com/",
-    repo: "https://github.com/"
+    link: "https://motiondreamstudio.com/",
+    repo: "https://github.com/MiguelDiuza/MotionDreamStudio"
   },
 
   {

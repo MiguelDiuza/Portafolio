@@ -44,20 +44,22 @@ const proyectosData: Proyecto[] = [
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
     description:
-      "Proyecto de e-commerce con carrito, pasarela de pagos y panel de administración.",
+      "Proyecto para un estudio de diseño con y panel de administración.",
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` }
+      { name: "CSS", logo: `${base}loogos/css.svg` },
+      { name: "PostgreSQL", logo: `${base}loogos/postgresql.svg` }
+
     ],
     images: [`${base}img/mot.png`],
-    video: `${base}img/motion.mp4`,
+    video: `${base}img/Motion.mp4`,
 
     // 👇 ahora sí bien definidos
     link: "https://motiondreamstudio.com/",
-    link2: "https://admin.motiondreamstudio.com/",
+    link2: "https://motion-dreams-erp.vercel.app/",
     repo: "https://github.com/MiguelDiuza/MotionDreamStudio",
-    repo2: "https://github.com/MiguelDiuza/MotionDreamStudio-Backend"
+    repo2: "https://github.com/MiguelDiuza/motionDreamsERP"
   },
 
 

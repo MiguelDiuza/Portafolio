@@ -119,7 +119,11 @@ const App: React.FC = () => {
 
               <div className="contact-buttons">
                 <div className="icon-buttons">
-                  <button className="contact-button con" aria-label="Contact">
+                  <button
+                    className="contact-button con"
+                    aria-label="Contact"
+                    onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}
+                  >
                     <img src={asset("loogos/contactame.svg")} alt="Contact" />
                   </button>
                   <button
@@ -130,7 +134,7 @@ const App: React.FC = () => {
                   <button
                     className="icon-button whatsapp"
                     aria-label="WhatsApp"
-                    onClick={() => window.open("https://w.app/person", "_blank")}
+                    onClick={() => window.open("https://wa.me/573128555441", "_blank")}
                   ></button>
                   <button
                     className="icon-button behance"

@@ -2,6 +2,7 @@ import React, { useState, CSSProperties, useEffect } from "react";
 import { TiChevronLeftOutline, TiChevronRightOutline } from "react-icons/ti";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaGithub } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Proyectos.css";
 
 const MAX_VISIBILITY = 3;
@@ -11,10 +12,9 @@ interface CardProps {
   subtitle: string;
   image: string;
   icon: string;
-  onIconClick?: () => void; // <- opcional para manejar interacción del botón
+  onIconClick?: () => void;
 }
 
-// 📌 Definir el tipo de los proyectos con un ID y una categoría
 interface Proyecto {
   id: number;
   title: string;
@@ -27,11 +27,10 @@ interface Proyecto {
   images?: string[];
   video?: string;
   link?: string;
-  link2?: string;   // segundo sitio
+  link2?: string;
   repo?: string;
-  repo2?: string;   // segundo repositorio
+  repo2?: string;
 }
-
 
 const base = import.meta.env.BASE_URL;
 
@@ -50,19 +49,14 @@ const proyectosData: Proyecto[] = [
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
       { name: "CSS", logo: `${base}loogos/css.svg` },
       { name: "PostgreSQL", logo: `${base}loogos/postgresql.svg` }
-
     ],
     images: [`${base}img/mot.png`],
     video: `${base}img/Motion.mp4`,
-
-    // 👇 ahora sí bien definidos
     link: "https://motiondreamstudio.com/",
     link2: "https://motion-dreams-erp.vercel.app/",
     repo: "https://github.com/MiguelDiuza/MotionDreamStudio",
     repo2: "https://github.com/MiguelDiuza/motionDreamsERP"
   },
-
-
   {
     id: 2,
     title: "Machinery Web",
@@ -81,7 +75,6 @@ const proyectosData: Proyecto[] = [
     link: "https://www.vipwelleurope.es",
     repo: "https://github.com/MiguelDiuza/VipWell"
   },
-
   {
     id: 3,
     title: "Web AI de Diseño",
@@ -100,7 +93,6 @@ const proyectosData: Proyecto[] = [
     link: "https://www.designi.com.br/",
     repo: "https://github.com/"
   },
-
   {
     id: 4,
     title: " Web IA",
@@ -119,7 +111,6 @@ const proyectosData: Proyecto[] = [
     link: "https://www.deepseek.com/",
     repo: "https://github.com/"
   },
-
   {
     id: 5,
     title: "App de gestión",
@@ -158,13 +149,10 @@ const proyectosData: Proyecto[] = [
     link: "https://www.mcdonalds.com.co/",
     repo: "https://github.com/MiguelDiuza/SombraFur"
   }
-
 ];
-
 
 const Card: React.FC<CardProps> = ({ title, subtitle, image, icon, onIconClick }) => (
   <div className="proyecto-card">
-    {/* --- CAPAS DE NEÓN (Decorativas) --- */}
     <div className="shine shine-top"></div>
     <div className="shine shine-bottom"></div>
     <div className="glow glow-top"></div>
@@ -172,10 +160,8 @@ const Card: React.FC<CardProps> = ({ title, subtitle, image, icon, onIconClick }
     <div className="glow glow-bright glow-top"></div>
     <div className="glow glow-bright glow-bottom"></div>
 
-    {/* --- CONTENIDO REAL (Envuelto para z-index) --- */}
     <div className="inner-content">
       <div className="image-container">
-        {/* Icono como botón */}
         <button
           className="card-icon-overlay"
           onClick={onIconClick}
@@ -183,8 +169,6 @@ const Card: React.FC<CardProps> = ({ title, subtitle, image, icon, onIconClick }
         >
           <img src={icon} alt={`icono ${title}`} />
         </button>
-
-        {/* Imagen principal */}
         <img src={image} alt={title} className="card-image" />
       </div>
 
@@ -238,7 +222,6 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   );
 };
 
-//  Nuevo: Componente de Categorías con nombres más descriptivos
 const categories = [
   { id: "Web", name: "Desarrollo Web" },
   { id: "RA", name: "Realidad Aumentada" },
@@ -277,124 +260,157 @@ const CategoryDropdown: React.FC<{ onSelect: (category: string) => void }> = ({ 
 const Proyectos: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("Web");
   const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
 
   useEffect(() => {
     if (selectedProject) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      setIsVideoLoading(true);
     } else {
       document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
     }
     return () => {
       document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
     };
   }, [selectedProject]);
 
   return (
-    <div className="app">
-      <h1 className="section-title">Mis Proyectos</h1>
+    <motion.div
+      className="app"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 1 }}
+    >
+      <motion.h1
+        className="section-title"
+        initial={{ y: 50, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        Mis Proyectos
+      </motion.h1>
 
       <CategoryDropdown onSelect={setSelectedCategory} />
 
-      <Carousel>
-        {proyectosData
-          .filter((proyecto: Proyecto) => proyecto.idCategoria === selectedCategory)
-          .map((proyecto) => (
-            <Card
-              key={proyecto.id}
-              title={proyecto.title}
-              subtitle={proyecto.subtitle}
-              image={proyecto.image}
-              icon={proyecto.icon}
-              onIconClick={() => {
-                console.log(`Ver más sobre: ${proyecto.title}`);
-                setSelectedProject(proyecto); // ✅ Funciona correctamente
-              }}
-            />
-          ))}
-      </Carousel>
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2, duration: 0.8 }}
+      >
+        <Carousel>
+          {proyectosData
+            .filter((proyecto: Proyecto) => proyecto.idCategoria === selectedCategory)
+            .map((proyecto) => (
+              <Card
+                key={proyecto.id}
+                title={proyecto.title}
+                subtitle={proyecto.subtitle}
+                image={proyecto.image}
+                icon={proyecto.icon}
+                onIconClick={() => setSelectedProject(proyecto)}
+              />
+            ))}
+        </Carousel>
+      </motion.div>
 
-      {/* Modal básico para mostrar detalles del proyecto */}
-      {selectedProject && (
-        <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
-          <div className="modal-content glass-panel" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="modal-close"
-              onClick={() => setSelectedProject(null)}
-              aria-label="Cerrar modal"
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
+            <motion.div
+              className="modal-content glass-panel"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 50 }}
             >
-              ✖
-            </button>
+              <button
+                className="modal-close"
+                onClick={() => setSelectedProject(null)}
+                aria-label="Cerrar modal"
+              >
+                ✖
+              </button>
 
-            <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
-              {selectedProject.title}
-            </h2>
+              <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
+                {selectedProject.title}
+              </h2>
 
-            <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '0.8rem', fontSize: '1rem', lineHeight: '1.4' }}>
-              {selectedProject.description}
-            </p>
+              <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '0.8rem', fontSize: '1rem', lineHeight: '1.4' }}>
+                {selectedProject.description}
+              </p>
 
-            <div className="tech-icons">
-              {selectedProject.technologies?.map((tech) => (
-                <img key={tech.name} src={tech.logo} alt={tech.name} title={tech.name} className="icon-white" />
-              ))}
-            </div>
+              <div className="tech-icons">
+                {selectedProject.technologies?.map((tech) => (
+                  <img key={tech.name} src={tech.logo} alt={tech.name} title={tech.name} className="icon-white" />
+                ))}
+              </div>
 
-            <div className="project-media">
-              <div className="media-container">
-                {selectedProject.images && selectedProject.images.length > 0 ? (
-                  <img src={selectedProject.images[0]} alt={selectedProject.title} />
-                ) : (
-                  <img src={selectedProject.image} alt={selectedProject.title} />
+              <div className="project-media">
+                <div className="media-container">
+                  {selectedProject.images && selectedProject.images.length > 0 ? (
+                    <img src={selectedProject.images[0]} alt={selectedProject.title} />
+                  ) : (
+                    <img src={selectedProject.image} alt={selectedProject.title} />
+                  )}
+                </div>
+                <div className="media-container video-block">
+                  {selectedProject.video ? (
+                    <>
+                      {isVideoLoading && (
+                        <div className="video-loader">
+                          <div className="spinner"></div>
+                          <p>Cargando video...</p>
+                        </div>
+                      )}
+                      <video
+                        src={selectedProject.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        onLoadedData={() => setIsVideoLoading(false)}
+                        style={{ opacity: isVideoLoading ? 0 : 1, transition: 'opacity 0.5s' }}
+                      />
+                    </>
+                  ) : (
+                    <div className="video-placeholder">Video no disponible</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="project-links">
+                {selectedProject.link && (
+                  <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
+                    Ver Sitio
+                  </a>
+                )}
+                {selectedProject.link2 && (
+                  <a href={selectedProject.link2} target="_blank" rel="noopener noreferrer">
+                    Ver Panel
+                  </a>
+                )}
+                {selectedProject.repo && (
+                  <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">
+                    <FaGithub /> Repo
+                  </a>
+                )}
+                {selectedProject.repo2 && (
+                  <a href={selectedProject.repo2} target="_blank" rel="noopener noreferrer">
+                    <FaGithub /> Backend
+                  </a>
                 )}
               </div>
-              <div className="media-container">
-                {selectedProject.video ? (
-                  <video
-                    src={selectedProject.video}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : (
-                  <div className="video-placeholder">Video no disponible</div>
-                )}
-              </div>
-            </div>
-
-            <div className="project-links">
-              {selectedProject.link && (
-                <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
-                  Ver Sitio
-                </a>
-              )}
-
-              {selectedProject.link2 && (
-                <a href={selectedProject.link2} target="_blank" rel="noopener noreferrer">
-                  Ver Panel
-                </a>
-              )}
-
-              {selectedProject.repo && (
-                <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">
-                  <FaGithub /> Repo
-                </a>
-              )}
-
-              {selectedProject.repo2 && (
-                <a href={selectedProject.repo2} target="_blank" rel="noopener noreferrer">
-                  <FaGithub /> Backend
-                </a>
-              )}
-            </div>
+            </motion.div>
           </div>
-        </div>
-      )}
-
-    </div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
-
-
 
 export default Proyectos;

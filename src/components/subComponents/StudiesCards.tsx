@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import "./StudiesCards.css";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Study {
   title: string;
@@ -10,6 +11,21 @@ interface Study {
   pdf?: string;
   description?: string;
 }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1 }
+};
 
 const StudiesCards: React.FC = () => {
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
@@ -76,11 +92,14 @@ const StudiesCards: React.FC = () => {
   useEffect(() => {
     if (selectedStudy) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
     }
     return () => {
       document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
     };
   }, [selectedStudy]);
 
@@ -124,46 +143,67 @@ const StudiesCards: React.FC = () => {
     },
   ];
 
-
   return (
-    <div className="sobre-mi__studies">
+    <motion.div
+      className="sobre-mi__studies"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
       {studies.map((study, index) => (
-        <div key={index} className="study-card glass-panel" onClick={() => setSelectedStudy(study)}>
+        <motion.div
+          key={index}
+          className="study-card glass-panel"
+          onClick={() => setSelectedStudy(study)}
+          variants={cardVariants}
+        >
           <h3>{study.title}</h3>
           <p>{study.years}</p>
           <div className="study-card-footer">
             <img src={study.image} alt={`Imagen de ${study.title}`} className="study-card-image" />
           </div>
-        </div>
+        </motion.div>
       ))}
 
-      {selectedStudy && (
-        <div
-          className="study-modal-overlay"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setSelectedStudy(null)}
-        >
-          <div className="study-modal glass-panel" onClick={(e) => e.stopPropagation()}>
-            <button className="close-button" onClick={() => setSelectedStudy(null)}>✖</button>
-            <h2>{selectedStudy.title}</h2>
-            <p><strong>{selectedStudy.years}</strong></p>
-            {selectedStudy.description && <p>{selectedStudy.description}</p>}
-            {selectedStudy.pdf ? (
-              <iframe
-                src={selectedStudy.pdf}
-                title={`PDF de ${selectedStudy.title}`}
-                className="pdf-viewer"
-              ></iframe>
-            ) : (
-              <p>No hay PDF disponible para este estudio.</p>
-            )}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {selectedStudy && (
+          <motion.div
+            className="study-modal-overlay"
+            role="dialog"
+            aria-modal="true"
+            onClick={() => setSelectedStudy(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="study-modal glass-panel"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <button className="close-button" onClick={() => setSelectedStudy(null)}>✖</button>
+              <h2>{selectedStudy.title}</h2>
+              <p><strong>{selectedStudy.years}</strong></p>
+              {selectedStudy.description && <p>{selectedStudy.description}</p>}
+              {selectedStudy.pdf ? (
+                <iframe
+                  src={selectedStudy.pdf}
+                  title={`PDF de ${selectedStudy.title}`}
+                  className="pdf-viewer"
+                ></iframe>
+              ) : (
+                <p>No hay PDF disponible para este estudio.</p>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style className="hover"></style>
-    </div>
+    </motion.div>
   );
 };
 

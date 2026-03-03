@@ -16,52 +16,70 @@
 
 /* Tarjeta de la izquierda con foto centrada */
 .sobre-mi__left {
-  /* Glass effect handled by .glass-panel class */
-  padding: 1.5rem;
+  padding: 2rem;
   color: white;
-  max-width: 400px;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centra la imagen y el contenido */
   text-align: center;
-  /* Centra el texto */
 }
 
-.sobre-mi__left img {
-  /* Tamaño: Define el ancho y deja que la altura se ajuste sola */
-  width: 320px; 
-  height: auto; 
-  
-  /* Eliminar bordes y estilos de "cuadro" */
-  border: none;
-  border-radius: 0; /* Opcional: si la imagen ya es transparente no necesitas redondear bordes */
-  margin-bottom: 1rem;
-  
-  /* Asegura que se vea la imagen completa */
-  object-fit: contain; 
-  background-color: transparent;
+.perfil-container {
+  width: 280px;
+  height: 280px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  /* TRUCO PRO: Usar drop-shadow en lugar de box-shadow */
-  /* Esto crea una sombra que sigue la silueta de tu foto PNG, no un cuadrado */
-  filter: drop-shadow(0 8px 16px rgba(138, 49, 255, 0.515));
+.perfil-foto {
+  width: 100%;
+  height: auto;
+  border: none;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(105, 102, 255, 0.6));
 }
 
 .sobre-mi__left h1 {
-  text-align: center;
-  font-size: 4.9rem;
-  margin-bottom: 1.3rem;
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to bottom, #fff, #6966FF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.sobre-mi__desc {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .sobre-mi__left p {
-  text-align: justify;
-  line-height: 1.5;
-  max-width: 80%;
-  /* Limita el ancho del texto al 80% del contenedor */
-  margin: 0 auto;
-  /* Centra el texto horizontalmente */
-  text-align: justify;
-  /* Justifica el texto para mayor legibilidad */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+}
+
+.formacion-resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border-left: 4px solid #6966FF;
+}
+
+.formacion-resumen span {
+  display: block;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 

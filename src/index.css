@@ -208,6 +208,10 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  /* Asegura que el z-index funcione */
+  z-index: 10;
+  /* Lo pone por encima de sombras */
 }
 
 /* --- TARJETAS DE CRISTAL OSCURO (Dark Glass) --- */

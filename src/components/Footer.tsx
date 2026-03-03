@@ -19,10 +19,10 @@ const Footer: React.FC = () => {
             onClick={() =>
               window.open("https://www.linkedin.com/in/miguel-diuza-ab13501a0/", "_blank")
             }>
-            </button>
+          </button>
           <button
             className="icon-button whatsapp"
-            onClick={() => window.open("https://w.app/person", "_blank")}>
+            onClick={() => window.open("https://wa.me/573128555441", "_blank")}>
           </button>
           <button
             className="icon-button behance"

@@ -26,8 +26,8 @@
 }
 
 .perfil-container {
-  width: 280px;
-  height: 280px;
+  width: 350px;
+  height: 350px;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
@@ -60,10 +60,11 @@
 }
 
 .sobre-mi__left p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: left;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: justify;
+  text-align-last: center;
 }
 
 .formacion-resumen {

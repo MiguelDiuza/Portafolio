@@ -31,20 +31,7 @@ const SobreMi = () => {
                         viewport={{ once: true }}
                         transition={{ delay: 0.5, duration: 0.8 }}
                     >
-                        <strong>Apasionado por la tecnología y el diseño.</strong> Siempre en la búsqueda de nuevas formas de combinar <em>creatividad y programación</em> para crear experiencias digitales únicas.
-                    </motion.p>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.7, duration: 0.8 }}
-                        className="formacion-resumen"
-                    >
-                        Mi trayectoria académica combina el arte y la técnica:
-                        <span>🎨 Bachiller en Arte Gráfico</span>
-                        <span>🎬 Tecnólogo en Animación 3D</span>
-                        <span>💻 Ingeniero Multimedia (UAO)</span>
-                        <span>🤖 Especialista en IA</span>
+                        Soy un apasionado de la programación, el diseño y la tecnología, siempre en la búsqueda de nuevas formas de combinar creatividad y programación. Soy bachiller en Arte Gráfico, tecnólogo en Animación 3D e Ingeniero Multimedia de la UAO, especializándome en Inteligencia Artificial.
                     </motion.p>
                 </div>
             </motion.div>

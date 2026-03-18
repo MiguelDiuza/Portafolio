@@ -4,13 +4,13 @@ import React, { useEffect, useRef } from 'react';
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     // CAMBIO CLAVE: De 'fixed' a 'absolute' para que scrollee con la página
-    position: 'absolute', 
+    position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
     height: '100%',
     zIndex: -1,
-    backgroundColor: '#05000c',
+    backgroundColor: '#000000',
     overflow: 'hidden',
   },
   canvas: {
@@ -27,7 +27,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '100%',
     height: '100%',
     zIndex: 2,
-    background: 'radial-gradient(circle at center, #05000c 15%, transparent 80%)',
+    background: 'radial-gradient(circle at center, #000000ff 15%, transparent 80%)',
     pointerEvents: 'none',
   }
 };
@@ -38,7 +38,7 @@ const BackgroundAI: React.FC = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -51,9 +51,9 @@ const BackgroundAI: React.FC = () => {
       particleCount: window.innerWidth < 768 ? 40 : 80,
       speed: 0.5,
       linkDistance: 140,
-      colorDot: 'rgba(0, 210, 255, 0.8)', 
+      colorDot: 'rgba(0, 210, 255, 0.8)',
       colorLine: 'rgba(138, 43, 226, 0.3)',
-      colorShape: 'rgba(138, 43, 226, 0.08)' 
+      colorShape: 'rgba(138, 43, 226, 0.08)'
     };
 
     // CAMBIO CLAVE: Ahora toma el tamaño de la sección donde lo pusiste, no de la pantalla completa
@@ -91,7 +91,7 @@ const BackgroundAI: React.FC = () => {
       }
 
       draw() {
-        if (!ctx) return; 
+        if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = config.colorDot;
@@ -160,7 +160,7 @@ const BackgroundAI: React.FC = () => {
       resizeReset();
       initParticles();
     };
-    
+
     window.addEventListener('resize', handleResize);
 
     return () => {

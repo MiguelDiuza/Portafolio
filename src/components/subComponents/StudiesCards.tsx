@@ -3,6 +3,7 @@ import $ from "jquery";
 import "./StudiesCards.css";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { motion, AnimatePresence } from "framer-motion";
+import { Calendar, Info } from "lucide-react";
 
 interface Study {
   title: string;
@@ -10,6 +11,7 @@ interface Study {
   image: string;
   pdf?: string;
   description?: string;
+  badge?: string;
 }
 
 const containerVariants = {
@@ -108,38 +110,40 @@ const StudiesCards: React.FC = () => {
   const studies: Study[] = [
     {
       title: "Bachiller Técnico en Arte Gráfico",
-      years: "2012-2018",
+      years: "2012 - 2018",
       image: `${base}img/artImg.png`,
       pdf: `${base}pdfs/art.pdf`,
-      description: "Estudio técnico enfocado en procesos gráficos, diseño y producción impresa.",
+      description: "Formación técnica integral enfocada en los fundamentos del diseño visual, técnicas de ilustración digital y procesos de pre-prensa. Especialización en la conceptualización creativa para medios impresos y digitales.",
     },
     {
       title: "Tecnólogo en Animación 3D",
-      years: "2019-2021",
+      years: "2019 - 2021",
       image: `${base}img/senaImg.png`,
       pdf: `${base}pdfs/An3d.pdf`,
-      description: "Formación profesional en modelado, rigging, animación y postproducción 3D.",
+      description: "Capacitación avanzada en el pipeline completo de producción digital. Incluye modelado poligonal 3D, rigging avanzado, animación de personajes, iluminación cinemática y composición de efectos visuales (VFX) para producciones multimedia.",
     },
     {
       title: "Ingeniería Multimedia",
-      years: "En espera del <br> diploma, mayo 2026",
+      years: "2021 - 2026",
       image: `${base}img/mulImg.png`,
       pdf: `${base}pdfs/IngMultimedia.pdf`,
-      description: "Carrera universitaria enfocada en desarrollo de software multimedia e interacción.",
+      badge: "graduación programada mayo 23",
+      description: "Programa académico transdisciplinar que fusiona la ingeniería de software con el diseño de experiencias interactivas. Especialización en desarrollo de productos digitales, interfaces inmersivas, y gestión de proyectos tecnológicos multimedia.",
     },
     {
       title: "Especialización en IA",
-      years: "En curso",
+      years: "Actualmente cursando",
       image: `${base}img/iaImg.png`,
-      pdf: `${base}pdfs/extra.pdf`,
-      description: "Estudios de posgrado sobre aprendizaje automático, redes neuronales y big data.",
+      pdf: `${base}pdfs/ai.pdf`,
+      badge: "1/2 semestres aprobados",
+      description: "Estudios de posgrado de vanguardia orientados al análisis predictivo y automatización inteligente. Profundización en arquitecturas de redes neuronales, visión por computador, procesamiento de lenguaje natural y el despliegue de modelos de Machine Learning en entornos de producción.",
     },
     {
       title: "Cursos Adicionales",
-      years: "2013 - ∞",
+      years: "2013 - Actualidad",
       image: `${base}img/cuImg.png`,
       pdf: `${base}pdfs/extra.pdf`,
-      description: "Colección de cursos cortos en áreas como diseño, desarrollo, animación y más.",
+      description: "Trayectoria de formación continua y autodidacta a través de certificaciones internacionales en desarrollo web, backend, infraestructura en la nube y diseño estratégico. Un compromiso constante con la actualización técnica en un ecosistema digital en constante cambio.",
     },
   ];
 
@@ -185,18 +189,61 @@ const StudiesCards: React.FC = () => {
               exit={{ scale: 0.8, opacity: 0 }}
             >
               <button className="close-button" onClick={() => setSelectedStudy(null)}>✖</button>
-              <h2>{selectedStudy.title}</h2>
-              <p><strong>{selectedStudy.years}</strong></p>
-              {selectedStudy.description && <p>{selectedStudy.description}</p>}
-              {selectedStudy.pdf ? (
-                <iframe
-                  src={selectedStudy.pdf}
-                  title={`PDF de ${selectedStudy.title}`}
-                  className="pdf-viewer"
-                ></iframe>
-              ) : (
-                <p>No hay PDF disponible para este estudio.</p>
-              )}
+
+              <div className="study-modal-content">
+                <div className="study-info">
+                  <motion.h2
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {selectedStudy.title}
+                  </motion.h2>
+                  <motion.p
+                    className="study-years"
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <Calendar size={20} style={{ marginRight: '10px', verticalAlign: 'middle', color: '#00d2ff' }} />
+                    <strong style={{ verticalAlign: 'middle' }}>{selectedStudy.years}</strong>
+                  </motion.p>
+                  <motion.div
+                    className="study-description"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    {selectedStudy.description && (
+                      <div className="description-flex">
+                        <Info size={22} className="info-icon" />
+                        <p>{selectedStudy.description}</p>
+                      </div>
+                    )}
+                  </motion.div>
+                </div>
+
+                <div className="study-preview-container">
+                  {selectedStudy.badge && (
+                    <div className="study-badge">
+                      {selectedStudy.badge}
+                    </div>
+                  )}
+                  {selectedStudy.pdf ? (
+                    <div className="pdf-container">
+                      <iframe
+                        src={`${selectedStudy.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                        title={`PDF de ${selectedStudy.title}`}
+                        className={`pdf-viewer-standard ${selectedStudy.title.includes("Ingeniería") ? 'pdf-scaled' : ''}`}
+                      ></iframe>
+                    </div>
+                  ) : (
+                    <div className="no-pdf">
+                      <p>No hay previsualización disponible.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}

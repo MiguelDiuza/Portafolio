@@ -43,7 +43,7 @@ const proyectosData: Proyecto[] = [
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
     description:
-      "Proyecto para un estudio de diseño con y panel de administración.",
+      "Plataforma web completa desarrollada para un estudio de diseño digital. Incluye una landing page moderna con animaciones fluidas, galería de portafolio interactiva y formulario de contacto. Además, cuenta con un panel de administración (ERP) independiente para la gestión de clientes, proyectos y facturación, con autenticación segura y base de datos PostgreSQL.",
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
@@ -64,7 +64,7 @@ const proyectosData: Proyecto[] = [
     image: `${base}img/im1.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description: "Proyecto de videojuegos en una aplicacion web codificado en c++ con el motor de juegos unity.",
+    description: "Sitio web corporativo desarrollado para una empresa europea de gestión y alquiler de maquinaria industrial. Diseño responsive y profesional con catálogo de productos dinámico, sistema de cotizaciones en línea y sección de contacto. Optimizado para SEO y rendimiento, con una interfaz limpia que refleja la identidad de marca de la compañía.",
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
@@ -77,22 +77,27 @@ const proyectosData: Proyecto[] = [
   },
   {
     id: 3,
-    title: "Web AI de Diseño",
-    subtitle: "Ai de diseño entrenada y desplegada en web",
-    image: `${base}img/aiFly.jpg`,
+    title: "Web AI Medica",
+    subtitle: "Visión por Computadora aplicada a imagenología médica",
+    image: `${base}img/MedicalAI.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description: "Proyecto sobre venta de plantillas de diseño con una pasarela de pagos incluida",
+    description: "Aplicación web de visión por computadora enfocada en el análisis de imagenología médica. El frontend está construido con React y presenta un diseño moderno e intuitivo que permite al usuario cargar tres tipos de imágenes médicas (radiografías, tomografías y resonancias). Un modelo de deep learning entrenado por mí con YOLOv8 y PyTorch analiza cada imagen en busca de anomalías patológicas.",
     technologies: [
       { name: "React", logo: `${base}loogos/react.svg` },
+      { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "Javascript", logo: `${base}loogos/Javascript.svg` },
-      { name: "MySql", logo: `${base}loogos/mysql.svg` }
+      { name: "CSS", logo: `${base}loogos/css.svg` },
+      { name: "Python", logo: `${base}loogos/python.svg` },
+      { name: "YOLO", logo: `${base}loogos/yolo.svg` },
+      { name: "PyTorch", logo: `${base}loogos/pytorch.svg` }
     ],
-    images: [`${base}img/aiFly.jpg`],
+    images: [`${base}img/MedicalAI.png`],
     video: `${base}img/Bg3.mp4`,
-    link: "https://www.designi.com.br/",
-    repo: "https://github.com/"
+    link: "https://ia-patologia.vercel.app/",
+    repo: "https://github.com/MiguelDiuza/IA_Patologia"
   },
+
   {
     id: 4,
     title: " Web IA",
@@ -100,7 +105,7 @@ const proyectosData: Proyecto[] = [
     image: `${base}img/po4.jpg`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "IA",
-    description: "chat bot de atencion al cliente usando AI.",
+    description: "Chatbot inteligente de atención al cliente impulsado por inteligencia artificial. Utiliza procesamiento de lenguaje natural para comprender y responder consultas de los usuarios en tiempo real, ofreciendo respuestas contextuales y personalizadas. Desarrollado con React en el frontend y Node.js en el backend, con integración a modelos de IA para generación de respuestas naturales y un historial de conversaciones almacenado en base de datos.",
     technologies: [
       { name: "React", logo: `${base}loogos/react.svg` },
       { name: "Node.js", logo: `${base}loogos/Javascript.svg` },
@@ -118,7 +123,7 @@ const proyectosData: Proyecto[] = [
     image: `${base}img/app.jpg`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description: "aplicacion web para una empresa de comidas rapidas",
+    description: "Aplicación móvil Android para la gestión colaborativa de tareas del hogar. Permite a los miembros de un grupo crear, asignar y dar seguimiento a tareas diarias y semanales, con roles de administrador y moderador para el control de estados. Incluye notificaciones, sistema de autenticación y sincronización en tiempo real para mantener a todos los integrantes coordinados.",
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
@@ -135,7 +140,7 @@ const proyectosData: Proyecto[] = [
     image: `${base}img/som.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description: "Videojuego en web desarrollado en Unity",
+    description: "Videojuego 3D desarrollado en Unity y desplegado en la web mediante WebGL. Incluye modelado de personajes y escenarios creados en Blender, mecánicas de juego programadas en C#, sistema de físicas, iluminación dinámica y efectos de partículas. La experiencia de juego se integra en una página web personalizada con HTML, JavaScript y CSS para una presentación inmersiva directamente desde el navegador.",
     technologies: [
       { name: "UNITY", logo: `${base}loogos/unity.png` },
       { name: "BLENDER", logo: `${base}loogos/blender.svg` },
@@ -162,20 +167,21 @@ const Card: React.FC<CardProps> = ({ title, subtitle, image, icon, onIconClick }
 
     <div className="inner-content">
       <div className="image-container">
-        <button
-          className="card-icon-overlay"
-          onClick={onIconClick}
-          aria-label={`Más sobre ${title}`}
-        >
-          <img src={icon} alt={`icono ${title}`} />
-        </button>
         <img src={image} alt={title} className="card-image" />
       </div>
+
+      <button
+        className="card-icon-overlay"
+        onClick={onIconClick}
+        aria-label={`Más sobre ${title}`}
+      >
+        <img src={icon} alt={`icono ${title}`} />
+      </button>
 
       <div className="card-content">
         <p className="card-subtitle">{subtitle}</p>
         <h2 className="card-title">{title}</h2>
-        <p className="card-date">2025</p>
+        <p className="card-date">2026</p>
       </div>
     </div>
   </div>
@@ -260,13 +266,14 @@ const CategoryDropdown: React.FC<{ onSelect: (category: string) => void }> = ({ 
 const Proyectos: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("Web");
   const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null);
+  const [expandedMedia, setExpandedMedia] = useState<{ type: 'image' | 'video'; src: string } | null>(null);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
 
   useEffect(() => {
-    if (selectedProject) {
+    if (selectedProject || expandedMedia) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
-      setIsVideoLoading(true);
+      if (selectedProject && !expandedMedia) setIsVideoLoading(true);
     } else {
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
@@ -275,7 +282,7 @@ const Proyectos: React.FC = () => {
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
     };
-  }, [selectedProject]);
+  }, [selectedProject, expandedMedia]);
 
   return (
     <motion.div
@@ -329,18 +336,18 @@ const Proyectos: React.FC = () => {
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
             >
               <button
-                className="modal-close"
+                className="close-button"
                 onClick={() => setSelectedProject(null)}
                 aria-label="Cerrar modal"
               >
                 ✖
               </button>
 
-              <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
+              <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '0.2rem', marginTop: '-0.5rem' }}>
                 {selectedProject.title}
               </h2>
 
-              <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '0.8rem', fontSize: '1rem', lineHeight: '1.4' }}>
+              <p className="modal-description" style={{ fontSize: '0.95rem' }}>
                 {selectedProject.description}
               </p>
 
@@ -351,16 +358,33 @@ const Proyectos: React.FC = () => {
               </div>
 
               <div className="project-media">
-                <div className="media-container">
+                <div 
+                  className="media-container clickable-media"
+                  onClick={() => {
+                    const src = selectedProject.images && selectedProject.images.length > 0 
+                      ? selectedProject.images[0] 
+                      : selectedProject.image;
+                    setExpandedMedia({ type: 'image', src });
+                  }}
+                >
+                  <div className="media-zoom-overlay">🔍 Click para ampliar</div>
                   {selectedProject.images && selectedProject.images.length > 0 ? (
                     <img src={selectedProject.images[0]} alt={selectedProject.title} />
                   ) : (
                     <img src={selectedProject.image} alt={selectedProject.title} />
                   )}
                 </div>
-                <div className="media-container video-block">
+                <div 
+                  className="media-container video-block clickable-media"
+                  onClick={() => {
+                    if (selectedProject.video) {
+                      setExpandedMedia({ type: 'video', src: selectedProject.video });
+                    }
+                  }}
+                >
                   {selectedProject.video ? (
                     <>
+                      <div className="media-zoom-overlay">🔍 Click para ampliar</div>
                       {isVideoLoading && (
                         <div className="video-loader">
                           <div className="spinner"></div>
@@ -407,6 +431,36 @@ const Proyectos: React.FC = () => {
               </div>
             </motion.div>
           </div>
+        )}
+
+        {expandedMedia && (
+          <motion.div 
+            className="media-expanded-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setExpandedMedia(null)}
+          >
+            <motion.div 
+              className="media-expanded-content"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="close-button expanded-close" 
+                onClick={() => setExpandedMedia(null)}
+              >
+                ✖
+              </button>
+              {expandedMedia.type === 'image' ? (
+                <img src={expandedMedia.src} alt="Vista ampliada" />
+              ) : (
+                <video src={expandedMedia.src} autoPlay loop controls />
+              )}
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.div>

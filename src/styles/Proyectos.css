@@ -246,6 +246,21 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  overflow: hidden;
+  /* Mascara tipo 'cortada' en la esquina inferior derecha - Mas prolongada */
+  clip-path: polygon(0 0, 100% 0, 100% 65%, 65% 100%, 0 100%);
+}
+
+.image-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 15;
 }
 
 .card-image {
@@ -253,37 +268,60 @@
   height: 100%;
   object-fit: cover;
   border-radius: 30px;
-  /* Eliminé el clip-path complejo para que se vea más limpio con el cristal, pero puedes volver a ponerlo si gustas */
 }
 
 .card-icon-overlay {
   position: absolute;
-  top: 85%;
-  /* Ajustado */
-  right: 10px;
-  width: 60px;
-  /* Ajustado para que no sea gigante */
-  height: 60px;
-  z-index: 20;
-  background-color: rgb(41, 41, 41);
-  border-radius: 50%;
+  top: 51%; /* Bajamos un poco mas para centrar con el corte mas prolongado */
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  z-index: 40;
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  padding: 0;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card-icon-overlay img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  pointer-events: none;
 }
 
 .card-icon-overlay:hover {
-  transform: scale(1.1);
+  transform: scale(1.2) rotate(15deg);
+}
+
+/* --- BOTÓN CERRAR (Igual que Estudios) --- */
+.close-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+}
+
+.close-button:hover {
+  background: #ff0055;
+  transform: rotate(90deg) scale(1.1);
+  border-color: transparent;
 }
 
 .card-content {
@@ -449,6 +487,17 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* Modal Description Styling */
+.modal-description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.6rem; /* Reducido */
+  font-size: 1.05rem;
+  line-height: 1.5; /* Reducido ligeramente */
+  text-align: justify;
+  font-weight: 300;
+  padding: 0 5px;
+}
+
 /* Animación de dropdown */
 .dropdown-menu {
   transform: scaleY(0);
@@ -465,9 +514,8 @@
 .tech-icons {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin: 0.5rem 0;
-  /* Espacio reducido */
+  gap: 10px; /* Reducido */
+  margin: 0.3rem 0; /* Reducido */
   justify-content: center;
 }
 
@@ -484,50 +532,12 @@
   transform: scale(1.3);
 }
 
-.project-media {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  /* Reducido de 20px */
-  width: 100%;
-  margin-top: 0.5rem;
-  /* Reducido de 1rem */
-}
-
-.media-container {
-  flex: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-  aspect-ratio: 16 / 9;
-}
-
-.media-container img,
-.media-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.video-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: #666;
-  font-size: 0.9rem;
-  font-style: italic;
-}
+/* Antiguas definiciones de media eliminadas para usar las nuevas mas grandes al final del archivo */
 
 .project-links {
   display: flex;
-  gap: 15px;
-  margin-top: 1rem;
-  /* Reducido al mínimo */
+  gap: 10px; /* Reducido */
+  margin-top: 0.6rem; /* Reducido */
   width: 100%;
   flex-wrap: wrap;
 }
@@ -618,7 +628,6 @@
 }
 
 @keyframes cicloColorNeones {
-
   0%,
   100% {
     --anim-color-1: #6966FF;
@@ -633,5 +642,166 @@
   66% {
     --anim-color-1: #FF0080;
     --anim-color-2: #0070F3;
+  }
+}
+
+/* --- MODAL PROYECTOS --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+}
+
+.modal-content {
+  position: relative;
+  width: 92%;
+  max-width: 1000px; 
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.5rem 2.5rem; /* Menos padding vertical */
+  border-radius: 30px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  background: rgba(15, 20, 30, 0.95);
+  backdrop-filter: blur(20px);
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--color-neon-1);
+  border-radius: 10px;
+}
+
+/* Boton cerrar antiguo eliminado para usar .close-button universal */
+
+/* --- MEDIA EN MODAL (MÁS GRANDE) --- */
+.project-media {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+.media-container {
+  flex: 1;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  aspect-ratio: 16 / 9;
+  /* Eliminamos min-height excesivo para evitar scroll */
+}
+
+.media-container img,
+.media-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .project-media {
+    flex-direction: column;
+  }
+  .media-container {
+    min-height: auto;
+  }
+}
+
+/* --- CLICK PARA AMPLIAR --- */
+.clickable-media {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.clickable-media:hover {
+  transform: scale(1.02);
+}
+
+.media-zoom-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+}
+
+.clickable-media:hover .media-zoom-overlay {
+  opacity: 1;
+}
+
+/* --- OVERLAY MEDIA AMPLIADA --- */
+.media-expanded-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 6000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+  padding: 40px;
+}
+
+.media-expanded-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-expanded-content img,
+.media-expanded-content video {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+.expanded-close {
+  top: -50px !important;
+  right: -50px !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+@media (max-width: 768px) {
+  .media-expanded-overlay {
+    padding: 20px;
+  }
+  .expanded-close {
+    top: 10px !important;
+    right: 10px !important;
   }
 }

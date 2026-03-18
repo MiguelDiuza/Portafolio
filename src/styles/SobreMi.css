@@ -16,7 +16,7 @@
 
 /* Tarjeta de la izquierda con foto centrada */
 .sobre-mi__left {
-  padding: 2rem;
+  padding: 2rem 1rem;
   color: white;
   max-width: 450px;
   display: flex;
@@ -46,7 +46,7 @@
   font-size: 5.5rem;
   font-weight: 950;
   margin-top: -0.5rem;
-  margin-bottom: 0rem;
+  margin-bottom: 2rem; /* Mas distancia entre titulo y texto */
   background: linear-gradient(to bottom, #fff, #6966FF);
   background-clip: text;
   -webkit-background-clip: text;
@@ -61,11 +61,30 @@
 }
 
 .sobre-mi__left p {
-  font-size: 1.15rem;
+  font-size: 1.05rem; /* Tamaño reducido */
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.95);
   text-align: justify;
-  text-align-last: center;
+}
+
+.typing-container {
+  position: relative;
+  width: 100%;
+}
+
+.typing-placeholder {
+  visibility: hidden;
+  margin: 0;
+  padding: 0 8%;
+}
+
+.typing-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0 8%;
+  width: 100%;
 }
 
 .formacion-resumen {
@@ -235,5 +254,25 @@
 
   .sobre-mi__certifications h3 {
     font-size: 1rem;
+  }
+}
+
+/* Animación de Cursor para Efecto Escritura */
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background-color: #6966ff;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 }

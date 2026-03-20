@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import viteLogo from "/vite.svg";
+import logoIcon from "./assets/icon.svg";
 import "./App.css";
 import TechBanner from "./components/TechBanner";
 import SobreMi from "./components/SobreMi";
@@ -26,9 +26,16 @@ const App: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const skillsSectionRef = useRef<HTMLDivElement>(null);
 
+  const navItems = [
+    { label: "Inicio", id: "inicio" },
+    { label: "Sobre mí", id: "sobre-mi" },
+    { label: "Proyectos", id: "proyectos" },
+    { label: "Vídeo", id: "video" },
+    { label: "Contáctame", id: "contacto" },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
-      // Cambiamos a sticky un poco antes para suavizar
       setIsSticky(window.scrollY > 50);
     };
 
@@ -50,6 +57,50 @@ const App: React.FC = () => {
     };
   }, []);
 
+  /**
+   * Navegación fluida y precisa
+   * @param e - Evento opcional para preventDefault
+   * @param id - El ID del elemento al que queremos navegar
+   */
+  const handleNavClick = (e: React.MouseEvent | null, id: string) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setMenuOpen(false);
+
+    // Un timeout de 50ms es más seguro para asegurar que el DOM se estabilice tras cerrar el menú
+    setTimeout(() => {
+      if (id === "inicio") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (id === "contacto") {
+        const scrollToBottom = () => {
+          const scrollHeight = Math.max(
+            document.body.scrollHeight, 
+            document.documentElement.scrollHeight
+          );
+          window.scrollTo({ top: scrollHeight, behavior: "smooth" });
+        };
+        
+        scrollToBottom();
+        // Un segundo intento tras 300ms ayuda a compensar cambios en el layout 
+        // mientras la animación de scroll está en progreso
+        setTimeout(scrollToBottom, 300);
+        setTimeout(scrollToBottom, 600);
+      } else {
+        const element = document.getElementById(id);
+        if (element) {
+          const headerOffset = 85; 
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }
+    }, 50);
+  };
+
   return (
     <LayoutGroup>
       {/* 1. CONTENEDOR FLOTANTE INDEPENDIENTE 
@@ -69,16 +120,21 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Encabezado fijo (Ahora solo navegación) */}
+      {/* Encabezado fijo */}
       <header className={`header ${isSticky ? "sticky" : ""}`}>
         <div className="header-content">
           <div className="header-left">
             <nav>
-              <img src={viteLogo} className="logo" alt="Vite logo" />
-              <a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
-              <a href="#sobre-mi" onClick={() => setMenuOpen(false)}>Sobre mí</a>
-              <a href="#proyectos" onClick={() => setMenuOpen(false)}>Proyectos</a>
-              <a href="#contacto" onClick={() => setMenuOpen(false)}>Contáctame</a>
+              <img src={logoIcon} className="logo" alt="Logo" />
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                >
+                  {item.label}
+                </a>
+              ))}
             </nav>
           </div>
 
@@ -96,15 +152,19 @@ const App: React.FC = () => {
           {/* Menú Mobile */}
           {menuOpen && (
             <nav className="mobile-menu">
-              <a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
-              <a href="#sobre-mi" onClick={() => setMenuOpen(false)}>Sobre mí</a>
-              <a href="#proyectos" onClick={() => setMenuOpen(false)}>Proyectos</a>
-              <a href="#contacto" onClick={() => setMenuOpen(false)}>Contáctame</a>
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                >
+                  {item.label}
+                </a>
+              ))}
             </nav>
           )}
 
-          {/* El lado derecho queda vacío para mantener el espacio si usas flex space-between */}
-          <div className="header-right" style={{ width: '60%' }}></div>
+          <div className="header-right"></div>
         </div>
       </header>
 
@@ -115,21 +175,21 @@ const App: React.FC = () => {
             <div className="intro-text">
               <h1>INGENIERO <br /> MULTIMEDIA</h1>
               <h2>MIGUEL ANGEL DIUZA M.</h2>
-              <p>Diseñador UI/UX | Front-End & Full-Stack Developer | IA Developer</p>
+              <p> Full-Stack Developer | Diseñador UI/UX | Machine Learning Engineer </p>
 
               <div className="contact-buttons">
                 <div className="icon-buttons">
                   <button
                     className="contact-button con"
                     aria-label="Contact"
-                    onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}
+                    onClick={(e) => handleNavClick(e, "contacto")}
                   >
                     <img src={asset("loogos/contactame.svg")} alt="Contact" />
                   </button>
                   <button
                     className="icon-button linkedin"
                     aria-label="LinkedIn"
-                    onClick={() => window.open("https://www.linkedin.com/in/miguel-diuza-ab13501a0/", "_blank")}
+                    onClick={() => window.open("https://www.linkedin.com/in/miguel-angel-diuza-montaño-ab13501a0", "_blank")}
                   ></button>
                   <button
                     className="icon-button whatsapp"
@@ -137,9 +197,9 @@ const App: React.FC = () => {
                     onClick={() => window.open("https://wa.me/573128555441", "_blank")}
                   ></button>
                   <button
-                    className="icon-button behance"
-                    aria-label="Behance"
-                    onClick={() => window.open("https://www.behance.net/migueldiuza1", "_blank")}
+                    className="icon-button github"
+                    aria-label="GitHub"
+                    onClick={() => window.open("https://github.com/MiguelDiuza", "_blank")}
                   ></button>
                 </div>
               </div>
@@ -148,7 +208,7 @@ const App: React.FC = () => {
                 <button
                   className="contact-button video-button"
                   aria-label="Video"
-                  onClick={() => document.getElementById("video")?.scrollIntoView({ behavior: "smooth" })}
+                  onClick={(e) => handleNavClick(e, "video")}
                 >
                   <img src={asset("img/boton_Video.svg")} alt="Video" />
                 </button>
@@ -169,7 +229,7 @@ const App: React.FC = () => {
       </div>
       {/* Sección de Experiencia (A donde viajan las tarjetas) */}
 
-      <div id="sobre-mi" className="contentE">
+      <div className="contentE">
         <ExperienceSection />
       </div>
 
@@ -181,11 +241,7 @@ const App: React.FC = () => {
         <Video />
       </div>
 
-      <footer id="contacto" className="footer-container">
-        <div className="footer-content">
-          <Footer />
-        </div>
-      </footer>
+      <Footer />
     </LayoutGroup>
   );
 };

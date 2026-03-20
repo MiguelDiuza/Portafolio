@@ -37,25 +37,20 @@ const base = import.meta.env.BASE_URL;
 const proyectosData: Proyecto[] = [
   {
     id: 1,
-    title: "Studio Web",
-    subtitle: "Studio de diseño web",
-    image: `${base}img/mot.png`,
+    title: "App de gestión",
+    subtitle: "Gestión de tareas del hogar",
+    image: `${base}img/app.jpg`,
     icon: `${base}loogos/mas.svg`,
-    idCategoria: "Web",
-    description:
-      "Plataforma web completa desarrollada para un estudio de diseño digital. Incluye una landing page moderna con animaciones fluidas, galería de portafolio interactiva y formulario de contacto. Además, cuenta con un panel de administración (ERP) independiente para la gestión de clientes, proyectos y facturación, con autenticación segura y base de datos PostgreSQL.",
+    idCategoria: "Mobile",
+    description: "Aplicación móvil Android para la gestión colaborativa de tareas del hogar. Permite a los miembros de un grupo crear, asignar y dar seguimiento a tareas diarias y semanales, con roles de administrador y moderador para el control de estados. Incluye notificaciones, sistema de autenticación y sincronización en tiempo real para mantener a todos los integrantes coordinados.",
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` },
-      { name: "PostgreSQL", logo: `${base}loogos/postgresql.svg` }
+      { name: "CSS", logo: `${base}loogos/css.svg` }
     ],
-    images: [`${base}img/mot.png`],
-    video: `${base}img/Motion.mp4`,
-    link: "https://motiondreamstudio.com/",
-    link2: "https://motion-dreams-erp.vercel.app/",
-    repo: "https://github.com/MiguelDiuza/MotionDreamStudio",
-    repo2: "https://github.com/MiguelDiuza/motionDreamsERP"
+    images: [`${base}img/app2.jpg`],
+    video: `${base}img/Bg3.mp4`,
+    repo: "https://github.com/MiguelDiuza/AppAndroid"
   },
   {
     id: 2,
@@ -81,7 +76,7 @@ const proyectosData: Proyecto[] = [
     subtitle: "Visión por Computadora aplicada a imagenología médica",
     image: `${base}img/MedicalAI.png`,
     icon: `${base}loogos/mas.svg`,
-    idCategoria: "Web",
+    idCategoria: "IA, Web",
     description: "Aplicación web de visión por computadora enfocada en el análisis de imagenología médica. El frontend está construido con React y presenta un diseño moderno e intuitivo que permite al usuario cargar tres tipos de imágenes médicas (radiografías, tomografías y resonancias). Un modelo de deep learning entrenado por mí con YOLOv8 y PyTorch analiza cada imagen en busca de anomalías patológicas.",
     technologies: [
       { name: "React", logo: `${base}loogos/react.svg` },
@@ -93,53 +88,40 @@ const proyectosData: Proyecto[] = [
       { name: "PyTorch", logo: `${base}loogos/pytorch.svg` }
     ],
     images: [`${base}img/MedicalAI.png`],
-    video: `${base}img/Bg3.mp4`,
+    video: `${base}img/Visumed.mp4`,
     link: "https://ia-patologia.vercel.app/",
     repo: "https://github.com/MiguelDiuza/IA_Patologia"
   },
-
   {
     id: 4,
-    title: " Web IA",
-    subtitle: "Chatbot de Atención al Cliente",
-    image: `${base}img/po4.jpg`,
-    icon: `${base}loogos/mas.svg`,
-    idCategoria: "IA",
-    description: "Chatbot inteligente de atención al cliente impulsado por inteligencia artificial. Utiliza procesamiento de lenguaje natural para comprender y responder consultas de los usuarios en tiempo real, ofreciendo respuestas contextuales y personalizadas. Desarrollado con React en el frontend y Node.js en el backend, con integración a modelos de IA para generación de respuestas naturales y un historial de conversaciones almacenado en base de datos.",
-    technologies: [
-      { name: "React", logo: `${base}loogos/react.svg` },
-      { name: "Node.js", logo: `${base}loogos/Javascript.svg` },
-      { name: "MongoDB", logo: `${base}loogos/mysql.svg` }
-    ],
-    images: [`${base}img/po4.jpg`],
-    video: `${base}img/Bg3.mp4`,
-    link: "https://www.deepseek.com/",
-    repo: "https://github.com/"
-  },
-  {
-    id: 5,
-    title: "App de gestión",
-    subtitle: "Gestión de tareas del hogar",
-    image: `${base}img/app.jpg`,
+    title: "Studio Web",
+    subtitle: "Studio de diseño web",
+    image: `${base}img/mot.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description: "Aplicación móvil Android para la gestión colaborativa de tareas del hogar. Permite a los miembros de un grupo crear, asignar y dar seguimiento a tareas diarias y semanales, con roles de administrador y moderador para el control de estados. Incluye notificaciones, sistema de autenticación y sincronización en tiempo real para mantener a todos los integrantes coordinados.",
+    description:
+      "Plataforma web completa desarrollada para un estudio de diseño digital. Incluye una landing page moderna con animaciones fluidas, galería de portafolio interactiva y formulario de contacto. Además, cuenta con un panel de administración (ERP) independiente para la gestión de clientes, proyectos y facturación, con autenticación segura y base de datos PostgreSQL.",
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` }
+      { name: "CSS", logo: `${base}loogos/css.svg` },
+      { name: "PostgreSQL", logo: `${base}loogos/postgresql.svg` }
     ],
-    images: [`${base}img/app2.jpg`],
-    video: `${base}img/Bg3.mp4`,
-    repo: "https://github.com/MiguelDiuza/AppAndroid"
+    images: [`${base}img/mot.png`],
+    video: `${base}img/Motion.mp4`,
+    link: "https://motiondreamstudio.com/",
+    link2: "https://motion-dreams-erp.vercel.app/",
+    repo: "https://github.com/MiguelDiuza/MotionDreamStudio",
+    repo2: "https://github.com/MiguelDiuza/motionDreamsERP"
   },
+
   {
-    id: 6,
+    id: 5,
     title: "Video juego web",
     subtitle: "Videojuego en web desarrollado en Unity",
     image: `${base}img/som.png`,
     icon: `${base}loogos/mas.svg`,
-    idCategoria: "Web",
+    idCategoria: "RA",
     description: "Videojuego 3D desarrollado en Unity y desplegado en la web mediante WebGL. Incluye modelado de personajes y escenarios creados en Blender, mecánicas de juego programadas en C#, sistema de físicas, iluminación dinámica y efectos de partículas. La experiencia de juego se integra en una página web personalizada con HTML, JavaScript y CSS para una presentación inmersiva directamente desde el navegador.",
     technologies: [
       { name: "UNITY", logo: `${base}loogos/unity.png` },
@@ -151,7 +133,6 @@ const proyectosData: Proyecto[] = [
     ],
     images: [`${base}img/sombra.png`],
     video: `${base}img/G.mp4`,
-    link: "https://www.mcdonalds.com.co/",
     repo: "https://github.com/MiguelDiuza/SombraFur"
   }
 ];
@@ -192,8 +173,8 @@ interface CarouselProps {
 }
 
 const Carousel: React.FC<CarouselProps> = ({ children }) => {
-  const [active, setActive] = useState<number>(2);
   const count = React.Children.count(children);
+  const [active, setActive] = useState<number>(Math.floor(count / 2));
 
   return (
     <div className="carousel">
@@ -229,15 +210,16 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
 };
 
 const categories = [
+  { id: "All", name: "Todos los proyectos" },
   { id: "Web", name: "Desarrollo Web" },
-  { id: "RA", name: "Realidad Aumentada" },
+  { id: "RA", name: "VR/AR/VG/3D" },
   { id: "IA", name: "Inteligencia Artificial" },
-  { id: "UI/UX", name: "Diseño UI/UX" },
+  { id: "Mobile", name: "Apps Mobile Android" },
 ];
 
 const CategoryDropdown: React.FC<{ onSelect: (category: string) => void }> = ({ onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Desarrollo Web");
+  const [selectedCategory, setSelectedCategory] = useState("Todos los proyectos");
 
   const handleSelect = (categoryId: string, categoryName: string) => {
     setSelectedCategory(categoryName);
@@ -264,7 +246,7 @@ const CategoryDropdown: React.FC<{ onSelect: (category: string) => void }> = ({ 
 };
 
 const Proyectos: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Web");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null);
   const [expandedMedia, setExpandedMedia] = useState<{ type: 'image' | 'video'; src: string } | null>(null);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
@@ -273,7 +255,6 @@ const Proyectos: React.FC = () => {
     if (selectedProject || expandedMedia) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
-      if (selectedProject && !expandedMedia) setIsVideoLoading(true);
     } else {
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
@@ -283,6 +264,12 @@ const Proyectos: React.FC = () => {
       document.documentElement.style.overflow = "auto";
     };
   }, [selectedProject, expandedMedia]);
+
+  useEffect(() => {
+    if (selectedProject) {
+      setIsVideoLoading(true);
+    }
+  }, [selectedProject?.id]);
 
   return (
     <motion.div
@@ -309,9 +296,13 @@ const Proyectos: React.FC = () => {
         viewport={{ once: true }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
-        <Carousel>
+        <Carousel key={selectedCategory}>
           {proyectosData
-            .filter((proyecto: Proyecto) => proyecto.idCategoria === selectedCategory)
+            .filter((proyecto: Proyecto) => {
+              if (selectedCategory === "All") return true;
+              const projectCats = proyecto.idCategoria.split(',').map(cat => cat.trim());
+              return projectCats.includes(selectedCategory);
+            })
             .map((proyecto) => (
               <Card
                 key={proyecto.id}
@@ -358,23 +349,23 @@ const Proyectos: React.FC = () => {
               </div>
 
               <div className="project-media">
-                <div 
+                <div
                   className="media-container clickable-media"
                   onClick={() => {
-                    const src = selectedProject.images && selectedProject.images.length > 0 
-                      ? selectedProject.images[0] 
+                    const src = selectedProject.images && selectedProject.images.length > 0
+                      ? selectedProject.images[0]
                       : selectedProject.image;
                     setExpandedMedia({ type: 'image', src });
                   }}
                 >
-                  <div className="media-zoom-overlay">🔍 Click para ampliar</div>
+                  <div className="media-zoom-overlay">Click para ampliar</div>
                   {selectedProject.images && selectedProject.images.length > 0 ? (
                     <img src={selectedProject.images[0]} alt={selectedProject.title} />
                   ) : (
                     <img src={selectedProject.image} alt={selectedProject.title} />
                   )}
                 </div>
-                <div 
+                <div
                   className="media-container video-block clickable-media"
                   onClick={() => {
                     if (selectedProject.video) {
@@ -384,10 +375,12 @@ const Proyectos: React.FC = () => {
                 >
                   {selectedProject.video ? (
                     <>
-                      <div className="media-zoom-overlay">🔍 Click para ampliar</div>
+                      <div className="media-zoom-overlay">Click para ampliar</div>
                       {isVideoLoading && (
                         <div className="video-loader">
-                          <div className="spinner"></div>
+                          <div className="progress-bar">
+                            <div className="progress-fill"></div>
+                          </div>
                           <p>Cargando video...</p>
                         </div>
                       )}
@@ -434,22 +427,22 @@ const Proyectos: React.FC = () => {
         )}
 
         {expandedMedia && (
-          <motion.div 
+          <motion.div
             className="media-expanded-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setExpandedMedia(null)}
           >
-            <motion.div 
+            <motion.div
               className="media-expanded-content"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button 
-                className="close-button expanded-close" 
+              <button
+                className="close-button expanded-close"
                 onClick={() => setExpandedMedia(null)}
               >
                 ✖
@@ -457,7 +450,7 @@ const Proyectos: React.FC = () => {
               {expandedMedia.type === 'image' ? (
                 <img src={expandedMedia.src} alt="Vista ampliada" />
               ) : (
-                <video src={expandedMedia.src} autoPlay loop controls />
+                <video src={expandedMedia.src} autoPlay loop muted playsInline />
               )}
             </motion.div>
           </motion.div>

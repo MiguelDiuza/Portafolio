@@ -29,34 +29,14 @@
   -webkit-backdrop-filter: blur(24px);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.3),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: none !important;
   position: relative;
   overflow: hidden;
 }
 
-.glass-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  pointer-events: none;
-}
-
+.glass-panel::before,
 .glass-panel::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
-  pointer-events: none;
+  display: none !important;
 }
 
 /* --- MODALES GLOBALES --- */
@@ -224,10 +204,7 @@
   -webkit-backdrop-filter: blur(24px);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.3),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: none !important;
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -245,24 +222,9 @@
     inset -1px -1px 0 rgba(0, 0, 0, 0.5);
 }
 
-.large-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-}
-
+.large-card::before,
 .large-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+  display: none !important;
 }
 
 /* Filtro para iconos blancos */

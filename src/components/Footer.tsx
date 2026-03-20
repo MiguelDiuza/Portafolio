@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
           <button
             className="icon-button linkedin"
             onClick={() =>
-              window.open("https://www.linkedin.com/in/miguel-diuza-ab13501a0/", "_blank")
+              window.open("https://www.linkedin.com/in/miguel-angel-diuza-montaño-ab13501a0", "_blank")
             }>
           </button>
           <button
@@ -25,14 +25,14 @@ const Footer: React.FC = () => {
             onClick={() => window.open("https://wa.me/573128555441", "_blank")}>
           </button>
           <button
-            className="icon-button behance"
-            aria-label="Behance"
-            onClick={() => window.open("https://www.behance.net/migueldiuza1", "_blank")}
+            className="icon-button github"
+            aria-label="GitHub"
+            onClick={() => window.open("https://github.com/MiguelDiuza", "_blank")}
           >
-
           </button>
         </div>
       </div>
+      <div id="contacto" style={{ height: '1px' }}></div>
     </footer>
   );
 };

@@ -21,7 +21,7 @@ const SobreMi = () => {
                     clearInterval(typingInterval);
                     setIsTypingComplete(true);
                 }
-            }, 20); // Velocidad de escritura: 20ms por caracter
+            }, 8); // Velocidad de escritura: 8ms por caracter
             return () => clearInterval(typingInterval);
         }
     }, [isInView, isTypingComplete]);

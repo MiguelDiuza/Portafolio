@@ -12,13 +12,7 @@ import { LayoutGroup } from "framer-motion";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
-const skillsData = [
-  { name: "Frontend", percentage: 70 },
-  { name: "Backend", percentage: 58 },
-  { name: "UI/UX", percentage: 70 },
-  { name: "3D/AR/VR", percentage: 65 },
-  { name: "AI", percentage: 55 },
-];
+import { skillsData } from "./constants/skillsData.ts";
 
 const App: React.FC = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
@@ -41,18 +35,36 @@ const App: React.FC = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowSkillsInBody(entry.isIntersecting);
+        // Obtenemos el rectángulo del elemento para una precisión extra
+        const rect = entry.target.getBoundingClientRect();
+        // Si el elemento está en el viewport O está por encima de él (ya pasó)
+        const isPastOrInSection = rect.top <= 150 || entry.isIntersecting;
+        setShowSkillsInBody(isPastOrInSection);
       },
-      { threshold: 0.1, rootMargin: "-100px 0px 0px 0px" }
+      { threshold: 0.1, rootMargin: "-150px 0px 0px 0px" }
     );
 
     if (skillsSectionRef.current) {
       observer.observe(skillsSectionRef.current);
     }
 
-    window.addEventListener("scroll", handleScroll);
+    const scrollHandler = () => {
+      handleScroll();
+      // Forzamos una comprobación manual además del observer para evitar el bug del modal
+      if (skillsSectionRef.current) {
+        const rect = skillsSectionRef.current.getBoundingClientRect();
+        if (rect.top <= 150) {
+          setShowSkillsInBody(true);
+        } else if (rect.top > 500) {
+          setShowSkillsInBody(false);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", scrollHandler);
+    scrollHandler();
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", scrollHandler);
       observer.disconnect();
     };
   }, []);
@@ -113,8 +125,9 @@ const App: React.FC = () => {
               key={skill.name}
               skillName={skill.name}
               percentage={skill.percentage}
+              techs={skill.techs}
               layoutId={`skill-${skill.name}`}
-              isShrunk={isSticky} // Mantiene la lógica de encogerse
+              isShrunk={isSticky} 
             />
           ))}
         </div>
@@ -229,7 +242,7 @@ const App: React.FC = () => {
       </div>
       {/* Sección de Experiencia (A donde viajan las tarjetas) */}
 
-      <div className="contentE">
+      <div className="contentE" id="experience-zone" ref={skillsSectionRef}>
         <ExperienceSection />
       </div>
 

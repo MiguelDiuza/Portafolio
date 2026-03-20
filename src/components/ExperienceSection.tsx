@@ -1,96 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { LayoutGroup } from 'framer-motion';
 import SkillCard from './SkillCard';
 import BackgroundAI from './BackgroundAI';
-
-// 1. CONFIGURACIÓN DE RUTAS Y DATOS
-const base = import.meta.env.BASE_URL || "/";
-
-// Función auxiliar para generar ruta de logo
-const getLogo = (name: string) => `${base}loogos/${name}`;
-
-// Mapeo completo de tus datos
-const skillsData = [
-  {
-    name: "Frontend",
-    percentage: 70,
-    techs: [
-      { src: getLogo("react.svg"), alt: "React" },
-      { src: getLogo("html5.svg"), alt: "HTML5" },
-      { src: getLogo("css3.svg"), alt: "CSS3" },
-      { src: getLogo("js.png"), alt: "JS" }
-    ]
-  },
-  {
-    name: "Backend",
-    percentage: 58,
-    techs: [
-      { src: getLogo("python.svg"), alt: "Python" },
-      { src: getLogo("nodejs.webp"), alt: "NodeJS" },
-      { src: getLogo("api.svg"), alt: "APIs" },
-      { src: getLogo("mysql.svg"), alt: "MySQL" },
-      { src: getLogo("java.svg"), alt: "Java" },
-      { src: getLogo("postgresql.svg"), alt: "Postgre" }
-
-
-    ]
-  },
-  {
-    name: "UI/UX",
-    percentage: 70,
-    techs: [
-      { src: getLogo("photo.svg"), alt: "photoshop" },
-      { src: getLogo("figma.svg"), alt: "Figma" },
-      { src: getLogo("sk.png"), alt: "sk" },
-      { src: getLogo("ilus.svg"), alt: "ilustrator" }
-    ]
-  },
-  {
-    name: "3D/AR/VR",
-    percentage: 65,
-    techs: [
-      { src: getLogo("blender.svg"), alt: "Blender" },
-      { src: getLogo("unity.png"), alt: "Unity" },
-      { src: getLogo("unr.png"), alt: "Unreal" },
-      { src: getLogo("maya.png"), alt: "Maya" }
-    ]
-  },
-  {
-    name: "AI",
-    percentage: 55,
-    techs: [
-      { src: getLogo("python.svg"), alt: "Reg Log" },
-      { src: getLogo("pytorch.svg"), alt: "PyTorch" },
-      { src: getLogo("sc.svg"), alt: "Scikit" },
-      { src: getLogo("robo.png"), alt: "roboflow" },
-      { src: getLogo("yolo.svg"), alt: "YOLO" },
-      { src: getLogo("n8n.png"), alt: "N8N" }
-    ]
-  },
-];
+import { skillsData } from '../constants/skillsData.ts';
 
 const ExperienceSection: React.FC = () => {
-  const [isSticky, setIsSticky] = useState<boolean>(false);
   const [showSkillsInBody, setShowSkillsInBody] = useState<boolean>(false);
-  const skillsSectionRef = useRef<HTMLDivElement>(null);
+  const internalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      // 1. Lógica Sticky
-      setIsSticky(window.scrollY > 50);
-
-      // 2. Lógica de Docking
-      if (skillsSectionRef.current) {
-        const rect = skillsSectionRef.current.getBoundingClientRect();
+      if (internalRef.current) {
+        const rect = internalRef.current.getBoundingClientRect();
+        // Sincronizado con la lógica de App.tsx: 150px de margen superior
         if (rect.top <= 150) {
           setShowSkillsInBody(true);
-        } else {
+        } else if (rect.top > 500) {
           setShowSkillsInBody(false);
         }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Comprobación inicial
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -101,72 +33,50 @@ const ExperienceSection: React.FC = () => {
 
       {/* 2. EL CONTENIDO */}
       <div className="content-wrapper">
-        <LayoutGroup>
+        <div
+          ref={internalRef}
+          id="experience-cards-section"
+          style={{
+            minHeight: '600px',
+            padding: '5rem 0',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            position: 'relative'
+          }}
+        >
+          <h1 className="section-title">
+            Mis Habilidades
+          </h1>
 
-          {/* TARJETAS FLOTANTES (Arriba) */}
-          {!showSkillsInBody && (
-            <div className={`floating-skills-container ${isSticky ? "sticky-mode" : ""}`}>
-              {skillsData.map((skill) => (
-                <SkillCard
-                  key={skill.name}
-                  skillName={skill.name}
-                  percentage={skill.percentage}
-                  techs={skill.techs}
-                  layoutId={`skill-${skill.name}`}
-                  isShrunk={isSticky}
-                  isExpanded={false}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* TARJETAS EN SECCIÓN (Abajo) */}
-          <div
-            ref={skillsSectionRef}
-            id="experience-cards-section"
-            style={{
-              minHeight: '600px',
-              padding: '5rem 0',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              position: 'relative'
-            }}
-          >
-            <h1 className="section-title">
-              Mis Habilidades
-            </h1>
-
-            <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
-              {showSkillsInBody && skillsData.map((skill) => (
-                <SkillCard
-                  key={skill.name}
-                  skillName={skill.name}
-                  percentage={skill.percentage}
-                  techs={skill.techs}
-                  layoutId={`skill-${skill.name}`}
-                  isShrunk={false}
-                  isExpanded={true}
-                  className="large-card"
-                />
-              ))}
-            </div>
-
-            {/* TARJETA ANCHA DE DIFERENCIADOR */}
-            {showSkillsInBody && (
-              <div className="glass-panel wide-differentiator-card">
-                <h2>Más allá de la Ingeniería Convencional</h2>
-                <p>
-                  Mi perfil profesional trasciende la ingeniería tradicional. Como Ingeniero Multimedia, combino una sólida formación técnica y algorítmica con la versatilidad multimodal que exige la industria actual. Esta convergencia me permite liderar proyectos en diversas fronteras tecnológicas: desde el diseño de experiencias de usuario de alto impacto (UI/UX) y el desarrollo de tecnologías inmersivas (Realidad Aumentada y Videojuegos).
-                </p>
-                <p style={{ marginTop: '1.5rem' }}>
-                  Además, mi especialización en Inteligencia Artificial potencia mi capacidad para diseñar, entrenar e implementar modelos avanzados que resuelven problemas complejos, integrándolos de manera armoniosa en ecosistemas informáticos escalables y multidisciplinarios. Mi enfoque no solo busca la funcionalidad, sino la creación de valor a través de la armonía entre la técnica y la experiencia del usuario.
-                </p>
-              </div>
-            )}
+          <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
+            {showSkillsInBody && skillsData.map((skill) => (
+              <SkillCard
+                key={skill.name}
+                skillName={skill.name}
+                percentage={skill.percentage}
+                techs={skill.techs}
+                layoutId={`skill-${skill.name}`}
+                isShrunk={false}
+                isExpanded={true}
+                className="large-card"
+              />
+            ))}
           </div>
 
-        </LayoutGroup>
+          {/* TARJETA ANCHA DE DIFERENCIADOR */}
+          {showSkillsInBody && (
+            <div className="glass-panel wide-differentiator-card">
+              <h2>Más allá de la Ingeniería Convencional</h2>
+              <p>
+                Mi perfil profesional trasciende la ingeniería tradicional. Como Ingeniero Multimedia, combino una sólida formación técnica y algorítmica con la versatilidad multimodal que exige la industria actual. Esta convergencia me permite liderar proyectos en diversas fronteras tecnológicas: desde el diseño de experiencias de usuario de alto impacto (UI/UX) y el desarrollo de tecnologías inmersivas (Realidad Aumentada y Videojuegos).
+              </p>
+              <p style={{ marginTop: '1.5rem' }}>
+                Además, mi especialización en Inteligencia Artificial potencia mi capacidad para diseñar, entrenar e implementar modelos avanzados que resuelven problemas complejos, integrándolos de manera armoniosa en ecosistemas informáticos escalables y multidisciplinarios. Mi enfoque no solo busca la funcionalidad, sino la creación de valor a través de la armonía entre la técnica y la experiencia del usuario.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

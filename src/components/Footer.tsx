@@ -1,17 +1,19 @@
 import React from "react";
 import "../styles/Footer.css"
+import { useLanguage } from "./idiomas";
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <footer className="footer-container">
       <div className="footer-content">
-        <h3>Contactame:</h3>
+        <h3>{t("footer_contact")}</h3>
         <p className="name">Miguel Angel Diuza Montaño</p>
         <p className="phone">+57 312 8555441</p>
         <a href="mailto:mandiuza@gmail.com" className="email">
           mandiuza@gmail.com
         </a>
-        <p className="location">Cali - Colombia</p>
+        <p className="location">{t("footer_location")}</p>
 
         <div className="footer-icons">
           <button

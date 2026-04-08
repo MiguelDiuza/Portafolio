@@ -9,23 +9,25 @@ import Footer from "./components/Footer";
 import Video from "./components/Video";
 import ExperienceSection from "./components/ExperienceSection";
 import { LayoutGroup } from "framer-motion";
+import { useLanguage } from "./components/idiomas";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
 import { skillsData } from "./constants/skillsData.ts";
 
 const App: React.FC = () => {
+  const { t, language, toggleLanguage } = useLanguage();
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [showSkillsInBody, setShowSkillsInBody] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const skillsSectionRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
-    { label: "Inicio", id: "inicio" },
-    { label: "Sobre mí", id: "sobre-mi" },
-    { label: "Proyectos", id: "proyectos" },
-    { label: "Vídeo", id: "video" },
-    { label: "Contáctame", id: "contacto" },
+    { label: t("nav_home"), id: "inicio" },
+    { label: t("nav_about"), id: "sobre-mi" },
+    { label: t("nav_projects"), id: "proyectos" },
+    { label: t("nav_video"), id: "video" },
+    { label: t("nav_contact"), id: "contacto" },
   ];
 
   useEffect(() => {
@@ -148,6 +150,13 @@ const App: React.FC = () => {
                   {item.label}
                 </a>
               ))}
+              <button 
+                onClick={toggleLanguage} 
+                aria-label="Change Language"
+                style={{ marginLeft: '8px', padding: '4px 10px', fontSize: '13px', borderRadius: '15px', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.1)', color: 'white', fontWeight: 'bold', backdropFilter: 'blur(5px)' }}
+              >
+                {language === 'en' ? 'ES' : 'EN'}
+              </button>
             </nav>
           </div>
 
@@ -174,6 +183,13 @@ const App: React.FC = () => {
                   {item.label}
                 </a>
               ))}
+              <button 
+                onClick={toggleLanguage} 
+                aria-label="Change Language"
+                style={{ margin: '5px auto 10px auto', display: 'block', padding: '6px 16px', fontSize: '14px', borderRadius: '20px', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.1)', color: 'white', fontWeight: 'bold', backdropFilter: 'blur(5px)' }}
+              >
+                {language === 'en' ? 'ES' : 'EN'}
+              </button>
             </nav>
           )}
 
@@ -186,9 +202,9 @@ const App: React.FC = () => {
         <section className="intro">
           <div className="intro-content">
             <div className="intro-text">
-              <h1>INGENIERO <br /> MULTIMEDIA</h1>
-              <h2>MIGUEL ANGEL DIUZA M.</h2>
-              <p> Full-Stack Developer | Diseñador UI/UX | Machine Learning Engineer </p>
+              <h1>{t("hero_title").includes('\n') ? <>{t("hero_title").split('\n')[0]}<br/>{t("hero_title").split('\n')[1]}</> : t("hero_title")}</h1>
+              <h2>{t("hero_subtitle")}</h2>
+              <p> {t("hero_desc")} </p>
 
               <div className="contact-buttons">
                 <div className="icon-buttons">

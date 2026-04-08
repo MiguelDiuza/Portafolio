@@ -1,7 +1,9 @@
 import React from "react";
 import "../styles/Video.css";
+import { useLanguage } from "./idiomas";
 
 const Video: React.FC = () => {
+  const { t } = useLanguage();
   const videoId = "oOkRGhgylb8"; // Reemplázalo con el ID de tu video
 
   return (
@@ -19,8 +21,8 @@ const Video: React.FC = () => {
       />
 
       {/* Título y subtítulo */}
-      <h2 className="video-title">VIDEO PORTAFOLIO</h2>
-      <p className="video-subtitle">Dale play a mi creatividad</p>
+      <h2 className="video-title">{t("video_title")}</h2>
+      <p className="video-subtitle">{t("video_subtitle")}</p>
 
       {/* Video embebido */}
       <div className="video-card">

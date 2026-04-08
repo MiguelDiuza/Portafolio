@@ -2,13 +2,21 @@ import '../styles/SobreMi.css';
 import StudiesCards from './subComponents/StudiesCards';
 import { motion, useInView } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
+import { useLanguage } from './idiomas';
 
 const SobreMi = () => {
-    const text = "Soy un apasionado de la programación, el diseño y la tecnología, siempre en la búsqueda de nuevas formas de combinar creatividad y programación. Soy bachiller en Arte Gráfico, tecnólogo en Animación 3D e Ingeniero Multimedia de la UAO, especializándome en Inteligencia Artificial.";
+    const { t, language } = useLanguage();
+    const text = t("about_text");
     const [displayedText, setDisplayedText] = useState("");
     const textRef = useRef(null);
     const isInView = useInView(textRef, { once: true, amount: 0.5 });
     const [isTypingComplete, setIsTypingComplete] = useState(false);
+
+    // Reinicia el efecto de tipeado cuando cambia el idioma
+    useEffect(() => {
+        setDisplayedText("");
+        setIsTypingComplete(false);
+    }, [language, text]);
 
     useEffect(() => {
         if (isInView && !isTypingComplete) {
@@ -45,7 +53,7 @@ const SobreMi = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3, duration: 0.6 }}
                 >
-                    ¿QUIÉN SOY?
+                    {t("about_title")}
                 </motion.h1>
                 <div className="sobre-mi__desc" ref={textRef}>
                     <div className="typing-container">
@@ -70,7 +78,7 @@ const SobreMi = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
             >
-                <h2 className="titulo-estudios">Educación</h2>
+                <h2 className="titulo-estudios">{t("edu_title")}</h2>
                 <StudiesCards />
             </motion.div>
         </section>

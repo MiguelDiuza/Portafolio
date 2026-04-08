@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import SkillCard from './SkillCard';
 import BackgroundAI from './BackgroundAI';
 import { skillsData } from '../constants/skillsData.ts';
+import { useLanguage } from './idiomas';
 
 const ExperienceSection: React.FC = () => {
+  const { t } = useLanguage();
   const [showSkillsInBody, setShowSkillsInBody] = useState<boolean>(false);
   const internalRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +48,7 @@ const ExperienceSection: React.FC = () => {
           }}
         >
           <h1 className="section-title">
-            Mis Habilidades
+            {t("exp_title")}
           </h1>
 
           <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
@@ -67,13 +69,9 @@ const ExperienceSection: React.FC = () => {
           {/* TARJETA ANCHA DE DIFERENCIADOR */}
           {showSkillsInBody && (
             <div className="glass-panel wide-differentiator-card">
-              <h2>Más allá de la Ingeniería Convencional</h2>
-              <p>
-                Mi perfil profesional trasciende la ingeniería tradicional. Como Ingeniero Multimedia, combino una sólida formación técnica y algorítmica con la versatilidad multimodal que exige la industria actual. Esta convergencia me permite liderar proyectos en diversas fronteras tecnológicas: desde el diseño de experiencias de usuario de alto impacto (UI/UX) y el desarrollo de tecnologías inmersivas (Realidad Aumentada y Videojuegos).
-              </p>
-              <p style={{ marginTop: '1.5rem' }}>
-                Además, mi especialización en Inteligencia Artificial potencia mi capacidad para diseñar, entrenar e implementar modelos avanzados que resuelven problemas complejos, integrándolos de manera armoniosa en ecosistemas informáticos escalables y multidisciplinarios. Mi enfoque no solo busca la funcionalidad, sino la creación de valor a través de la armonía entre la técnica y la experiencia del usuario.
-              </p>
+              <h2>{t("exp_diff_title")}</h2>
+              <p>{t("exp_diff_p1")}</p>
+              <p style={{ marginTop: '1.5rem' }}>{t("exp_diff_p2")}</p>
             </div>
           )}
         </div>

@@ -3,6 +3,7 @@ import { TiChevronLeftOutline, TiChevronRightOutline } from "react-icons/ti";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "./idiomas";
 import "../styles/Proyectos.css";
 
 const MAX_VISIBILITY = 3;
@@ -34,15 +35,15 @@ interface Proyecto {
 
 const base = import.meta.env.BASE_URL;
 
-const proyectosData: Proyecto[] = [
+const getProyectosData = (t: any): Proyecto[] => [
   {
     id: 1,
-    title: "App de gestión",
-    subtitle: "Gestión de tareas del hogar",
+    title: t("p1_title"),
+    subtitle: t("p1_sub"),
     image: `${base}img/app.jpg`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Mobile",
-    description: "Aplicación móvil Android para la gestión colaborativa de tareas del hogar. Permite a los miembros de un grupo crear, asignar y dar seguimiento a tareas diarias y semanales, con roles de administrador y moderador para el control de estados. Incluye notificaciones, sistema de autenticación y sincronización en tiempo real para mantener a todos los integrantes coordinados.",
+    description: t("p1_desc"),
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
@@ -54,12 +55,12 @@ const proyectosData: Proyecto[] = [
   },
   {
     id: 2,
-    title: "Machinery Web",
-    subtitle: "Machinery Management Web",
+    title: t("p2_title"),
+    subtitle: t("p2_sub"),
     image: `${base}img/im1.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description: "Sitio web corporativo desarrollado para una empresa europea de gestión y alquiler de maquinaria industrial. Diseño responsive y profesional con catálogo de productos dinámico, sistema de cotizaciones en línea y sección de contacto. Optimizado para SEO y rendimiento, con una interfaz limpia que refleja la identidad de marca de la compañía.",
+    description: t("p2_desc"),
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
@@ -72,12 +73,12 @@ const proyectosData: Proyecto[] = [
   },
   {
     id: 3,
-    title: "Web AI Medica",
-    subtitle: "Visión por Computadora aplicada a imagenología médica",
+    title: t("p3_title"),
+    subtitle: t("p3_sub"),
     image: `${base}img/MedicalAI.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "IA, Web",
-    description: "Aplicación web de visión por computadora enfocada en el análisis de imagenología médica. El frontend está construido con React y presenta un diseño moderno e intuitivo que permite al usuario cargar tres tipos de imágenes médicas (radiografías, tomografías y resonancias). Un modelo de deep learning entrenado por mí con YOLOv8 y PyTorch analiza cada imagen en busca de anomalías patológicas.",
+    description: t("p3_desc"),
     technologies: [
       { name: "React", logo: `${base}loogos/react.svg` },
       { name: "HTML", logo: `${base}loogos/html.svg` },
@@ -94,13 +95,12 @@ const proyectosData: Proyecto[] = [
   },
   {
     id: 4,
-    title: "Studio Web",
-    subtitle: "Studio de diseño web",
+    title: t("p4_title"),
+    subtitle: t("p4_sub"),
     image: `${base}img/mot.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "Web",
-    description:
-      "Plataforma web completa desarrollada para un estudio de diseño digital. Incluye una landing page moderna con animaciones fluidas, galería de portafolio interactiva y formulario de contacto. Además, cuenta con un panel de administración (ERP) independiente para la gestión de clientes, proyectos y facturación, con autenticación segura y base de datos PostgreSQL.",
+    description: t("p4_desc"),
     technologies: [
       { name: "HTML", logo: `${base}loogos/html.svg` },
       { name: "JS", logo: `${base}loogos/Javascript.svg` },
@@ -114,15 +114,14 @@ const proyectosData: Proyecto[] = [
     repo: "https://github.com/MiguelDiuza/MotionDreamStudio",
     repo2: "https://github.com/MiguelDiuza/motionDreamsERP"
   },
-
   {
     id: 5,
-    title: "Video juego web",
-    subtitle: "Videojuego en web desarrollado en Unity",
+    title: t("p5_title"),
+    subtitle: t("p5_sub"),
     image: `${base}img/som.png`,
     icon: `${base}loogos/mas.svg`,
     idCategoria: "RA",
-    description: "Videojuego 3D desarrollado en Unity y desplegado en la web mediante WebGL. Incluye modelado de personajes y escenarios creados en Blender, mecánicas de juego programadas en C#, sistema de físicas, iluminación dinámica y efectos de partículas. La experiencia de juego se integra en una página web personalizada con HTML, JavaScript y CSS para una presentación inmersiva directamente desde el navegador.",
+    description: t("p5_desc"),
     technologies: [
       { name: "UNITY", logo: `${base}loogos/unity.png` },
       { name: "BLENDER", logo: `${base}loogos/blender.svg` },
@@ -241,33 +240,35 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   );
 };
 
-const categories = [
-  { id: "All", name: "Todos los proyectos" },
-  { id: "Web", name: "Desarrollo Web" },
-  { id: "RA", name: "VR/AR/VG/3D" },
-  { id: "IA", name: "Inteligencia Artificial" },
-  { id: "Mobile", name: "Apps Mobile Android" },
-];
-
-const CategoryDropdown: React.FC<{ onSelect: (category: string) => void }> = ({ onSelect }) => {
+const CategoryDropdown: React.FC<{ onSelect: (category: string) => void, t: any }> = ({ onSelect, t }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Todos los proyectos");
+  const [selectedId, setSelectedId] = useState("All");
 
-  const handleSelect = (categoryId: string, categoryName: string) => {
-    setSelectedCategory(categoryName);
+  const categories = [
+    { id: "All", name: t("proj_all") },
+    { id: "Web", name: t("proj_web") },
+    { id: "RA", name: t("proj_ra") },
+    { id: "IA", name: t("proj_ia") },
+    { id: "Mobile", name: t("proj_mobile") },
+  ];
+
+  const handleSelect = (categoryId: string) => {
+    setSelectedId(categoryId);
     setIsOpen(false);
     onSelect(categoryId);
   };
 
+  const selectedName = categories.find(c => c.id === selectedId)?.name || t("proj_all");
+
   return (
     <div className="dropdown">
       <button className="dropdown-button" onClick={() => setIsOpen(!isOpen)}>
-        {selectedCategory} <IoIosArrowDown className="dropdown-icon" />
+        {selectedName} <IoIosArrowDown className="dropdown-icon" />
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
           {categories.map(({ id, name }) => (
-            <li key={id} onClick={() => handleSelect(id, name)}>
+            <li key={id} onClick={() => handleSelect(id)}>
               {name}
             </li>
           ))}
@@ -278,6 +279,7 @@ const CategoryDropdown: React.FC<{ onSelect: (category: string) => void }> = ({ 
 };
 
 const Proyectos: React.FC = () => {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null);
   const [expandedMedia, setExpandedMedia] = useState<{ type: 'image' | 'video'; src: string } | null>(null);
@@ -317,10 +319,10 @@ const Proyectos: React.FC = () => {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
       >
-        Mis Proyectos
+        {t("proj_title")}
       </motion.h1>
 
-      <CategoryDropdown onSelect={setSelectedCategory} />
+      <CategoryDropdown onSelect={setSelectedCategory} t={t} />
 
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
@@ -329,7 +331,7 @@ const Proyectos: React.FC = () => {
         transition={{ delay: 0.2, duration: 0.8 }}
       >
         <Carousel key={selectedCategory}>
-          {proyectosData
+          {getProyectosData(t)
             .filter((proyecto: Proyecto) => {
               if (selectedCategory === "All") return true;
               const projectCats = proyecto.idCategoria.split(',').map(cat => cat.trim());
@@ -397,7 +399,7 @@ const Proyectos: React.FC = () => {
                     setExpandedMedia({ type: 'image', src });
                   }}
                 >
-                  <div className="media-zoom-overlay">Click para ampliar</div>
+                  <div className="media-zoom-overlay">{t("proj_zoom")}</div>
                   {selectedProject.images && selectedProject.images.length > 0 ? (
                     <img src={selectedProject.images[0]} alt={selectedProject.title} />
                   ) : (
@@ -414,13 +416,13 @@ const Proyectos: React.FC = () => {
                 >
                   {selectedProject.video ? (
                     <>
-                      <div className="media-zoom-overlay">Click para ampliar</div>
+                      <div className="media-zoom-overlay">{t("proj_zoom")}</div>
                       {isVideoLoading && (
                         <div className="video-loader">
                           <div className="progress-bar">
                             <div className="progress-fill"></div>
                           </div>
-                          <p>Cargando video...</p>
+                          <p>{t("proj_loading")}</p>
                         </div>
                       )}
                       <video
@@ -434,7 +436,7 @@ const Proyectos: React.FC = () => {
                       />
                     </>
                   ) : (
-                    <div className="video-placeholder">Video no disponible</div>
+                    <div className="video-placeholder">{t("proj_no_video")}</div>
                   )}
                 </div>
               </div>
@@ -442,22 +444,22 @@ const Proyectos: React.FC = () => {
               <div className="project-links">
                 {selectedProject.link && (
                   <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
-                    Ver Sitio
+                    {t("proj_visit_site")}
                   </a>
                 )}
                 {selectedProject.link2 && (
                   <a href={selectedProject.link2} target="_blank" rel="noopener noreferrer">
-                    Ver Panel
+                    {t("proj_visit_panel")}
                   </a>
                 )}
                 {selectedProject.repo && (
                   <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">
-                    <FaGithub /> Repo
+                    <FaGithub /> {t("proj_repo")}
                   </a>
                 )}
                 {selectedProject.repo2 && (
                   <a href={selectedProject.repo2} target="_blank" rel="noopener noreferrer">
-                    <FaGithub /> Backend
+                    <FaGithub /> {t("proj_backend")}
                   </a>
                 )}
               </div>

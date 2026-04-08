@@ -4,6 +4,7 @@ import "./StudiesCards.css";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Info } from "lucide-react";
+import { useLanguage } from '../idiomas';
 
 interface Study {
   title: string;
@@ -30,6 +31,7 @@ const cardVariants = {
 };
 
 const StudiesCards: React.FC = () => {
+  const { t } = useLanguage();
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
 
   useEffect(() => {
@@ -109,41 +111,41 @@ const StudiesCards: React.FC = () => {
 
   const studies: Study[] = [
     {
-      title: "Bachiller Técnico en Arte Gráfico",
-      years: "2012 - 2018",
+      title: t("study_art_title"),
+      years: t("study_art_years"),
       image: `${base}img/artImg.png`,
       pdf: `${base}pdfs/art.pdf`,
-      description: "Formación técnica integral enfocada en los fundamentos del diseño visual, técnicas de ilustración digital y procesos de pre-prensa. Especialización en la conceptualización creativa para medios impresos y digitales.",
+      description: t("study_art_desc"),
     },
     {
-      title: "Tecnólogo en Animación 3D",
-      years: "2019 - 2021",
+      title: t("study_anim_title"),
+      years: t("study_anim_years"),
       image: `${base}img/senaImg.png`,
       pdf: `${base}pdfs/An3d.pdf`,
-      description: "Capacitación avanzada en el pipeline completo de producción digital. Incluye modelado poligonal 3D, rigging avanzado, animación de personajes, iluminación cinemática y composición de efectos visuales (VFX) para producciones multimedia.",
+      description: t("study_anim_desc"),
     },
     {
-      title: "Ingeniería Multimedia",
-      years: "2021 - 2026",
+      title: t("study_eng_title"),
+      years: t("study_eng_years"),
       image: `${base}img/mulImg.png`,
       pdf: `${base}pdfs/IngMultimedia.pdf`,
-      badge: "graduación programada mayo 23",
-      description: "Programa académico transdisciplinar que fusiona la ingeniería de software con el diseño de experiencias interactivas. Especialización en desarrollo de productos digitales, interfaces inmersivas, y gestión de proyectos tecnológicos multimedia.",
+      badge: t("study_eng_badge"),
+      description: t("study_eng_desc"),
     },
     {
-      title: "Especialización en IA",
-      years: "Actualmente cursando",
+      title: t("study_ai_title"),
+      years: t("study_ai_years"),
       image: `${base}img/iaImg.png`,
       pdf: `${base}pdfs/ai.pdf`,
-      badge: "1/2 semestres aprobados",
-      description: "Estudios de posgrado de vanguardia orientados al análisis predictivo y automatización inteligente. Profundización en arquitecturas de redes neuronales, visión por computador, procesamiento de lenguaje natural y el despliegue de modelos de Machine Learning en entornos de producción.",
+      badge: t("study_ai_badge"),
+      description: t("study_ai_desc"),
     },
     {
-      title: "Cursos Adicionales",
-      years: "2013 - Actualidad",
+      title: t("study_extra_title"),
+      years: t("study_extra_years"),
       image: `${base}img/cuImg.png`,
       pdf: `${base}pdfs/extra.pdf`,
-      description: "Trayectoria de formación continua y autodidacta a través de certificaciones internacionales en desarrollo web, backend, infraestructura en la nube y diseño estratégico. Un compromiso constante con la actualización técnica en un ecosistema digital en constante cambio.",
+      description: t("study_extra_desc"),
     },
   ];
 
@@ -239,7 +241,7 @@ const StudiesCards: React.FC = () => {
                     </div>
                   ) : (
                     <div className="no-pdf">
-                      <p>No hay previsualización disponible.</p>
+                      <p>{t("study_no_pdf")}</p>
                     </div>
                   )}
                 </div>

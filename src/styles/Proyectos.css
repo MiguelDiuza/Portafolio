@@ -44,6 +44,13 @@
   /* Menos espacio al final */
 }
 
+@media (max-width: 768px) {
+  .app {
+    min-height: auto;
+    padding-bottom: 1rem;
+  }
+}
+
 .app::before {
   content: "";
   position: absolute;
@@ -398,10 +405,29 @@
   }
 }
 
+.mobile-exterior-close {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .modal-content .close-button:not(.mobile-exterior-close) {
+    display: none !important; /* Ocultamos el estorboso interno */
+  }
+
+  .mobile-exterior-close {
+    display: flex !important;
+    position: absolute !important;
+    top: 2% !important;
+    right: 3% !important;
+    transform: scale(0.9);
+  }
+
   .carousel {
     width: 320px;
     height: 450px;
+    transform: scale(0.7) !important;
+    margin-top: -60px;
+    margin-bottom: -40px;
   }
 
   .proyecto-card {
@@ -416,12 +442,12 @@
   }
 
   .proyecto-nav.left {
-    left: -1rem;
+    left: -5.5rem;
     background: rgba(0, 0, 0, 0.5);
   }
 
   .proyecto-nav.right {
-    right: -1rem;
+    right: -5.5rem;
     background: rgba(0, 0, 0, 0.5);
   }
 }
@@ -820,5 +846,16 @@
   .expanded-close {
     top: 10px !important;
     right: 10px !important;
+  }
+  .modal-description {
+    font-size: 0.75rem; /* Aún más pequeño */
+    line-height: 1.35;
+    margin-bottom: 0.3rem;
+  }
+  .modal-content {
+    padding: 1.2rem 1rem !important; /* Más espacio horizontal interno */
+    width: 95% !important;
+    max-height: 85vh !important;
+    margin-top: 6vh !important; /* Evita chocar con el botón superior */
   }
 }

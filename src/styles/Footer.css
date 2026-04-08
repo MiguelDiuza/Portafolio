@@ -53,3 +53,24 @@
     margin-top: 10px;
   }
   
+  @media (max-width: 768px) {
+    h3 {
+      font-size: 26px; /* Titulo de contacto un poco más pequeño */
+    }
+    
+    .name {
+      font-size: 20px; /* Nombre más pequeño para que quepa en una línea */
+    }
+    
+    .phone {
+      font-size: 24px; /* Número más pequeño */
+    }
+    
+    .email {
+      font-size: 18px;
+    }
+    
+    .location {
+      font-size: 16px;
+    }
+  }

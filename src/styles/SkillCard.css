@@ -180,3 +180,10 @@
   border-left: 4px solid #6a5acd;
   /* Detalle de color */
 }
+
+@media (max-width: 768px) {
+  .skill-card.large-card {
+    width: 90% !important;
+    min-width: 300px !important;
+  }
+}

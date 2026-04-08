@@ -323,3 +323,38 @@
     right: 10px;
   }
 }
+
+/* Forzar diseño de 2 tarjetas en Mobile para Educación */
+@media (max-width: 768px) {
+  .sobre-mi__studies {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+    padding: 0px !important;
+  }
+  
+  .study-card {
+    height: 180px !important;
+    min-width: 0 !important;
+  }
+  
+  .study-card h3 {
+    font-size: 0.8rem !important;
+    padding: 5px !important;
+    line-height: 1.1;
+  }
+  
+  .study-card p {
+    font-size: 0.7rem !important;
+  }
+  
+  .study-card-footer {
+    display: flex !important;
+    margin-top: auto;
+  }
+  
+  .study-card-footer img {
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
+  }
+}

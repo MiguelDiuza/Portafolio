@@ -231,8 +231,8 @@
   }
 
   .sobre-mi__studies {
-    grid-template-columns: 1fr;
-    /* Una columna en lugar de dos */
+    grid-template-columns: repeat(2, 1fr);
+    /* Dos columnas en lugar de una */
   }
 
   .titulo-estudios {
@@ -244,12 +244,25 @@
     padding: 1rem;
   }
 
+  .study-card {
+    padding: 0.5rem; 
+    min-width: 0; /* Add this so it can shrink */
+    word-break: break-word;
+  }
+
   .study-card h3 {
-    font-size: 1rem;
+    font-size: 0.70rem; /* Más pequeño para forzar que quepa */
+    margin-bottom: 0.2rem;
+    line-height: 1.1;
   }
 
   .study-card p {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
+  }
+
+  .study-card button {
+    font-size: 0.60rem;
+    margin-top: 0.2rem;
   }
 
   .sobre-mi__certifications h3 {

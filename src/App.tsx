@@ -137,8 +137,8 @@ const App: React.FC = () => {
       <header className={`header ${isSticky ? "sticky" : ""}`}>
         <div className="header-content">
           <div className="header-left">
+            <img src={logoIcon} className="logo" alt="Logo" />
             <nav>
-              <img src={logoIcon} className="logo" alt="Logo" />
               {navItems.map((item) => (
                 <a
                   key={item.id}

@@ -175,9 +175,41 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({ children }) => {
   const count = React.Children.count(children);
   const [active, setActive] = useState<number>(Math.floor(count / 2));
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe && active < count - 1) {
+      setActive((i) => i + 1);
+    }
+    if (isRightSwipe && active > 0) {
+      setActive((i) => i - 1);
+    }
+  };
 
   return (
-    <div className="carousel">
+    <div 
+      className="carousel"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {active > 0 && (
         <button className="proyecto-nav left" onClick={() => setActive((i) => i - 1)}>
           <TiChevronLeftOutline />
@@ -319,6 +351,13 @@ const Proyectos: React.FC = () => {
       <AnimatePresence>
         {selectedProject && (
           <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
+            <button
+                className="close-button mobile-exterior-close"
+                onClick={(e) => { e.stopPropagation(); setSelectedProject(null); }}
+                aria-label="Cerrar modal exterior"
+            >
+              ✖
+            </button>
             <motion.div
               className="modal-content glass-panel"
               onClick={(e) => e.stopPropagation()}
@@ -338,7 +377,7 @@ const Proyectos: React.FC = () => {
                 {selectedProject.title}
               </h2>
 
-              <p className="modal-description" style={{ fontSize: '0.95rem' }}>
+              <p className="modal-description">
                 {selectedProject.description}
               </p>
 

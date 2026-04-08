@@ -84,7 +84,7 @@
 .logo-container {
   display: flex;
   flex-wrap: nowrap;
-  width: 300%; /* Aseguramos que haya tres grupos de logos en total */
+  width: max-content; /* Aseguramos que se expanda según el contenido */
 }
 
 /* Solución para garantizar que todos los logos se repitan correctamente */
@@ -94,7 +94,7 @@
   align-items: center;
   padding-left: 16px;
   flex-shrink: 0;
-  width: 33.33%; /* Aseguramos que cada grupo de logos ocupe un tercio del contenedor */
+  width: max-content; /* Depende del contenido para no aplastar logos */
 }
 
 @media (max-width: 768px) {

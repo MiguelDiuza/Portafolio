@@ -56,18 +56,75 @@
 }
 
 
-/* Imagen centrada dentro de la tarjeta */
-.study-card-footer img {
+/* Contenedor de la media/imagen/PDF */
+.study-card-media-container {
+  position: relative;
   width: 100%;
-  /*  Ocupa todo el ancho del contenedor */
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+/* Imagen por defecto */
+.study-card-image.default-image {
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: 100px;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Previsualización del PDF en Hover (imagen JPG) */
+.pdf-thumbnail-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: scale(0.9);
+  overflow: hidden;
+}
+
+.pdf-thumbnail-image.hover-image {
+  width: auto;
+  max-width: 90%;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   display: block;
 }
 
 /* Efecto hover */
+.study-card {
+  cursor: pointer;
+}
+
 .study-card:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 20px 30px rgba(255, 255, 255, 0.4);
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 20px 30px rgba(0, 210, 255, 0.4);
+}
+
+.study-card:hover .default-image {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.study-card:hover .pdf-thumbnail-wrapper {
+  opacity: 1;
+  transform: scale(1.02);
 }
 
 /* Efectos de luz dinámica */
@@ -162,7 +219,7 @@
   width: 100%;
   height: 100%;
   min-height: 450px;
-  background: rgba(0, 0, 0, 0.3);
+  background: #ffffff;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
@@ -214,18 +271,16 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background: #ffffff;
 }
 
-.pdf-viewer-standard {
+.pdf-viewer-image {
   width: 100%;
   height: 100%;
-  border: none;
-  filter: brightness(0.9) contrast(1.1);
-  transition: filter 0.3s ease;
-}
-
-.pdf-viewer-standard:hover {
-  filter: brightness(1) contrast(1);
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  background-color: #ffffff;
 }
 
 .no-pdf {
@@ -285,8 +340,9 @@
 .pdf-scaled {
   width: 100%;
   height: 100%;
-  transform: scale(1.1);
+  transform: scale(1.18);
   transform-origin: center center;
+  background-color: #ffffff;
 }
 
 /* Responsividad */
@@ -350,11 +406,18 @@
   .study-card-footer {
     display: flex !important;
     margin-top: auto;
+    width: 100%;
   }
   
-  .study-card-footer img {
-    height: auto;
-    max-height: 80px;
-    object-fit: contain;
+  .study-card-media-container {
+    height: 80px !important;
+  }
+  
+  .study-card-image.default-image {
+    max-height: 60px !important;
+  }
+  
+  .pdf-thumbnail-image.hover-image {
+    max-height: 70px !important;
   }
 }

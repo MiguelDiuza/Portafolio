@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import "./StudiesCards.css";
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Info } from "lucide-react";
 import { useLanguage } from '../idiomas';
+
 
 interface Study {
   title: string;
@@ -128,8 +128,7 @@ const StudiesCards: React.FC = () => {
       title: t("study_eng_title"),
       years: t("study_eng_years"),
       image: `${base}img/mulImg.png`,
-      pdf: `${base}pdfs/IngMultimedia.pdf`,
-      badge: t("study_eng_badge"),
+      pdf: `${base}pdfs/pregrado.pdf`,
       description: t("study_eng_desc"),
     },
     {
@@ -149,6 +148,11 @@ const StudiesCards: React.FC = () => {
     },
   ];
 
+  const getJpgPath = (pdfPath?: string) => {
+    if (!pdfPath) return "";
+    return pdfPath.replace(/\.pdf$/, "_page-0001.jpg");
+  };
+
   return (
     <motion.div
       className="sobre-mi__studies"
@@ -167,7 +171,18 @@ const StudiesCards: React.FC = () => {
           <h3>{study.title}</h3>
           <p>{study.years}</p>
           <div className="study-card-footer">
-            <img src={study.image} alt={`Imagen de ${study.title}`} className="study-card-image" />
+            <div className="study-card-media-container">
+              <img src={study.image} alt={`Imagen de ${study.title}`} className="study-card-image default-image" />
+              {study.pdf && (
+                <div className="pdf-thumbnail-wrapper">
+                  <img
+                    src={getJpgPath(study.pdf)}
+                    alt={`Previsualización de ${study.title}`}
+                    className="pdf-thumbnail-image hover-image"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </motion.div>
       ))}
@@ -233,11 +248,11 @@ const StudiesCards: React.FC = () => {
                   )}
                   {selectedStudy.pdf ? (
                     <div className="pdf-container">
-                      <iframe
-                        src={`${selectedStudy.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                        title={`PDF de ${selectedStudy.title}`}
-                        className={`pdf-viewer-standard ${selectedStudy.title.includes("Ingeniería") ? 'pdf-scaled' : ''}`}
-                      ></iframe>
+                      <img
+                        src={getJpgPath(selectedStudy.pdf)}
+                        alt={`Diploma de ${selectedStudy.title}`}
+                        className="pdf-viewer-image"
+                      />
                     </div>
                   ) : (
                     <div className="no-pdf">

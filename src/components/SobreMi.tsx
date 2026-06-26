@@ -1,5 +1,6 @@
 import '../styles/SobreMi.css';
 import StudiesCards from './subComponents/StudiesCards';
+import { BackgroundPaths } from './ui/FloatingPaths';
 import { motion, useInView } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from './idiomas';
@@ -70,7 +71,7 @@ const SobreMi = () => {
                 </div>
             </motion.div>
 
-            {/* Sección derecha */}
+            {/* Sección derecha (Educación) */}
             <motion.div
                 className="sobre-mi__right"
                 initial={{ opacity: 0, x: 50 }}
@@ -78,6 +79,9 @@ const SobreMi = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
             >
+                {/* Fondo de trazos animados en color de marca */}
+                <BackgroundPaths />
+
                 <h2 className="titulo-estudios">{t("edu_title")}</h2>
                 <StudiesCards />
             </motion.div>

@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Claude Code local config
+.claude/
+
+# graphify internal (machine-specific paths)
+graphify-out/.graphify_python
+graphify-out/.graphify_root
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

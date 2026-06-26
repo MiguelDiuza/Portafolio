@@ -1,159 +1,280 @@
-/* Variables globales */
+/* ============================================================
+   SISTEMA DE DISEÑO — Tokens en OKLCH
+   OKLCH = luminosidad/croma perceptualmente uniformes:
+   el color se ve casi idéntico entre pantallas distintas.
+   Toda la identidad de marca vive aquí. Nada de hex sueltos.
+   ============================================================ */
 :root {
-  --primary-color: #646cff;
-  --primary-hover: #535bf2;
-  --text-color-light: rgba(255, 255, 255, 0.87);
-  --text-color-dark: #213547;
-  --bg-dark: #242424;
-  --bg-light: #ffffff;
+  /* --- Marca (violeta controlado, croma moderado para no "saltar") --- */
+  --brand: oklch(0.63 0.16 285);
+  --brand-strong: oklch(0.53 0.17 282);
+  --brand-soft: oklch(0.74 0.11 290);
+  --brand-glow: oklch(0.63 0.16 285 / 0.45);
+  --accent: oklch(0.70 0.12 248); /* azul de apoyo, contenido */
+
+  /* --- Fondos (negro con leve tinte violeta para cohesión) --- */
+  --bg-0: oklch(0.12 0.012 285);
+  --bg-1: oklch(0.16 0.018 285);
+  --bg-2: oklch(0.21 0.022 285);
+
+  /* --- Tinta / texto --- */
+  --ink: oklch(0.97 0.004 285);
+  --ink-dim: oklch(0.80 0.01 285);
+  --ink-faint: oklch(0.64 0.012 285);
+
+  /* --- Estados --- */
+  --danger: oklch(0.64 0.20 25);
+
+  /* --- Glassmorphism (un solo sistema, 3 niveles de elevación) --- */
+  --glass-bg: oklch(0.18 0.02 285 / 0.55);
+  --glass-bg-strong: oklch(0.16 0.02 285 / 0.72);
+  --glass-border: oklch(0.98 0 0 / 0.10);
+  --glass-hi: oklch(1 0 0 / 0.14); /* highlight superior */
+  --glass-lo: oklch(0 0 0 / 0.35); /* sombra inferior */
+  --glass-shadow: 0 16px 48px -16px oklch(0 0 0 / 0.65);
+  --glass-blur: 18px;
+
+  /* --- Gradiente de marca reutilizable --- */
+  --grad-brand: linear-gradient(135deg, var(--brand) 0%, var(--brand-strong) 100%);
+  --grad-title: linear-gradient(92deg, var(--ink) 0%, var(--brand-soft) 100%);
+
+  /* --- Curvas de animación --- */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   font-family: 'Montserrat', sans-serif;
   line-height: 1.4;
   font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Glass Effect Variables */
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  --glass-blur: 12px;
+  color-scheme: dark;
 }
 
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-0);
+  color: var(--ink);
+}
+
+a {
+  font-weight: 500;
+  color: var(--brand-soft);
+  text-decoration: none;
+  transition: color 0.25s var(--ease-out-soft);
+}
+
+a:hover {
+  color: var(--brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   GLASSMORPHISM PROFESIONAL
+   Borde con gradiente (highlight arriba-izq → sombra abajo-der),
+   blur + saturate calibrados, profundidad real con sombras.
+   ============================================================ */
 .glass-panel {
-  background: rgba(10, 10, 10, 0.65);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  position: relative;
+  /* Cristal translúcido tipo "frosted": se ve el fondo detrás con
+     distorsión (blur + saturate) pero sin ser completamente transparente. */
+  background: linear-gradient(
+    135deg,
+    oklch(0.45 0.04 285 / 0.13) 0%,
+    oklch(0.26 0.025 285 / 0.20) 100%
+  );
+  backdrop-filter: blur(16px) saturate(1.8) brightness(1.05);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8) brightness(1.05);
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: none !important;
+  border: 1px solid oklch(1 0 0 / 0.12);
+  /* Profundidad real + insets brillantes (liquid glass) */
+  box-shadow:
+    0 12px 40px -8px oklch(0 0 0 / 0.55),
+    inset 1.5px 1.5px 1px oklch(1 0 0 / 0.22),
+    inset -1px -1px 2px oklch(0 0 0 / 0.35);
+  overflow: hidden;
+  transition:
+    transform 0.45s var(--ease-out-soft),
+    box-shadow 0.45s var(--ease-out-soft),
+    border-color 0.45s var(--ease-out-soft);
+}
+
+/* Reflejo superior tipo barniz de cristal */
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, oklch(1 0 0 / 0.08), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* El contenido pinta por encima del reflejo ::before */
+.glass-panel > * {
   position: relative;
-  overflow: hidden;
+  z-index: 1;
 }
 
-.glass-panel::before,
-.glass-panel::after {
-  display: none !important;
+.glass-panel:hover {
+  border-color: oklch(1 0 0 / 0.2);
+  box-shadow:
+    0 24px 60px -12px oklch(0 0 0 / 0.65),
+    0 0 26px -6px var(--brand-glow),
+    inset 1.5px 1.5px 1px oklch(1 0 0 / 0.3),
+    inset -1px -1px 2px oklch(0 0 0 / 0.35);
 }
 
-/* --- MODALES GLOBALES --- */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
+/* Variante elevada (modales) */
+.glass-strong {
+  background: linear-gradient(
+    135deg,
+    oklch(0.22 0.025 285 / 0.7) 0%,
+    oklch(0.13 0.015 285 / 0.78) 100%
+  );
+  backdrop-filter: blur(30px) saturate(1.7);
+  -webkit-backdrop-filter: blur(30px) saturate(1.7);
 }
 
-.modal-content {
+/* ============================================================
+   TÍTULOS DE SECCIÓN
+   ============================================================ */
+.section-title {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  line-height: 1.05;
+  /* Gradiente profesional blanco → violeta (sin resplandor) */
+  background: linear-gradient(92deg, #ffffff 0%, var(--brand-soft) 48%, var(--brand) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 8px oklch(0 0 0 / 0.5));
   position: relative;
-  width: 100%;
-  max-width: 1000px;
-  /* Ancho suficiente para imagen + video side by side */
-  max-height: 95vh;
-  /* Un poco más alto */
-  padding: 1.5rem 2.5rem;
-  /* Padding reducido */
-  overflow: hidden;
-  /* Sin scroll interno */
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  /* Gap reducido */
+  z-index: 10;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+/* ============================================================
+   TIPOGRAFÍA HERO
+   ============================================================ */
+h1 {
+  font-size: clamp(2.8rem, 8vw, 8rem);
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+  /* Blanco-lavanda → violeta, con profundidad */
+  background: linear-gradient(94deg, #dfdaff 0%, var(--brand) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 10px oklch(0 0 0 / 0.5));
 }
 
-.modal-body {
-  display: flex;
-  gap: 2rem;
-  width: 100%;
-}
-
-.modal-media-section {
-  flex: 1;
-  border-radius: 15px;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.3);
-  aspect-ratio: 16/9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-media-section img,
-.modal-media-section video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.modal-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.modal-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.project-links {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-}
-
+/* ============================================================
+   BOTONES GLASS (pills reutilizables)
+   ============================================================ */
 .glass-button {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white !important;
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  color: var(--ink) !important;
   padding: 0.8rem 2rem;
-  border-radius: 50px;
+  border-radius: 999px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  display: flex;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-out-soft);
+  display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
 .glass-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--glass-bg-strong);
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(105, 102, 255, 0.4);
-  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 14px 30px -10px oklch(0 0 0 / 0.5), 0 0 22px var(--brand-glow);
+  border-color: oklch(0.98 0 0 / 0.25);
 }
 
 .glass-button.primary {
-  background: linear-gradient(45deg, #6966FF, #6200CB);
+  background: var(--grad-brand);
   border: none;
+  color: var(--ink) !important;
 }
 
 .glass-button.primary:hover {
-  box-shadow: 0 10px 25px rgba(98, 0, 203, 0.5);
+  box-shadow: 0 16px 34px -10px var(--brand-glow);
+}
+
+/* ============================================================
+   MODAL — primitivas globales
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: oklch(0.08 0.01 285 / 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.35s var(--ease-out-soft);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-close {
@@ -163,71 +284,20 @@
   background: transparent;
   border: none;
   font-size: 1.5rem;
-  color: white;
+  color: var(--ink);
   cursor: pointer;
   z-index: 10;
   transition: transform 0.2s, color 0.2s;
 }
 
 .modal-close:hover {
-  transform: scale(1.2);
-  color: #ff4d4d;
+  transform: scale(1.2) rotate(90deg);
+  color: var(--danger);
 }
 
-/* --- TÍTULOS DE SECCIÓN GLOBALES --- */
-.section-title {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  font-weight: 800;
-  color: #ffffff;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 2rem;
-  letter-spacing: 1px;
-  background: linear-gradient(90deg, #ffffff, #8a3ad5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  position: relative;
-  /* Asegura que el z-index funcione */
-  z-index: 10;
-  /* Lo pone por encima de sombras */
-}
-
-/* --- TARJETAS DE CRISTAL OSCURO (Dark Glass) --- */
-.large-card {
-  width: 220px;
-  min-height: 480px;
-  padding: 1.5rem;
-  background: rgba(10, 10, 10, 0.65);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: none !important;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.large-card:hover {
-  transform: translateY(-5px);
-  background: rgba(10, 10, 10, 0.75);
-  box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.8),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.5),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.5);
-}
-
-.large-card::before,
-.large-card::after {
-  display: none !important;
-}
-
-/* Filtro para iconos blancos */
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
 .icon-white {
   filter: brightness(0) invert(1);
   opacity: 0.9;
@@ -240,39 +310,6 @@
   transition: opacity 0.3s ease;
 }
 
-
-/* Estilos generales */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-width: 100%;
-  min-height: 100vh;
-  background-color: black;
-  color: var(--text-color-light);
-}
-
-
-/* Enlaces */
-a {
-  font-weight: 500;
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--primary-hover);
-}
-
-/* Botones generales */
 .general-button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -280,92 +317,17 @@ a:hover {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--bg-1);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 .general-button:hover {
-  border-color: var(--primary-color);
+  border-color: var(--brand);
 }
 
 .general-button:focus,
 .general-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* Tipografía */
-h1 {
-  font-size: 10.2em;
-  line-height: 1.1;
-  font-weight: 800;
-  /* Extra bold */
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 4px;
-  letter-spacing: 1px;
-  background: linear-gradient(90deg, #dfdaff, #8a3ad5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-html,
-body {
-  overflow-x: hidden;
-  max-width: 100%;
-  position: relative;
-}
-
-
-/* Modo claro */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--text-color-dark);
-    background-color: var(--bg-light);
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  .general-button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* --- RESPONSIVIDAD MODAL --- */
-@media (max-width: 768px) {
-  .modal-content {
-    padding: 1.5rem;
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .modal-body {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .modal-media-section {
-    width: 100%;
-    aspect-ratio: 16/9;
-  }
-
-  .project-links {
-    flex-direction: column;
-    width: 100%;
-    gap: 1rem;
-  }
-
-  .glass-button {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .modal-header-info .section-title {
-    font-size: 1.8rem !important;
-  }
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }

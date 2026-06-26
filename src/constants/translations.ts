@@ -40,9 +40,11 @@ export const translations = {
     study_extra_years: "2013 - Present",
     study_extra_desc: "Continuous and self-taught training path through international certifications in web development, backend, cloud infrastructure, and strategic design. A constant commitment to technical updating in an ever-changing digital ecosystem.",
     study_no_pdf: "No preview available.",
+    study_view_full: "View full",
 
     // Experience
     exp_title: "My Skills",
+    exp_tech_hint: "Tap a technology to see my experience with it ↗",
     exp_diff_title: "Beyond Conventional Engineering",
     exp_diff_p1: "My professional profile transcends traditional engineering. As a Multimedia Engineer, I combine solid technical and algorithmic training with the multimodal versatility demanded by today's industry. This convergence allows me to lead projects across various technological frontiers: from high-impact user experience (UI/UX) design to the development of immersive technologies (Augmented Reality and Video Games).",
     exp_diff_p2: "Furthermore, my specialization in Artificial Intelligence enhances my ability to design, train, and deploy advanced models that solve complex problems, integrating them seamlessly into scalable and multidisciplinary IT ecosystems. My approach seeks not only functionality but also the creation of value through harmony between technique and user experience.",
@@ -83,12 +85,39 @@ export const translations = {
     p5_sub: "Web video game developed in Unity",
     p5_desc: "3D video game developed in Unity and deployed on the web using WebGL. Includes character and environment modeling created in Blender, game mechanics programmed in C#, physics system, dynamic lighting, and particle effects. The gaming experience is integrated into a custom webpage with HTML, JavaScript, and CSS for immersive presentation directly from the browser.",
 
+    // Project modal — extended details, stack roles & UI
+    proj_about_title: "About the project",
+    proj_stack_title: "Stack & decisions",
+    proj_see_more: "See more",
+    proj_see_less: "See less",
+
+    p1_detail: "I built this as a native Android app to learn the full mobile lifecycle: persistent local storage, role-based permissions (admin / moderator / member) and notifications. The biggest challenge was keeping every member's task list in sync, which I solved with a real-time data layer and an authentication flow that scopes each household to its own group.",
+    p2_detail: "A client-facing corporate site for a European machinery rental company. The priority was a fast, SEO-friendly experience on modest hosting, so I kept the stack deliberately lightweight (vanilla HTML/CSS/JS) and focused on a dynamic catalog, an online quoting flow and a clean information architecture that mirrors the company's brand.",
+    p3_detail: "My most technical project: a computer-vision web app for medical imaging. I trained a YOLOv8 detection model in PyTorch on annotated X-ray, CT and MRI data, then served it behind a React frontend that lets clinicians upload an image and receive highlighted pathological regions. I chose React for the responsive UI and PyTorch + YOLO for the accuracy-to-speed balance the use case demanded.",
+    p4_detail: "A two-part product: a public marketing site plus a private ERP panel for the studio to manage clients, projects and billing. I separated the front-of-house landing from the back-office tooling, secured the panel with authentication and used PostgreSQL for relational integrity across clients, projects and invoices.",
+    p5_detail: "A 3D browser game shipped with Unity's WebGL target. Characters and environments were modeled in Blender, gameplay and physics scripted in C++/C#, and the build embedded in a custom HTML/JS/CSS page so it runs straight from the browser with no install. The goal was a fully immersive experience delivered through a normal web link.",
+
+    role_html: "Semantic structure & markup",
+    role_js: "Interactivity & app logic",
+    role_css: "Styling, layout & responsiveness",
+    role_react: "Component-based UI",
+    role_python: "Model training & backend logic",
+    role_yolo: "Real-time object detection model",
+    role_pytorch: "Deep-learning training framework",
+    role_postgresql: "Relational database",
+    role_unity: "Game engine & WebGL build",
+    role_blender: "3D modeling & assets",
+    role_cpp: "Gameplay & performance logic",
+
     // Video
     video_title: "PORTFOLIO VIDEO",
     video_subtitle: "Press play to my creativity",
 
     // Footer
-    footer_contact: "Contact Me:",
+    footer_contact: "Let's talk",
+    footer_cta: "Ready to build something together?",
+    footer_crafted: "Crafted with",
+    footer_by: "by",
     footer_location: "Cali - Colombia"
   },
   es: {
@@ -132,9 +161,11 @@ export const translations = {
     study_extra_years: "2013 - Actualidad",
     study_extra_desc: "Trayectoria de formación continua y autodidacta a través de certificaciones internacionales en desarrollo web, backend, infraestructura en la nube y diseño estratégico. Un compromiso constante con la actualización técnica en un ecosistema digital en constante cambio.",
     study_no_pdf: "No hay previsualización disponible.",
+    study_view_full: "Ver completo",
 
     // Experience
     exp_title: "Mis Habilidades",
+    exp_tech_hint: "Toca una tecnología para ver mi experiencia con ella ↗",
     exp_diff_title: "Más allá de la Ingeniería Convencional",
     exp_diff_p1: "Mi perfil profesional trasciende la ingeniería tradicional. Como Ingeniero Multimedia, combino una sólida formación técnica y algorítmica con la versatilidad multimodal que exige la industria actual. Esta convergencia me permite liderar proyectos en diversas fronteras tecnológicas: desde el diseño de experiencias de usuario de alto impacto (UI/UX) y el desarrollo de tecnologías inmersivas (Realidad Aumentada y Videojuegos).",
     exp_diff_p2: "Además, mi especialización en Inteligencia Artificial potencia mi capacidad para diseñar, entrenar e implementar modelos avanzados que resuelven problemas complejos, integrándolos de manera armoniosa en ecosistemas informáticos escalables y multidisciplinarios. Mi enfoque no solo busca la funcionalidad, sino la creación de valor a través de la armonía entre la técnica y la experiencia del usuario.",
@@ -175,12 +206,39 @@ export const translations = {
     p5_sub: "Videojuego en web desarrollado en Unity",
     p5_desc: "Videojuego 3D desarrollado en Unity y desplegado en la web mediante WebGL. Incluye modelado de personajes y escenarios creados en Blender, mecánicas de juego programadas en C#, sistema de físicas, iluminación dinámica y efectos de partículas. La experiencia de juego se integra en una página web personalizada con HTML, JavaScript y CSS para una presentación inmersiva directamente desde el navegador.",
 
+    // Modal de proyecto — detalles extendidos, roles del stack y UI
+    proj_about_title: "Sobre el proyecto",
+    proj_stack_title: "Stack y decisiones",
+    proj_see_more: "Ver más",
+    proj_see_less: "Ver menos",
+
+    p1_detail: "La construí como app nativa de Android para dominar el ciclo completo en móvil: almacenamiento local persistente, permisos por rol (administrador / moderador / miembro) y notificaciones. El mayor reto fue mantener sincronizada la lista de tareas de cada integrante, que resolví con una capa de datos en tiempo real y un flujo de autenticación que aísla cada hogar en su propio grupo.",
+    p2_detail: "Sitio corporativo para una empresa europea de alquiler de maquinaria. La prioridad era una experiencia rápida y orientada a SEO sobre hosting modesto, así que mantuve el stack deliberadamente ligero (HTML/CSS/JS puro) y me enfoqué en un catálogo dinámico, un flujo de cotización en línea y una arquitectura de información limpia y fiel a la marca.",
+    p3_detail: "Mi proyecto más técnico: una app web de visión por computador para imagenología médica. Entrené un modelo de detección YOLOv8 en PyTorch sobre datos anotados de radiografías, tomografías y resonancias, y lo serví detrás de un frontend en React que permite subir una imagen y recibir las regiones patológicas resaltadas. Elegí React por la UI responsive y PyTorch + YOLO por el balance precisión-velocidad que exigía el caso de uso.",
+    p4_detail: "Un producto en dos partes: un sitio público de marketing más un panel ERP privado para que el estudio gestione clientes, proyectos y facturación. Separé la landing de cara al público de las herramientas internas, protegí el panel con autenticación y usé PostgreSQL por la integridad relacional entre clientes, proyectos y facturas.",
+    p5_detail: "Un videojuego 3D para navegador con el target WebGL de Unity. Modelé personajes y escenarios en Blender, programé la jugabilidad y la física en C++/C#, e incrusté el build en una página HTML/JS/CSS personalizada para que corra directo desde el navegador sin instalar nada. La meta era una experiencia totalmente inmersiva entregada por un simple enlace web.",
+
+    role_html: "Estructura semántica y marcado",
+    role_js: "Interactividad y lógica de app",
+    role_css: "Estilos, maquetación y responsive",
+    role_react: "Interfaz por componentes",
+    role_python: "Entrenamiento del modelo y backend",
+    role_yolo: "Modelo de detección en tiempo real",
+    role_pytorch: "Framework de deep learning",
+    role_postgresql: "Base de datos relacional",
+    role_unity: "Motor de juego y build WebGL",
+    role_blender: "Modelado 3D y assets",
+    role_cpp: "Lógica de juego y rendimiento",
+
     // Video
     video_title: "VIDEO PORTAFOLIO",
     video_subtitle: "Dale play a mi creatividad",
 
     // Footer
-    footer_contact: "Contactame:",
+    footer_contact: "Hablemos",
+    footer_cta: "¿Construimos algo juntos?",
+    footer_crafted: "Hecho con",
+    footer_by: "por",
     footer_location: "Cali - Colombia"
   }
 };

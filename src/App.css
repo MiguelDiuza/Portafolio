@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to bottom, rgb(12, 1, 29) 30%, rgba(0, 0, 0, 0));
+  background: linear-gradient(to bottom, oklch(0.13 0.03 285) 30%, transparent);
   display: flex;
   justify-content: center;
   z-index: 3000;
@@ -108,7 +108,7 @@
   top: 60px;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, rgba(12, 1, 29, 0.98) 0%, rgba(30, 10, 60, 0.98) 100%);
+  background: linear-gradient(135deg, oklch(0.14 0.03 285 / 0.98) 0%, oklch(0.20 0.06 285 / 0.98) 100%);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-direction: column;
@@ -144,39 +144,33 @@
 }
 
 /* --- SKILLS FLOTANTES --- */
-.floating-skill-card.large-card {
-  /* Hacemos la tarjeta más angosta como pediste */
-  width: 220px !important;
-  min-width: 220px !important;
-  min-height: 480px;
-  /* Más altas para mejor distribución */
-  padding: 1.5rem;
-  justify-content: flex-start;
-  gap: 10px;
-  /* Espacio reducido */
-}
-
 .floating-skills-container {
   position: fixed;
-  top: 20px;
+  top: 16px;
   right: 0;
   height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
   padding-right: 2rem;
-  gap: 15px;
+  gap: 14px;
   z-index: 3100;
   pointer-events: none;
-  transition: all 0.3s ease;
+  /* IMPORTANTE: sin transform en este contenedor — un transform aquí
+     rompe la proyección de layout de framer y hace que las tarjetas
+     "salten" en lugar de viajar al aterrizar. */
+  transition: top 0.4s ease, gap 0.4s ease, padding-right 0.4s ease;
 }
 
 .floating-skills-container>* {
   pointer-events: auto;
 }
 
+/* Al hacer scroll, el grupo sube un poco y se compacta (como en HEAD) */
 .floating-skills-container.sticky-mode {
   top: 10px;
+  gap: 10px;
+  padding-right: 1.5rem;
 }
 
 /* --- CONTENEDORES PRINCIPALES --- */
@@ -238,17 +232,17 @@
 }
 
 .intro-text h1 {
-  font-size: 5.8vw;
+  font-size: clamp(2.8rem, 5.8vw, 6.5rem);
   margin: 0;
 }
 
 .intro-text h2 {
-  font-size: 3vw;
+  font-size: clamp(1.3rem, 3vw, 3rem);
   margin: 0;
 }
 
 .intro-text p {
-  font-size: 1.2vw;
+  font-size: clamp(0.9rem, 1.2vw, 1.25rem);
   margin-top: 10px;
 }
 
@@ -266,24 +260,96 @@
   object-fit: contain;
 }
 
+/* --- ROBOT 3D (Spline) en el hero --- */
+.hero-robot {
+  position: absolute;
+  right: -3%;
+  bottom: 0;
+  /* Contenedor alto: la parte inferior (piernas) queda fuera de vista
+     para que se vea el robot "hasta el pecho". */
+  width: 52vw;
+  max-width: 780px;
+  height: 150vh;
+  z-index: 1;
+  /* translateY baja el robot (recorta piernas); rotateY lo gira un poco de lado */
+  transform: perspective(1400px) translateY(20%) rotateY(-16deg);
+  transform-origin: bottom center;
+  pointer-events: auto;
+}
+
+.hero-robot__canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.spline-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spline-loader {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid oklch(1 0 0 / 0.15);
+  border-top-color: var(--brand);
+  animation: spline-spin 0.9s linear infinite;
+}
+
+@keyframes spline-spin {
+  to { transform: rotate(360deg); }
+}
+
 /* --- SECCIONES DE CONTENIDO --- */
 .content1 {
   padding: 10px 50px;
-  background-image:
-    linear-gradient(to top, rgba(8, 9, 13, 0.8) 0%, transparent 20%),
-    linear-gradient(to bottom, rgba(8, 9, 13, 1) 0%, transparent 10%),
-    url('/img/bg2.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  /* Sin imagen de fondo ni luz inferior-izquierda: gradiente superior limpio */
+  background:
+    radial-gradient(120% 80% at 80% 0%, oklch(0.20 0.04 285 / 0.55) 0%, transparent 55%),
+    var(--bg-0);
   min-height: 100vh;
+  position: relative;
 }
 
 .contentE {
   position: relative;
   min-height: 100vh;
   width: 100%;
+  /* Sin overflow:hidden: recortaba las SkillCards mientras viajan
+     desde el header hacia la grilla (aterrizaje). El fondo de canvas
+     se recorta en su propio contenedor (.exp-canvas-bg). */
+}
+
+/* Fondo de matriz de puntos animada (three.js) de la sección de aterrizaje */
+.exp-canvas-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--bg-0);
+  pointer-events: none;
   overflow: hidden;
+}
+
+/* Máscara radial: enfoca el centro y funde los bordes hacia el fondo */
+.exp-canvas-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, transparent 0%, oklch(0.12 0.012 285 / 0.85) 75%, var(--bg-0) 100%),
+    linear-gradient(to bottom, var(--bg-0) 0%, transparent 22%, transparent 78%, var(--bg-0) 100%);
+}
+
+/* Gradiente inferior que trae el componente CanvasRevealEffect */
+.canvas-reveal-gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--bg-0), transparent);
 }
 
 .bg-video {
@@ -301,6 +367,42 @@
   z-index: 1;
   width: 100%;
   height: 100%;
+}
+
+.exp-hint {
+  margin: -0.5rem 0 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--brand-soft);
+  text-align: center;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  background: oklch(0.63 0.16 285 / 0.12);
+  border: 1px solid oklch(0.63 0.16 285 / 0.28);
+  animation: exp-hint-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes exp-hint-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.63 0.16 285 / 0.35); }
+  50% { box-shadow: 0 0 0 8px oklch(0.63 0.16 285 / 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-hint { animation: none; }
+}
+
+.exp-cards-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 1rem;
 }
 
 /* --- BOTONES E ICONOS --- */
@@ -415,7 +517,7 @@
   font-size: 2rem;
   margin-bottom: 2rem;
   color: #fff;
-  background: linear-gradient(90deg, #fff, #6966FF);
+  background: linear-gradient(90deg, var(--ink), var(--brand));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

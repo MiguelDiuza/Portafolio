@@ -1,26 +1,60 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import logoIcon from "./assets/icon.svg";
 import "./App.css";
 import TechBanner from "./components/TechBanner";
 import SobreMi from "./components/SobreMi";
 import SkillCard from "./components/SkillCard";
 import Proyectos from "./components/Proyectos";
-import Footer from "./components/Footer";
+import Footer from "./components/CinematicFooter";
 import Video from "./components/Video";
 import ExperienceSection from "./components/ExperienceSection";
 import { LayoutGroup } from "framer-motion";
 import { useLanguage } from "./components/idiomas";
-
-const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+import { useFloatingSkills } from "./hooks/useFloatingSkills";
+// import { SplineScene } from "./components/ui/SplineScene"; // Robot 3D (en pausa)
+import { asset } from "./lib/utils";
 
 import { skillsData } from "./constants/skillsData.ts";
 
+const HEADER_OFFSET = 85;
+
+/**
+ * Scroll suave robusto: en cada frame recalcula el destino real del elemento,
+ * de modo que los cambios de layout durante el trayecto (tarjetas aterrizando,
+ * canvas/imágenes cargando) no cortan la animación. Devuelve un cancelador.
+ */
+function smoothScrollTo(getTarget: () => number, duration = 480): () => void {
+  const startY = window.scrollY;
+  const startTime = performance.now();
+  let raf = 0;
+  let cancelled = false;
+  const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  const tick = (now: number) => {
+    if (cancelled) return;
+    const t = Math.min(1, (now - startTime) / duration);
+    const target = getTarget(); // recalcula cada frame: tolera cambios de layout
+    window.scrollTo(0, startY + (target - startY) * easeOutCubic(t));
+    if (t < 1) {
+      raf = requestAnimationFrame(tick);
+    } else {
+      window.scrollTo(0, getTarget()); // ajuste final exacto
+    }
+  };
+  raf = requestAnimationFrame(tick);
+
+  return () => {
+    cancelled = true;
+    cancelAnimationFrame(raf);
+  };
+}
+
 const App: React.FC = () => {
   const { t, language, toggleLanguage } = useLanguage();
-  const [isSticky, setIsSticky] = useState<boolean>(false);
-  const [showSkillsInBody, setShowSkillsInBody] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const skillsSectionRef = useRef<HTMLDivElement>(null);
+  const { isSticky, landed } = useFloatingSkills(skillsSectionRef);
+  const cancelScrollRef = useRef<(() => void) | null>(null);
 
   const navItems = [
     { label: t("nav_home"), id: "inicio" },
@@ -29,47 +63,6 @@ const App: React.FC = () => {
     { label: t("nav_video"), id: "video" },
     { label: t("nav_contact"), id: "contacto" },
   ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 50);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Obtenemos el rectángulo del elemento para una precisión extra
-        const rect = entry.target.getBoundingClientRect();
-        // Si el elemento está en el viewport O está por encima de él (ya pasó)
-        const isPastOrInSection = rect.top <= 150 || entry.isIntersecting;
-        setShowSkillsInBody(isPastOrInSection);
-      },
-      { threshold: 0.1, rootMargin: "-150px 0px 0px 0px" }
-    );
-
-    if (skillsSectionRef.current) {
-      observer.observe(skillsSectionRef.current);
-    }
-
-    const scrollHandler = () => {
-      handleScroll();
-      // Forzamos una comprobación manual además del observer para evitar el bug del modal
-      if (skillsSectionRef.current) {
-        const rect = skillsSectionRef.current.getBoundingClientRect();
-        if (rect.top <= 150) {
-          setShowSkillsInBody(true);
-        } else if (rect.top > 500) {
-          setShowSkillsInBody(false);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", scrollHandler);
-    scrollHandler();
-    return () => {
-      window.removeEventListener("scroll", scrollHandler);
-      observer.disconnect();
-    };
-  }, []);
 
   /**
    * Navegación fluida y precisa
@@ -81,37 +74,25 @@ const App: React.FC = () => {
     e?.stopPropagation();
     setMenuOpen(false);
 
-    // Un timeout de 50ms es más seguro para asegurar que el DOM se estabilice tras cerrar el menú
-    setTimeout(() => {
-      if (id === "inicio") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (id === "contacto") {
-        const scrollToBottom = () => {
-          const scrollHeight = Math.max(
-            document.body.scrollHeight, 
-            document.documentElement.scrollHeight
-          );
-          window.scrollTo({ top: scrollHeight, behavior: "smooth" });
-        };
-        
-        scrollToBottom();
-        // Un segundo intento tras 300ms ayuda a compensar cambios en el layout 
-        // mientras la animación de scroll está en progreso
-        setTimeout(scrollToBottom, 300);
-        setTimeout(scrollToBottom, 600);
-      } else {
-        const element = document.getElementById(id);
-        if (element) {
-          const headerOffset = 85; 
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - headerOffset;
+    // Cancela cualquier scroll en curso para no pelear con uno nuevo
+    cancelScrollRef.current?.();
 
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
+    // Pequeño delay para que el menú móvil termine de cerrar antes de medir
+    setTimeout(() => {
+      const getTarget = (): number => {
+        if (id === "inicio") return 0;
+        if (id === "contacto") {
+          return Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight
+          ) - window.innerHeight;
         }
-      }
+        const el = document.getElementById(id);
+        if (!el) return window.scrollY;
+        return el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+      };
+
+      cancelScrollRef.current = smoothScrollTo(getTarget);
     }, 50);
   };
 
@@ -120,7 +101,7 @@ const App: React.FC = () => {
       {/* 1. CONTENEDOR FLOTANTE INDEPENDIENTE 
         Está fuera del header, fixed en la pantalla.
       */}
-      {!showSkillsInBody && (
+      {!landed && (
         <div className={`floating-skills-container ${isSticky ? "sticky-mode" : ""}`}>
           {skillsData.map((skill) => (
             <SkillCard
@@ -129,7 +110,7 @@ const App: React.FC = () => {
               percentage={skill.percentage}
               techs={skill.techs}
               layoutId={`skill-${skill.name}`}
-              isShrunk={isSticky} 
+              isShrunk={isSticky}
             />
           ))}
         </div>
@@ -247,6 +228,14 @@ const App: React.FC = () => {
 
           <div className="intro-image">
             <img src={asset("img/person.png")} alt="person" />
+            {/* Robot 3D (en pausa) — para reactivar: descomentar el import de
+                SplineScene y reemplazar el <img> por:
+            <div className="hero-robot">
+              <SplineScene
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="hero-robot__canvas"
+              />
+            </div> */}
           </div>
         </section>
       </div>
@@ -259,7 +248,7 @@ const App: React.FC = () => {
       {/* Sección de Experiencia (A donde viajan las tarjetas) */}
 
       <div className="contentE" id="experience-zone" ref={skillsSectionRef}>
-        <ExperienceSection />
+        <ExperienceSection landed={landed} />
       </div>
 
       <div id="proyectos" className="content2">

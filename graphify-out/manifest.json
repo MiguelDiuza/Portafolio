@@ -1,0 +1,132 @@
+{
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\App.tsx": {
+    "mtime": 1782486779.7986133,
+    "ast_hash": "62844a1a93200eff43b355baeeb42a46",
+    "semantic_hash": "62844a1a93200eff43b355baeeb42a46"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\CinematicFooter.tsx": {
+    "mtime": 1782452696.8233817,
+    "ast_hash": "70656eb762b7b37f7ae64692f43e884a",
+    "semantic_hash": "70656eb762b7b37f7ae64692f43e884a"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\ExperienceSection.tsx": {
+    "mtime": 1782454407.070094,
+    "ast_hash": "83166e079fb38cd0c4ed634269c67597",
+    "semantic_hash": "83166e079fb38cd0c4ed634269c67597"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\Proyectos.tsx": {
+    "mtime": 1782234405.182486,
+    "ast_hash": "47db12bd88bd154549780647c21ae347",
+    "semantic_hash": "47db12bd88bd154549780647c21ae347"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\SkillCard.tsx": {
+    "mtime": 1782455930.7079787,
+    "ast_hash": "784e596ae3a0dbe7e8e9e8d03359520c",
+    "semantic_hash": "784e596ae3a0dbe7e8e9e8d03359520c"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\SobreMi.tsx": {
+    "mtime": 1782452550.885816,
+    "ast_hash": "77601d22ee4f93ad8a111e6dee7a0483",
+    "semantic_hash": "77601d22ee4f93ad8a111e6dee7a0483"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\TechBanner.tsx": {
+    "mtime": 1772397635.0013297,
+    "ast_hash": "2c0904e07646ff86898e0fbcfc8af74d",
+    "semantic_hash": "2c0904e07646ff86898e0fbcfc8af74d"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\Video.tsx": {
+    "mtime": 1775681042.77649,
+    "ast_hash": "cb7b034a65deb8087b2c813918ee706e",
+    "semantic_hash": "cb7b034a65deb8087b2c813918ee706e"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\idiomas.tsx": {
+    "mtime": 1775680790.1073017,
+    "ast_hash": "7eaf1a2d67ec2f1a078c822ce1fc418c",
+    "semantic_hash": "7eaf1a2d67ec2f1a078c822ce1fc418c"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\subComponents\\StudiesCards.tsx": {
+    "mtime": 1782455119.2607124,
+    "ast_hash": "d5841daf3c18bfd5cf68da4b9bc45731",
+    "semantic_hash": "d5841daf3c18bfd5cf68da4b9bc45731"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\ui\\CanvasRevealEffect.tsx": {
+    "mtime": 1782230778.6974413,
+    "ast_hash": "837f327f7c4dd2079cafd23be34c1eab",
+    "semantic_hash": "837f327f7c4dd2079cafd23be34c1eab"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\ui\\FloatingPaths.tsx": {
+    "mtime": 1782452497.4113884,
+    "ast_hash": "de56b02d89ddaa33629bcc663ef2bee7",
+    "semantic_hash": "de56b02d89ddaa33629bcc663ef2bee7"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\ui\\MagneticButton.tsx": {
+    "mtime": 1782226282.6775272,
+    "ast_hash": "8b7617cd86d8836c507cf7e717948ff0",
+    "semantic_hash": "8b7617cd86d8836c507cf7e717948ff0"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\components\\ui\\SplineScene.tsx": {
+    "mtime": 1782456043.2815888,
+    "ast_hash": "3168ba1a49a7a7f1cf164bfb5a2d8950",
+    "semantic_hash": "3168ba1a49a7a7f1cf164bfb5a2d8950"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\constants\\projectsData.ts": {
+    "mtime": 1782234383.962574,
+    "ast_hash": "49c672853a8b17fe91f06141a8c8945e",
+    "semantic_hash": "49c672853a8b17fe91f06141a8c8945e"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\constants\\skillsData.ts": {
+    "mtime": 1773973955.738281,
+    "ast_hash": "0abf3038bd7c8469f2f181f3dec12115",
+    "semantic_hash": "0abf3038bd7c8469f2f181f3dec12115"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\constants\\techDetails.ts": {
+    "mtime": 1782233720.2614052,
+    "ast_hash": "fd92623e784d15225d691847b027fb92",
+    "semantic_hash": "fd92623e784d15225d691847b027fb92"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\constants\\translations.ts": {
+    "mtime": 1782452674.9930835,
+    "ast_hash": "1e798a19db14be85913eb7d8acdc5b81",
+    "semantic_hash": "1e798a19db14be85913eb7d8acdc5b81"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\hooks\\useFloatingSkills.ts": {
+    "mtime": 1782225839.243515,
+    "ast_hash": "b05e92eef61c679a08bbb231ddb8fb68",
+    "semantic_hash": "b05e92eef61c679a08bbb231ddb8fb68"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\lib\\gsap.ts": {
+    "mtime": 1782225677.7921243,
+    "ast_hash": "d6a765df73426f40295f6d911da450a4",
+    "semantic_hash": "d6a765df73426f40295f6d911da450a4"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\lib\\utils.ts": {
+    "mtime": 1782225672.5784237,
+    "ast_hash": "f95c78982f091b1922c8411635b3ae5d",
+    "semantic_hash": "f95c78982f091b1922c8411635b3ae5d"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\main.tsx": {
+    "mtime": 1775680792.9592545,
+    "ast_hash": "feac1250f08125ca023113d6a7f7f267",
+    "semantic_hash": "feac1250f08125ca023113d6a7f7f267"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\vite-env.d.ts": {
+    "mtime": 1769983796.9888976,
+    "ast_hash": "8f68c27c3fc38817b2726b20e2d4f1ee",
+    "semantic_hash": "8f68c27c3fc38817b2726b20e2d4f1ee"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\assets\\github-white-icon.webp": {
+    "mtime": 1773967018.1621747,
+    "ast_hash": "adcde5df1b8d623115f1de24eafbcb4f",
+    "semantic_hash": "adcde5df1b8d623115f1de24eafbcb4f"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\assets\\icon.svg": {
+    "mtime": 1773970816.9919407,
+    "ast_hash": "095865ada362f34c7d8f3bf6d425ab58",
+    "semantic_hash": "095865ada362f34c7d8f3bf6d425ab58"
+  },
+  "C:\\Users\\mandi\\Documents\\GitHub\\Portafolio\\src\\assets\\react.svg": {
+    "mtime": 1769983796.9802735,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
+  }
+}

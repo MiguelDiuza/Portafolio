@@ -4,139 +4,22 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "./idiomas";
+import { PROJECTS, TECHS, Project, ProjectLink } from "../constants/projectsData";
+import type { TranslationKey } from "../constants/translations";
+import { asset } from "../lib/utils";
 import "../styles/Proyectos.css";
 
 const MAX_VISIBILITY = 3;
+const ADD_ICON = asset("loogos/mas.svg");
 
 interface CardProps {
   title: string;
   subtitle: string;
   image: string;
-  icon: string;
   onIconClick?: () => void;
 }
 
-interface Proyecto {
-  id: number;
-  title: string;
-  subtitle: string;
-  image: string;
-  icon: string;
-  idCategoria: string;
-  description?: string;
-  technologies?: { name: string; logo: string }[];
-  images?: string[];
-  video?: string;
-  link?: string;
-  link2?: string;
-  repo?: string;
-  repo2?: string;
-}
-
-const base = import.meta.env.BASE_URL;
-
-const getProyectosData = (t: any): Proyecto[] => [
-  {
-    id: 1,
-    title: t("p1_title"),
-    subtitle: t("p1_sub"),
-    image: `${base}img/app.jpg`,
-    icon: `${base}loogos/mas.svg`,
-    idCategoria: "Mobile",
-    description: t("p1_desc"),
-    technologies: [
-      { name: "HTML", logo: `${base}loogos/html.svg` },
-      { name: "JS", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` }
-    ],
-    images: [`${base}img/app2.jpg`],
-    video: `${base}img/Bg3.mp4`,
-    repo: "https://github.com/MiguelDiuza/AppAndroid"
-  },
-  {
-    id: 2,
-    title: t("p2_title"),
-    subtitle: t("p2_sub"),
-    image: `${base}img/im1.png`,
-    icon: `${base}loogos/mas.svg`,
-    idCategoria: "Web",
-    description: t("p2_desc"),
-    technologies: [
-      { name: "HTML", logo: `${base}loogos/html.svg` },
-      { name: "JS", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` }
-    ],
-    images: [`${base}img/im1.png`],
-    video: `${base}img/vip.mp4`,
-    link: "https://www.vipwelleurope.es",
-    repo: "https://github.com/MiguelDiuza/VipWell"
-  },
-  {
-    id: 3,
-    title: t("p3_title"),
-    subtitle: t("p3_sub"),
-    image: `${base}img/MedicalAI.png`,
-    icon: `${base}loogos/mas.svg`,
-    idCategoria: "IA, Web",
-    description: t("p3_desc"),
-    technologies: [
-      { name: "React", logo: `${base}loogos/react.svg` },
-      { name: "HTML", logo: `${base}loogos/html.svg` },
-      { name: "Javascript", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` },
-      { name: "Python", logo: `${base}loogos/python.svg` },
-      { name: "YOLO", logo: `${base}loogos/yolo.svg` },
-      { name: "PyTorch", logo: `${base}loogos/pytorch.svg` }
-    ],
-    images: [`${base}img/MedicalAI.png`],
-    video: `${base}img/Visumed.mp4`,
-    link: "https://ia-patologia.vercel.app/",
-    repo: "https://github.com/MiguelDiuza/IA_Patologia"
-  },
-  {
-    id: 4,
-    title: t("p4_title"),
-    subtitle: t("p4_sub"),
-    image: `${base}img/mot.png`,
-    icon: `${base}loogos/mas.svg`,
-    idCategoria: "Web",
-    description: t("p4_desc"),
-    technologies: [
-      { name: "HTML", logo: `${base}loogos/html.svg` },
-      { name: "JS", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` },
-      { name: "PostgreSQL", logo: `${base}loogos/postgresql.svg` }
-    ],
-    images: [`${base}img/mot.png`],
-    video: `${base}img/Motion.mp4`,
-    link: "https://motiondreamstudio.com/",
-    link2: "https://motion-dreams-erp.vercel.app/",
-    repo: "https://github.com/MiguelDiuza/MotionDreamStudio",
-    repo2: "https://github.com/MiguelDiuza/motionDreamsERP"
-  },
-  {
-    id: 5,
-    title: t("p5_title"),
-    subtitle: t("p5_sub"),
-    image: `${base}img/som.png`,
-    icon: `${base}loogos/mas.svg`,
-    idCategoria: "RA",
-    description: t("p5_desc"),
-    technologies: [
-      { name: "UNITY", logo: `${base}loogos/unity.png` },
-      { name: "BLENDER", logo: `${base}loogos/blender.svg` },
-      { name: "C++", logo: `${base}loogos/c++.svg` },
-      { name: "HTML", logo: `${base}loogos/html.svg` },
-      { name: "JS", logo: `${base}loogos/Javascript.svg` },
-      { name: "CSS", logo: `${base}loogos/css.svg` }
-    ],
-    images: [`${base}img/sombra.png`],
-    video: `${base}img/G.mp4`,
-    repo: "https://github.com/MiguelDiuza/SombraFur"
-  }
-];
-
-const Card: React.FC<CardProps> = ({ title, subtitle, image, icon, onIconClick }) => (
+const Card: React.FC<CardProps> = ({ title, subtitle, image, onIconClick }) => (
   <div className="proyecto-card">
     <div className="shine shine-top"></div>
     <div className="shine shine-bottom"></div>
@@ -155,7 +38,7 @@ const Card: React.FC<CardProps> = ({ title, subtitle, image, icon, onIconClick }
         onClick={onIconClick}
         aria-label={`Más sobre ${title}`}
       >
-        <img src={icon} alt={`icono ${title}`} />
+        <img src={ADD_ICON} alt="" />
       </button>
 
       <div className="card-content">
@@ -193,7 +76,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    
+
     if (isLeftSwipe && active < count - 1) {
       setActive((i) => i + 1);
     }
@@ -203,7 +86,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   };
 
   return (
-    <div 
+    <div
       className="carousel"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -240,7 +123,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   );
 };
 
-const CategoryDropdown: React.FC<{ onSelect: (category: string) => void, t: any }> = ({ onSelect, t }) => {
+const CategoryDropdown: React.FC<{ onSelect: (category: string) => void; t: (k: TranslationKey) => string }> = ({ onSelect, t }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("All");
 
@@ -258,7 +141,7 @@ const CategoryDropdown: React.FC<{ onSelect: (category: string) => void, t: any 
     onSelect(categoryId);
   };
 
-  const selectedName = categories.find(c => c.id === selectedId)?.name || t("proj_all");
+  const selectedName = categories.find((c) => c.id === selectedId)?.name || t("proj_all");
 
   return (
     <div className="dropdown">
@@ -278,12 +161,20 @@ const CategoryDropdown: React.FC<{ onSelect: (category: string) => void, t: any 
   );
 };
 
+const LINK_LABELS: Record<ProjectLink["type"], TranslationKey> = {
+  site: "proj_visit_site",
+  panel: "proj_visit_panel",
+  repo: "proj_repo",
+  backend: "proj_backend",
+};
+
 const Proyectos: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null);
-  const [expandedMedia, setExpandedMedia] = useState<{ type: 'image' | 'video'; src: string } | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [expandedMedia, setExpandedMedia] = useState<{ type: "image" | "video"; src: string } | null>(null);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     if (selectedProject || expandedMedia) {
@@ -299,11 +190,20 @@ const Proyectos: React.FC = () => {
     };
   }, [selectedProject, expandedMedia]);
 
+  // Reinicia estado de carga y "ver más" al cambiar de proyecto
   useEffect(() => {
     if (selectedProject) {
       setIsVideoLoading(true);
+      setShowDetails(false);
     }
   }, [selectedProject?.id]);
+
+  const closeModal = () => setSelectedProject(null);
+
+  const filteredProjects = PROJECTS.filter((p) => {
+    if (selectedCategory === "All") return true;
+    return p.category.split(",").map((c) => c.trim()).includes(selectedCategory);
+  });
 
   return (
     <motion.div
@@ -331,137 +231,164 @@ const Proyectos: React.FC = () => {
         transition={{ delay: 0.2, duration: 0.8 }}
       >
         <Carousel key={selectedCategory}>
-          {getProyectosData(t)
-            .filter((proyecto: Proyecto) => {
-              if (selectedCategory === "All") return true;
-              const projectCats = proyecto.idCategoria.split(',').map(cat => cat.trim());
-              return projectCats.includes(selectedCategory);
-            })
-            .map((proyecto) => (
-              <Card
-                key={proyecto.id}
-                title={proyecto.title}
-                subtitle={proyecto.subtitle}
-                image={proyecto.image}
-                icon={proyecto.icon}
-                onIconClick={() => setSelectedProject(proyecto)}
-              />
-            ))}
+          {filteredProjects.map((proyecto) => (
+            <Card
+              key={proyecto.id}
+              title={t(proyecto.titleKey)}
+              subtitle={t(proyecto.subtitleKey)}
+              image={proyecto.image}
+              onIconClick={() => setSelectedProject(proyecto)}
+            />
+          ))}
         </Carousel>
       </motion.div>
 
       <AnimatePresence>
         {selectedProject && (
-          <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
+          <div className="modal-overlay" onClick={closeModal}>
             <button
-                className="close-button mobile-exterior-close"
-                onClick={(e) => { e.stopPropagation(); setSelectedProject(null); }}
-                aria-label="Cerrar modal exterior"
+              className="close-button mobile-exterior-close"
+              onClick={(e) => { e.stopPropagation(); closeModal(); }}
+              aria-label="Cerrar modal exterior"
             >
               ✖
             </button>
             <motion.div
-              className="modal-content glass-panel"
+              className="project-modal glass-panel glass-strong"
               onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              initial={{ scale: 0.9, opacity: 0, y: 40 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              exit={{ scale: 0.92, opacity: 0, y: 40 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <button
-                className="close-button"
-                onClick={() => setSelectedProject(null)}
-                aria-label="Cerrar modal"
-              >
+              <button className="close-button" onClick={closeModal} aria-label="Cerrar modal">
                 ✖
               </button>
 
-              <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '0.2rem', marginTop: '-0.5rem' }}>
-                {selectedProject.title}
-              </h2>
+              <div className="project-modal__scroll">
+                {/* HEADER */}
+                <header className="project-modal__header">
+                  <div className="project-modal__chips">
+                    {selectedProject.category.split(",").map((c) => (
+                      <span key={c} className="project-chip">{c.trim()}</span>
+                    ))}
+                  </div>
+                  <h2 className="project-modal__title">{t(selectedProject.titleKey)}</h2>
+                  <p className="project-modal__subtitle">{t(selectedProject.subtitleKey)}</p>
+                </header>
 
-              <p className="modal-description">
-                {selectedProject.description}
-              </p>
-
-              <div className="tech-icons">
-                {selectedProject.technologies?.map((tech) => (
-                  <img key={tech.name} src={tech.logo} alt={tech.name} title={tech.name} className="icon-white" />
-                ))}
-              </div>
-
-              <div className="project-media">
-                <div
-                  className="media-container clickable-media"
-                  onClick={() => {
-                    const src = selectedProject.images && selectedProject.images.length > 0
-                      ? selectedProject.images[0]
-                      : selectedProject.image;
-                    setExpandedMedia({ type: 'image', src });
-                  }}
-                >
-                  <div className="media-zoom-overlay">{t("proj_zoom")}</div>
-                  {selectedProject.images && selectedProject.images.length > 0 ? (
-                    <img src={selectedProject.images[0]} alt={selectedProject.title} />
-                  ) : (
-                    <img src={selectedProject.image} alt={selectedProject.title} />
-                  )}
-                </div>
-                <div
-                  className="media-container video-block clickable-media"
-                  onClick={() => {
-                    if (selectedProject.video) {
-                      setExpandedMedia({ type: 'video', src: selectedProject.video });
+                {/* MEDIA */}
+                <div className="project-media">
+                  <div
+                    className="media-container clickable-media"
+                    onClick={() =>
+                      setExpandedMedia({
+                        type: "image",
+                        src: selectedProject.images[0] || selectedProject.image,
+                      })
                     }
-                  }}
-                >
-                  {selectedProject.video ? (
-                    <>
-                      <div className="media-zoom-overlay">{t("proj_zoom")}</div>
-                      {isVideoLoading && (
-                        <div className="video-loader">
-                          <div className="progress-bar">
-                            <div className="progress-fill"></div>
-                          </div>
-                          <p>{t("proj_loading")}</p>
-                        </div>
-                      )}
-                      <video
-                        src={selectedProject.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        onLoadedData={() => setIsVideoLoading(false)}
-                        style={{ opacity: isVideoLoading ? 0 : 1, transition: 'opacity 0.5s' }}
-                      />
-                    </>
-                  ) : (
-                    <div className="video-placeholder">{t("proj_no_video")}</div>
-                  )}
-                </div>
-              </div>
+                  >
+                    <div className="media-zoom-overlay">{t("proj_zoom")}</div>
+                    <img src={selectedProject.images[0] || selectedProject.image} alt={t(selectedProject.titleKey)} />
+                  </div>
 
-              <div className="project-links">
-                {selectedProject.link && (
-                  <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
-                    {t("proj_visit_site")}
-                  </a>
-                )}
-                {selectedProject.link2 && (
-                  <a href={selectedProject.link2} target="_blank" rel="noopener noreferrer">
-                    {t("proj_visit_panel")}
-                  </a>
-                )}
-                {selectedProject.repo && (
-                  <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">
-                    <FaGithub /> {t("proj_repo")}
-                  </a>
-                )}
-                {selectedProject.repo2 && (
-                  <a href={selectedProject.repo2} target="_blank" rel="noopener noreferrer">
-                    <FaGithub /> {t("proj_backend")}
-                  </a>
-                )}
+                  <div
+                    className="media-container video-block clickable-media"
+                    onClick={() => {
+                      if (selectedProject.video) setExpandedMedia({ type: "video", src: selectedProject.video });
+                    }}
+                  >
+                    {selectedProject.video ? (
+                      <>
+                        <div className="media-zoom-overlay">{t("proj_zoom")}</div>
+                        {isVideoLoading && (
+                          <div className="video-loader">
+                            <div className="progress-bar"><div className="progress-fill"></div></div>
+                            <p>{t("proj_loading")}</p>
+                          </div>
+                        )}
+                        <video
+                          src={selectedProject.video}
+                          autoPlay loop muted playsInline
+                          onLoadedData={() => setIsVideoLoading(false)}
+                          style={{ opacity: isVideoLoading ? 0 : 1, transition: "opacity 0.5s" }}
+                        />
+                      </>
+                    ) : (
+                      <div className="video-placeholder">{t("proj_no_video")}</div>
+                    )}
+                  </div>
+                </div>
+
+                {/* DESCRIPCIÓN CORTA */}
+                <p className="project-modal__desc">{t(selectedProject.descKey)}</p>
+
+                {/* VER MÁS */}
+                <button
+                  className="see-more-toggle"
+                  onClick={() => setShowDetails((v) => !v)}
+                  aria-expanded={showDetails}
+                >
+                  {showDetails ? t("proj_see_less") : t("proj_see_more")}
+                  <IoIosArrowDown className={`see-more-icon ${showDetails ? "open" : ""}`} />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {showDetails && (
+                    <motion.div
+                      className="project-details"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <div className="project-details__inner">
+                        <h3 className="project-section-title">{t("proj_about_title")}</h3>
+                        <p className="project-modal__detail">{t(selectedProject.detailKey)}</p>
+
+                        <h3 className="project-section-title">{t("proj_stack_title")}</h3>
+                        <div className="proj-groups">
+                          {selectedProject.groups.map((group, gi) => (
+                            <div key={gi} className="proj-group">
+                              <div className="proj-group__head">
+                                <span className="proj-group__label">{group.label[language]}</span>
+                                <div className="proj-group__techs">
+                                  {group.techs.map((key) => {
+                                    const tech = TECHS[key];
+                                    if (!tech) return null;
+                                    return (
+                                      <span key={key} className="proj-group__chip" title={tech.name}>
+                                        <img src={tech.logo} alt={tech.name} className="icon-white" />
+                                        <span>{tech.name}</span>
+                                      </span>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                              <p className="proj-group__note">{group.note[language]}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* LINKS */}
+                <div className="project-links">
+                  {selectedProject.links.map((link) => (
+                    <a
+                      key={link.type + link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass-button"
+                    >
+                      {(link.type === "repo" || link.type === "backend") && <FaGithub />}
+                      {t(LINK_LABELS[link.type])}
+                    </a>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </div>
@@ -482,13 +409,10 @@ const Proyectos: React.FC = () => {
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                className="close-button expanded-close"
-                onClick={() => setExpandedMedia(null)}
-              >
+              <button className="close-button expanded-close" onClick={() => setExpandedMedia(null)}>
                 ✖
               </button>
-              {expandedMedia.type === 'image' ? (
+              {expandedMedia.type === "image" ? (
                 <img src={expandedMedia.src} alt="Vista ampliada" />
               ) : (
                 <video src={expandedMedia.src} autoPlay loop muted playsInline />

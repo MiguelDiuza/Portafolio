@@ -1,42 +1,46 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { Suspense, lazy } from 'react';
+import { motion } from 'framer-motion';
 import SkillCard from './SkillCard';
-import BackgroundAI from './BackgroundAI';
 import { skillsData } from '../constants/skillsData.ts';
 import { useLanguage } from './idiomas';
 
-const ExperienceSection: React.FC = () => {
+// Carga diferida: three.js solo se descarga cuando las tarjetas aterrizan.
+const CanvasRevealEffect = lazy(() =>
+  import('./ui/CanvasRevealEffect').then((m) => ({ default: m.CanvasRevealEffect }))
+);
+
+interface ExperienceSectionProps {
+  /** Controlado por App vía useFloatingSkills: las tarjetas ya aterrizaron. */
+  landed: boolean;
+}
+
+const ExperienceSection: React.FC<ExperienceSectionProps> = ({ landed }) => {
   const { t } = useLanguage();
-  const [showSkillsInBody, setShowSkillsInBody] = useState<boolean>(false);
-  const internalRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (internalRef.current) {
-        const rect = internalRef.current.getBoundingClientRect();
-        // Sincronizado con la lógica de App.tsx: 150px de margen superior
-        if (rect.top <= 150) {
-          setShowSkillsInBody(true);
-        } else if (rect.top > 500) {
-          setShowSkillsInBody(false);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Comprobación inicial
-    
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden' }} className="contentE">
-      {/* 1. EL VIDEO DE FONDO */}
-      <BackgroundAI />
+    <section style={{ position: 'relative' }} className="contentE">
+      {/* Fondo de matriz de puntos animada (solo se monta al aterrizar) */}
+      <div className="exp-canvas-bg" aria-hidden="true">
+        {landed && (
+          <Suspense fallback={null}>
+            <CanvasRevealEffect
+              animationSpeed={3.2}
+              colors={[
+                [139, 122, 255],
+                [99, 102, 241],
+              ]}
+              dotSize={4}
+              opacities={[0.2, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]}
+              reverse={false}
+            />
+          </Suspense>
+        )}
+        <div className="exp-canvas-mask" />
+      </div>
 
-      {/* 2. EL CONTENIDO */}
+      {/* CONTENIDO */}
       <div className="content-wrapper">
         <div
-          ref={internalRef}
           id="experience-cards-section"
           style={{
             minHeight: '600px',
@@ -44,15 +48,25 @@ const ExperienceSection: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            position: 'relative'
+            position: 'relative',
+            zIndex: 1,
           }}
         >
-          <h1 className="section-title">
-            {t("exp_title")}
-          </h1>
+          <h1 className="section-title">{t("exp_title")}</h1>
 
-          <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
-            {showSkillsInBody && skillsData.map((skill) => (
+          {landed && (
+            <motion.p
+              className="exp-hint"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              {t("exp_tech_hint")}
+            </motion.p>
+          )}
+
+          <div className="exp-cards-grid">
+            {landed && skillsData.map((skill) => (
               <SkillCard
                 key={skill.name}
                 skillName={skill.name}
@@ -67,12 +81,17 @@ const ExperienceSection: React.FC = () => {
           </div>
 
           {/* TARJETA ANCHA DE DIFERENCIADOR */}
-          {showSkillsInBody && (
-            <div className="glass-panel wide-differentiator-card">
+          {landed && (
+            <motion.div
+              className="glass-panel wide-differentiator-card"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
               <h2>{t("exp_diff_title")}</h2>
               <p>{t("exp_diff_p1")}</p>
               <p style={{ marginTop: '1.5rem' }}>{t("exp_diff_p2")}</p>
-            </div>
+            </motion.div>
           )}
         </div>
       </div>

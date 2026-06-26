@@ -114,7 +114,7 @@
 
 .study-card:hover {
   transform: translateY(-8px) scale(1.08);
-  box-shadow: 0 20px 30px rgba(0, 210, 255, 0.4);
+  box-shadow: 0 20px 30px var(--brand-glow);
 }
 
 .study-card:hover .default-image {
@@ -180,14 +180,17 @@
   gap: 3rem;
   width: 100%;
   height: 100%;
+  align-items: start; /* el texto se ancla arriba, no se centra con el diploma */
 }
 
 .study-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* título siempre arriba */
   gap: 1.5rem;
   text-align: left;
+  position: sticky;
+  top: 0;
 }
 
 .study-info h2 {
@@ -202,7 +205,7 @@
 
 .study-years {
   font-size: 1.2rem;
-  color: #00d2ff;
+  color: var(--accent);
   font-family: 'Outfit', sans-serif;
   letter-spacing: 1px;
 }
@@ -217,8 +220,8 @@
 .study-preview-container {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 450px;
+  min-height: 320px;
+  max-height: 68vh; /* recorta el diploma muy largo para que quepa junto al título */
   background: #ffffff;
   border-radius: 15px;
   overflow: hidden;
@@ -231,11 +234,76 @@
       0 100%);
 }
 
+/* Diploma recortado: degradado inferior + botón "ver completo" */
+.clickable-diploma {
+  cursor: zoom-in;
+}
+
+.diploma-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90px;
+  background: linear-gradient(to top, oklch(0.12 0.012 285 / 0.9), transparent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.diploma-view-full {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid oklch(1 0 0 / 0.25);
+  background: var(--grad-brand);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-out-back), box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px var(--brand-glow);
+}
+
+.diploma-view-full:hover {
+  transform: translateX(-50%) translateY(-2px) scale(1.04);
+  box-shadow: 0 12px 26px var(--brand-glow);
+}
+
+/* Overlay del diploma a tamaño completo */
+.diploma-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: oklch(0.08 0.01 285 / 0.92);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+}
+
+.diploma-zoom-image {
+  max-width: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 30px 70px oklch(0 0 0 / 0.7);
+}
+
+.diploma-zoom-close {
+  top: 20px !important;
+  right: 20px !important;
+}
+
 .study-badge {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: linear-gradient(135deg, #ff0055, #ff00aa);
+  background: var(--grad-brand);
   color: white;
   padding: 10px 20px;
   border-radius: 50px;
@@ -243,7 +311,7 @@
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 10px 20px rgba(255, 0, 85, 0.4);
+  box-shadow: 0 10px 20px var(--brand-glow);
   z-index: 5;
   border: 1px solid rgba(255, 255, 255, 0.2);
   white-space: nowrap;
@@ -253,17 +321,17 @@
 @keyframes badge-pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 10px 20px rgba(255, 0, 85, 0.4);
+    box-shadow: 0 10px 20px var(--brand-glow);
   }
 
   50% {
     transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(255, 0, 85, 0.6);
+    box-shadow: 0 15px 30px var(--brand-glow);
   }
 
   100% {
     transform: scale(1);
-    box-shadow: 0 10px 20px rgba(255, 0, 85, 0.4);
+    box-shadow: 0 10px 20px var(--brand-glow);
   }
 }
 
@@ -312,7 +380,7 @@
 }
 
 .close-button:hover {
-  background: #ff0055;
+  background: var(--danger);
   transform: rotate(90deg) scale(1.1);
   border-color: transparent;
 }
@@ -332,7 +400,7 @@
 .info-icon {
   flex-shrink: 0;
   margin-top: 4px;
-  color: #00d2ff;
+  color: var(--accent);
   opacity: 0.9;
 }
 

@@ -1,7 +1,7 @@
 /* Banner con el color morado que tenías antes */
 /* Banner con el color morado que tenías antes */
 .infinity-banner {
-  background: linear-gradient(0deg, #6966FF, #6200CB);
+  background: linear-gradient(0deg, var(--brand), var(--brand-strong));
   display: flex;
   padding: 8px 0;
   position: relative;
@@ -10,9 +10,9 @@
   width: 100%;
 
   box-shadow:
-    0 0 7px rgba(105, 102, 255, 0.6),   /* #6966FF */
-    0 0 5px rgba(98, 0, 203, 0.45),     /* #6200CB */
-    0 0 15px rgba(77, 75, 207, 0.32);  /* capa suave */
+    0 0 7px oklch(0.63 0.16 285 / 0.55),
+    0 0 5px oklch(0.53 0.17 282 / 0.45),
+    0 0 15px oklch(0.55 0.14 280 / 0.3);
 }
 /* brillo de cristal arriba */
 .infinity-banner::before {

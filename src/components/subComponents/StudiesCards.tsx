@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import $ from "jquery";
+import { createPortal } from "react-dom";
 import "./StudiesCards.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Info } from "lucide-react";
 import { useLanguage } from '../idiomas';
-
 
 interface Study {
   title: string;
@@ -19,93 +18,30 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
+    transition: { staggerChildren: 0.12 },
+  },
 };
 
 const cardVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1 }
+  hidden: { y: 24, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
 };
 
 const StudiesCards: React.FC = () => {
   const { t } = useLanguage();
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
+  const [zoomedDiploma, setZoomedDiploma] = useState<string | null>(null);
 
+  // Bloquea el scroll del body mientras hay un modal abierto
   useEffect(() => {
-    let x: ReturnType<typeof setTimeout>;
-    const $cards = $(".study-card");
-    const $style = $(".hover");
-
-    $cards.on("mousemove touchmove", function (e) {
-      let pos: [number, number] = [e.offsetX || 0, e.offsetY || 0];
-      e.preventDefault();
-
-      if (e.type === "touchmove" && e.originalEvent && "touches" in e.originalEvent) {
-        const touchEvent = e.originalEvent as TouchEvent;
-        pos = [touchEvent.touches[0].clientX, touchEvent.touches[0].clientY];
-      }
-
-      const $card = $(this);
-      const l = pos[0];
-      const t = pos[1];
-      const h = $card.height() || 0;
-      const w = $card.width() || 0;
-      const px = Math.abs(Math.floor((100 / w) * l) - 100);
-      const py = Math.abs(Math.floor((100 / h) * t) - 100);
-      const pa = 50 - px + (50 - py);
-
-      const lp = 50 + (px - 50) / 1.5;
-      const tp = 50 + (py - 50) / 1.5;
-      const px_spark = 50 + (px - 50) / 7;
-      const py_spark = 50 + (py - 50) / 7;
-      const p_opc = 20 + Math.abs(pa) * 1.5;
-
-      const ty = ((tp - 50) / 2) * -1;
-      const tx = ((lp - 50) / 1.5) * 0.5;
-
-      const grad_pos = `background-position: ${lp}% ${tp}%;`;
-      const sprk_pos = `background-position: ${px_spark}% ${py_spark}%;`;
-      const opc = `opacity: ${p_opc / 100};`;
-      const tf = `transform: rotateX(${ty}deg) rotateY(${tx}deg);`;
-
-      const style = `
-        .study-card:hover:before { ${grad_pos} }
-        .study-card:hover:after { ${sprk_pos} ${opc} }
-      `;
-
-      $cards.removeClass("active");
-      $card.removeClass("animated");
-      $card.attr("style", tf);
-      $style.html(style);
-
-      if (e.type === "touchmove") return false;
-      clearTimeout(x);
-    }).on("mouseout touchend touchcancel", function () {
-      const $card = $(this);
-      $style.html("");
-      $card.removeAttr("style");
-      x = setTimeout(() => {
-        $card.addClass("animated");
-      }, 2500);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (selectedStudy) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-      document.documentElement.style.overflow = "auto";
-    }
+    const open = selectedStudy || zoomedDiploma;
+    document.body.style.overflow = open ? "hidden" : "auto";
+    document.documentElement.style.overflow = open ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
     };
-  }, [selectedStudy]);
+  }, [selectedStudy, zoomedDiploma]);
 
   const base = import.meta.env.BASE_URL;
 
@@ -129,6 +65,7 @@ const StudiesCards: React.FC = () => {
       years: t("study_eng_years"),
       image: `${base}img/mulImg.png`,
       pdf: `${base}pdfs/pregrado.pdf`,
+      badge: t("study_eng_badge"),
       description: t("study_eng_desc"),
     },
     {
@@ -167,12 +104,18 @@ const StudiesCards: React.FC = () => {
           className="study-card glass-panel"
           onClick={() => setSelectedStudy(study)}
           variants={cardVariants}
+          whileHover={{ y: -8, scale: 1.04 }}
+          transition={{ type: "spring", stiffness: 300, damping: 22 }}
         >
           <h3>{study.title}</h3>
           <p>{study.years}</p>
           <div className="study-card-footer">
             <div className="study-card-media-container">
-              <img src={study.image} alt={`Imagen de ${study.title}`} className="study-card-image default-image" />
+              <img
+                src={study.image}
+                alt={`Imagen de ${study.title}`}
+                className="study-card-image default-image"
+              />
               {study.pdf && (
                 <div className="pdf-thumbnail-wrapper">
                   <img
@@ -187,7 +130,10 @@ const StudiesCards: React.FC = () => {
         </motion.div>
       ))}
 
-      <AnimatePresence>
+      {/* Modal de detalle del estudio (portal a body: queda sobre todo,
+          las tarjetas flotantes quedan detrás) */}
+      {createPortal(
+        <AnimatePresence>
         {selectedStudy && (
           <motion.div
             className="study-modal-overlay"
@@ -199,13 +145,16 @@ const StudiesCards: React.FC = () => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="study-modal glass-panel"
+              className="study-modal glass-panel glass-strong"
               onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 30 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <button className="close-button" onClick={() => setSelectedStudy(null)}>✖</button>
+              <button className="close-button" onClick={() => setSelectedStudy(null)} aria-label="Cerrar">
+                ✖
+              </button>
 
               <div className="study-modal-content">
                 <div className="study-info">
@@ -222,8 +171,8 @@ const StudiesCards: React.FC = () => {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.3 }}
                   >
-                    <Calendar size={20} style={{ marginRight: '10px', verticalAlign: 'middle', color: '#00d2ff' }} />
-                    <strong style={{ verticalAlign: 'middle' }}>{selectedStudy.years}</strong>
+                    <Calendar size={20} style={{ marginRight: "10px", verticalAlign: "middle" }} />
+                    <strong style={{ verticalAlign: "middle" }}>{selectedStudy.years}</strong>
                   </motion.p>
                   <motion.div
                     className="study-description"
@@ -241,18 +190,27 @@ const StudiesCards: React.FC = () => {
                 </div>
 
                 <div className="study-preview-container">
-                  {selectedStudy.badge && (
-                    <div className="study-badge">
-                      {selectedStudy.badge}
-                    </div>
-                  )}
+                  {selectedStudy.badge && <div className="study-badge">{selectedStudy.badge}</div>}
                   {selectedStudy.pdf ? (
-                    <div className="pdf-container">
+                    <div
+                      className="pdf-container clickable-diploma"
+                      onClick={() => setZoomedDiploma(getJpgPath(selectedStudy.pdf))}
+                    >
                       <img
                         src={getJpgPath(selectedStudy.pdf)}
                         alt={`Diploma de ${selectedStudy.title}`}
                         className="pdf-viewer-image"
                       />
+                      <div className="diploma-fade" />
+                      <button
+                        className="diploma-view-full"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setZoomedDiploma(getJpgPath(selectedStudy.pdf));
+                        }}
+                      >
+                        {t("study_view_full")}
+                      </button>
                     </div>
                   ) : (
                     <div className="no-pdf">
@@ -264,9 +222,38 @@ const StudiesCards: React.FC = () => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
 
-      <style className="hover"></style>
+      {/* Overlay del diploma a tamaño completo (portal a body) */}
+      {createPortal(
+        <AnimatePresence>
+        {zoomedDiploma && (
+          <motion.div
+            className="diploma-zoom-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setZoomedDiploma(null)}
+          >
+            <motion.img
+              src={zoomedDiploma}
+              alt="Diploma completo"
+              className="diploma-zoom-image"
+              initial={{ scale: 0.85 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.85 }}
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button className="close-button diploma-zoom-close" onClick={() => setZoomedDiploma(null)}>
+              ✖
+            </button>
+          </motion.div>
+        )}
+        </AnimatePresence>,
+        document.body
+      )}
     </motion.div>
   );
 };

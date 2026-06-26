@@ -1,31 +1,23 @@
 :root {
-  /* --- COLORES CONFIGURABLES --- */
-  --hue1: 255;
-  /* Base violeta */
-  --hue2: 270;
-  /* Base morada oscura */
-
-  /* Colores exactos solicitados para gradientes */
-  --color-neon-1: #6966FF;
-  --color-neon-2: #6200CB;
+  /* Colores neón derivados de los tokens de marca (OKLCH, sin saltos) */
+  --color-neon-1: var(--brand);
+  --color-neon-2: var(--brand-strong);
 
   --border: 1px;
   --radius: 30px;
-  --border-color: rgba(255, 255, 255, 0.15);
+  --border-color: oklch(0.98 0 0 / 0.15);
 }
 
-/* Le decimos al navegador que estas variables son colores y deben animarse suavemente */
+/* Variables animables del borde neón (rango controlado dentro de la marca) */
 @property --anim-color-1 {
   syntax: '<color>';
-  initial-value: #6966FF;
-  /* Tu color azul/violeta original */
+  initial-value: rebeccapurple;
   inherits: true;
 }
 
 @property --anim-color-2 {
   syntax: '<color>';
-  initial-value: #6200CB;
-  /* Tu color morado original */
+  initial-value: rebeccapurple;
   inherits: true;
 }
 
@@ -33,15 +25,13 @@
 .app {
   max-width: 100%;
   text-align: center;
-  color: white;
+  color: var(--ink);
   position: relative;
   min-height: 100vh;
-  /* Ajustado de 110vh */
-  background-color: #08090d;
+  background-color: var(--bg-0);
   overflow: hidden;
-  animation: cicloColorNeones 15s infinite linear;
+  animation: cicloColorNeones 18s infinite linear;
   padding-bottom: 2rem;
-  /* Menos espacio al final */
 }
 
 @media (max-width: 768px) {
@@ -59,25 +49,15 @@
   width: 100%;
   height: 100%;
 
+  /* Fondo original (se ve bien): sombra + imagen + colores de marca animados */
   background-image:
-    /* 1. SOMBRA SUPERIOR SUAVIZADA (Para que el título no se vea opaco) */
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.9) 100%),
-
-    /* 2. TU IMAGEN DE FONDO (Capa media) */
+    linear-gradient(to bottom, oklch(0 0 0 / 0.4) 0%, transparent 15%, transparent 85%, oklch(0 0 0 / 0.9) 100%),
     url('/img/bg2.jpg'),
-
-    /* 3. TUS COLORES ANIMADOS (Capa inferior) */
     linear-gradient(to right in oklab, var(--anim-color-1), var(--anim-color-2));
 
   background-size: cover;
   background-position: center;
-
-  /* IMPORTANTE: Ajuste de mezcla */
-  /* 'normal' para la sombra (para que sea negra real), 
-     'hard-light' (o overlay) para mezclar la imagen con los colores */
   background-blend-mode: normal, hard-light;
-
-  /* Invertir horizontalmente */
   transform: scaleX(-1);
   opacity: 0.6;
   z-index: 0;
@@ -136,13 +116,12 @@
 
   /* Fondo Cristal Oscuro */
   background:
-    linear-gradient(235deg, rgba(105, 102, 255, 0.1), transparent 33%),
-    linear-gradient(45deg, rgba(98, 0, 203, 0.15), transparent 33%),
-    rgba(15, 20, 30, 0.7);
-  /* Base oscura semi-transparente */
+    linear-gradient(235deg, oklch(0.63 0.16 285 / 0.12), transparent 33%),
+    linear-gradient(45deg, oklch(0.53 0.17 282 / 0.16), transparent 33%),
+    var(--glass-bg-strong);
 
-  backdrop-filter: blur(20px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 0 25px 50px oklch(0 0 0 / 0.7);
 
   overflow: hidden;
   display: flex;
@@ -410,7 +389,7 @@
 }
 
 @media (max-width: 768px) {
-  .modal-content .close-button:not(.mobile-exterior-close) {
+  .project-modal .close-button:not(.mobile-exterior-close) {
     display: none !important; /* Ocultamos el estorboso interno */
   }
 
@@ -562,58 +541,28 @@
 
 .project-links {
   display: flex;
-  gap: 10px; /* Reducido */
-  margin-top: 0.6rem; /* Reducido */
+  gap: 12px;
+  margin-top: 0.4rem;
   width: 100%;
   flex-wrap: wrap;
 }
 
-.project-links a {
+.project-links .glass-button {
   flex: 1;
-  min-width: 140px;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
+  min-width: 150px;
   justify-content: center;
-  gap: 10px;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
+  font-size: 0.92rem;
+  text-decoration: none;
 }
 
-/* Botones de links con fondo degradado */
-.project-links a:has(svg) {
-  background: rgba(255, 255, 255, 0.08);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+/* El primer enlace (sitio principal) resaltado con la marca */
+.project-links .glass-button:first-child {
+  background: var(--grad-brand);
+  border: none;
 }
 
-.project-links a:has(svg):hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-/* Botones con emojis (primer y segundo enlace) */
-.project-links a:not(:has(svg)) {
-  background: linear-gradient(135deg, var(--color-neon-1), var(--color-neon-2));
-  color: white;
-  box-shadow: 0 5px 15px rgba(105, 102, 255, 0.3);
-}
-
-.project-links a:not(:has(svg)):hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(105, 102, 255, 0.5);
-  filter: brightness(1.1);
-}
-
-.github-icon {
-  font-size: 1.4rem;
+.project-links .glass-button:first-child:hover {
+  box-shadow: 0 16px 34px -10px var(--brand-glow);
 }
 
 /* --- VIDEO LOADER --- */
@@ -632,16 +581,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(8, 9, 13, 0.9);
+  background: oklch(0.12 0.012 285 / 0.9);
   z-index: 5;
-  color: #6966FF;
+  color: var(--brand-soft);
 }
 
 /* Progress Bar Loader */
 .progress-bar {
   width: 150px;
   height: 4px;
-  background: rgba(105, 102, 255, 0.1);
+  background: oklch(0.63 0.16 285 / 0.12);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 15px;
@@ -663,21 +612,18 @@
   100% { transform: scaleX(1); opacity: 0; }
 }
 
+/* Ciclo de color contenido dentro del rango de marca (violeta ↔ azul de apoyo).
+   Evita los saltos drásticos a rosa/naranja del diseño anterior. */
 @keyframes cicloColorNeones {
   0%,
   100% {
-    --anim-color-1: #6966FF;
-    --anim-color-2: #6200CB;
+    --anim-color-1: oklch(0.63 0.16 285);
+    --anim-color-2: oklch(0.53 0.17 282);
   }
 
-  33% {
-    --anim-color-1: #8A2EFF;
-    --anim-color-2: #FF0080;
-  }
-
-  66% {
-    --anim-color-1: #FF0080;
-    --anim-color-2: #0070F3;
+  50% {
+    --anim-color-1: oklch(0.66 0.14 270);
+    --anim-color-2: oklch(0.58 0.13 255);
   }
 }
 
@@ -697,26 +643,271 @@
   padding: 20px;
 }
 
-.modal-content {
+.project-modal {
   position: relative;
   width: 92%;
-  max-width: 1000px; 
+  max-width: 1000px;
   max-height: 90vh;
-  overflow-y: auto;
-  padding: 1.5rem 2.5rem; /* Menos padding vertical */
-  border-radius: 30px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-  background: rgba(15, 20, 30, 0.95);
-  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.modal-content::-webkit-scrollbar {
+.project-modal__scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2rem 2.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.project-modal__scroll::-webkit-scrollbar {
   width: 8px;
 }
 
-.modal-content::-webkit-scrollbar-thumb {
-  background: var(--color-neon-1);
+.project-modal__scroll::-webkit-scrollbar-thumb {
+  background: var(--brand);
   border-radius: 10px;
+}
+
+/* --- HEADER --- */
+.project-modal__header {
+  text-align: left;
+}
+
+.project-modal__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.project-chip {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: var(--brand-soft);
+  background: oklch(0.63 0.16 285 / 0.14);
+  border: 1px solid oklch(0.63 0.16 285 / 0.3);
+}
+
+.project-modal__title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+  background: var(--grad-title);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.project-modal__subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--ink-dim);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* --- DESCRIPCIÓN --- */
+.project-modal__desc {
+  color: var(--ink-dim);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  text-align: left;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* --- VER MÁS --- */
+.see-more-toggle {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--brand-soft);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.25s ease;
+}
+
+.see-more-toggle:hover {
+  color: var(--brand);
+}
+
+.see-more-icon {
+  transition: transform 0.3s var(--ease-out-soft);
+}
+
+.see-more-icon.open {
+  transform: rotate(180deg);
+}
+
+/* --- DETALLES EXPANDIBLES --- */
+.project-details {
+  overflow: hidden;
+}
+
+.project-details__inner {
+  text-align: left;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.project-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  margin: 1.25rem 0 0.6rem;
+}
+
+.project-modal__detail {
+  color: var(--ink-dim);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* --- DESGLOSE DE HABILIDADES POR DISCIPLINA --- */
+.proj-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proj-group {
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  background: oklch(0.98 0 0 / 0.04);
+  border: 1px solid var(--glass-border);
+}
+
+.proj-group__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 0.6rem;
+}
+
+.proj-group__label {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--brand-soft);
+}
+
+.proj-group__techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.proj-group__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 999px;
+  background: oklch(0.63 0.16 285 / 0.16);
+  border: 1px solid oklch(0.63 0.16 285 / 0.3);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.proj-group__chip img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.proj-group__note {
+  margin: 0;
+  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  font-weight: 300;
+}
+
+/* --- STACK CON ROLES (legado) --- */
+.tech-stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.tech-stack__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: oklch(0.98 0 0 / 0.04);
+  border: 1px solid var(--glass-border);
+  transition: background 0.25s ease, transform 0.25s var(--ease-out-soft);
+}
+
+.tech-stack__item:hover {
+  background: oklch(0.98 0 0 / 0.08);
+  transform: translateY(-2px);
+}
+
+.tech-stack__badge {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grad-brand);
+}
+
+.tech-stack__badge img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.tech-stack__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tech-stack__name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.tech-stack__role {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  line-height: 1.3;
+}
+
+@media (max-width: 600px) {
+  .tech-stack {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Boton cerrar antiguo eliminado para usar .close-button universal */
@@ -847,15 +1038,17 @@
     top: 10px !important;
     right: 10px !important;
   }
-  .modal-description {
-    font-size: 0.75rem; /* Aún más pequeño */
-    line-height: 1.35;
-    margin-bottom: 0.3rem;
+  .project-modal__desc,
+  .project-modal__detail {
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
-  .modal-content {
-    padding: 1.2rem 1rem !important; /* Más espacio horizontal interno */
+  .project-modal {
     width: 95% !important;
-    max-height: 85vh !important;
-    margin-top: 6vh !important; /* Evita chocar con el botón superior */
+    max-height: 86vh !important;
+    margin-top: 5vh !important; /* Evita chocar con el botón superior */
+  }
+  .project-modal__scroll {
+    padding: 1.5rem 1.25rem;
   }
 }

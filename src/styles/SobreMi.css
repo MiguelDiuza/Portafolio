@@ -39,15 +39,15 @@
   height: auto;
   border: none;
   object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(105, 102, 255, 0.6));
+  filter: drop-shadow(0 0 20px var(--brand-glow));
 }
 
 .sobre-mi__left h1 {
-  font-size: 5.5rem;
+  font-size: clamp(2.6rem, 5.5vw, 5.5rem);
   font-weight: 950;
   margin-top: -0.5rem;
   margin-bottom: 2rem; /* Mas distancia entre titulo y texto */
-  background: linear-gradient(to bottom, #fff, #6966FF);
+  background: linear-gradient(to bottom, var(--ink), var(--brand));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -94,7 +94,7 @@
   padding: 1rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
-  border-left: 4px solid #6966FF;
+  border-left: 4px solid var(--brand);
 }
 
 .formacion-resumen span {
@@ -110,6 +110,32 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  position: relative;
+}
+
+/* El contenido (título + tarjetas) sobre el fondo de trazos */
+.sobre-mi__right > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fondo de trazos animados (FloatingPaths) en color de marca */
+.sobre-mi__right .bg-paths {
+  position: absolute;
+  inset: -6% -4%;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--brand);
+  opacity: 0.6;
+  -webkit-mask-image: radial-gradient(80% 75% at 50% 45%, black 0%, transparent 85%);
+  mask-image: radial-gradient(80% 75% at 50% 45%, black 0%, transparent 85%);
+}
+
+.bg-paths__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .sobre-mi__studies {
@@ -181,7 +207,7 @@
 }
 
 .sobre-mi__certifications button {
-  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  background: linear-gradient(to bottom, var(--accent), var(--brand));
   border-radius: 9999px;
   padding: 0.5rem 1rem;
   color: white;
@@ -194,16 +220,16 @@
 }
 
 .titulo-estudios {
-  font-size: 6rem;
+  font-size: clamp(2.6rem, 6vw, 6rem);
   font-weight: 800;
   /* Extra bold */
-  color: #ffffff;
+  color: var(--ink);
   text-transform: uppercase;
   text-align: center;
   margin-top: 0;
   margin-bottom: 4px;
   letter-spacing: 1px;
-  background: linear-gradient(90deg, #ffffff, #3a7bd5);
+  background: linear-gradient(90deg, var(--ink), var(--accent));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -275,7 +301,7 @@
   display: inline-block;
   width: 3px;
   height: 1.1em;
-  background-color: #6966ff;
+  background-color: var(--brand);
   margin-left: 4px;
   vertical-align: middle;
   animation: blink 0.8s step-end infinite;

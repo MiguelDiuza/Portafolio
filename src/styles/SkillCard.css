@@ -1,189 +1,318 @@
+/* ============================================================
+   SKILL CARD — flotante y aterrizada
+   ============================================================ */
 .skill-card {
-  width: 150px;
-  height: 200px;
+  width: 132px;
+  height: 178px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: none !important;
+  will-change: transform;
 }
 
-.skill-card::before,
-.skill-card::after {
-  display: none !important;
-}
-
-/* Estilo base para las tarjetas cuando están flotando en el header (antes y después de encogerse) */
-.floating-skills-container .skill-card {
-  background: rgba(255, 255, 255, 0.07) !important;
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: none !important;
-}
-
+/* Compacto al iniciar scroll (lo anima framer con `layout`) */
 .skill-card.shrink {
   width: 100px;
   height: 140px;
-  transform: scale(0.85);
 }
 
+/* ============================================================
+   ARO DE PROGRESO — glass + relieve 3D (sin disco interior)
+   ============================================================ */
+.skill-ring {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
 
+.skill-card.shrink .skill-ring {
+  width: 62px;
+  height: 62px;
+  margin-bottom: 6px;
+}
 
-.skill-circle {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: conic-gradient(#6a5acd 0% 38%, rgba(255, 255, 255, 0.1) 38%);
+.skill-card.shrink .skill-name {
+  font-size: 0.78rem;
+}
+
+.skill-ring__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Pista tipo tubo de cristal translúcido */
+.skill-ring__track {
+  fill: none;
+  stroke: oklch(1 0 0 / 0.14);
+  stroke-width: 12;
+}
+
+.skill-ring__stop-a { stop-color: var(--brand-soft); }
+.skill-ring__stop-b { stop-color: var(--brand-strong); }
+
+/* Arco de progreso: extremos redondeados + sombra 3D + glow */
+.skill-ring__progress {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round;
+  filter:
+    drop-shadow(0 2px 3px oklch(0 0 0 / 0.5))
+    drop-shadow(0 0 7px var(--brand-glow));
+  transition: stroke-dashoffset 0.9s var(--ease-out-soft);
+}
+
+/* Brillo superior fino: barniz/relieve del tubo */
+.skill-ring__sheen {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.skill-ring__label {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-}
-
-.skill-percentage {
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 3px oklch(0 0 0 / 0.5);
 }
 
 .skill-name {
-  color: white;
-  font-weight: 600;
-  margin-top: 10px;
-}
-
-.header-right {
-  display: flex;
-  justify-content: flex-end;
-  background-color: transparent;
-}
-
-.card-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-
-.card {
-  flex: 1 1 220px;
-  max-width: 250px;
-  min-width: 140px;
-  aspect-ratio: 12 / 18;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  background: rgba(255, 255, 255, 0.31);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.1px);
-  -webkit-backdrop-filter: blur(8.1px);
-  border: 1px solid rgba(255, 255, 255, 0.31);
-}
-
-
-/* ... Tus estilos anteriores ... */
-
-/* --- ESTILOS PARA LA TARJETA ATERRIZADA (EXPANDIDA) --- */
-.skill-card.large-card {
-  /* Hacemos la tarjeta más angosta como pediste */
-  width: 220px !important;
-  min-width: 220px !important;
-  min-height: 600px;
-  /* Un poco más altas para mejor distribución */
-  padding: 1.5rem;
-  justify-content: flex-start;
-  gap: 5px;
-  /* Espacio reducido */
-}
-
-/* Aseguramos que el círculo no se aplaste ni desaparezca */
-.skill-card.large-card .skill-circle {
-  flex-shrink: 0;
-  /* OBLIGATORIO: Evita que el círculo desaparezca si falta espacio */
-  width: 80px;
-  /* Un poco más grande en la versión expandida (opcional) */
-  height: 80px;
-  margin-bottom: 5px;
-}
-
-.skill-card.large-card .skill-name {
-  font-size: 1.2rem;
-  /* Nombre un poco más grande */
-  margin-bottom: 10px;
-}
-
-/* Contenedor interno que rota */
-.flip-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  color: var(--ink);
+  font-weight: 700;
   text-align: center;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  /* Efecto rebote suave */
-  transform-style: preserve-3d;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  padding: 0 0.4rem;
 }
 
-/* Estado rotado */
-.flip-inner.flipped {
-  transform: rotateY(180deg);
+.skill-name--landed {
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+  margin-top: 0;
 }
 
-/* Caras de la tarjeta (Frente y Reverso) */
-.flip-front,
-.flip-back {
-  position: absolute;
+/* ============================================================
+   TARJETA ATERRIZADA (large-card)
+   ============================================================ */
+.skill-card.large-card {
+  width: 210px;
+  min-width: 210px;
+  min-height: 0;
+  height: auto;
+  padding: 1.5rem 1.4rem;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+/* Hover morado en las tarjetas aterrizadas */
+.skill-card.large-card:hover {
+  border-color: oklch(0.63 0.16 285 / 0.6);
+  background: linear-gradient(
+    135deg,
+    oklch(0.45 0.12 285 / 0.32) 0%,
+    oklch(0.30 0.12 285 / 0.42) 100%
+  );
+  box-shadow:
+    0 24px 60px -12px oklch(0 0 0 / 0.65),
+    0 0 30px -4px var(--brand-glow),
+    inset 1.5px 1.5px 1px oklch(1 0 0 / 0.3);
+}
+
+.skill-detail {
   width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.skill-progress-track {
+  height: 10px;
+  background: oklch(0.30 0.01 285 / 0.6);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 6px 0 22px;
+  box-shadow: inset 0 1px 2px oklch(0 0 0 / 0.4);
+}
+
+.skill-progress-fill {
   height: 100%;
-  -webkit-backface-visibility: hidden;
-  /* Safari */
-  backface-visibility: hidden;
+  border-radius: 999px;
+  background: var(--grad-brand);
+  box-shadow: 0 0 12px var(--brand-glow);
+}
+
+.skill-techs {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.skill-tech {
+  text-align: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 20px;
-  /* Importante para que coincida con el borde de la tarjeta */
+  font: inherit;
 }
 
-/* Ajuste específico para el frente */
-.flip-front {
-  justify-content: flex-start;
-  /* Alineación que ya teníamos */
-  padding-top: 1.5rem;
-  z-index: 2;
-}
-
-/* Ajuste específico para el reverso */
-.flip-back {
-  background: rgba(30, 30, 40, 0.95);
-  /* Un fondo un poco más oscuro para leer bien */
-  color: white;
-  transform: rotateY(180deg);
-  /* Ya está volteado por defecto */
+.skill-tech__badge {
+  width: 46px;
+  height: 46px;
+  background: oklch(0.98 0 0 / 0.07);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  padding: 9px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 1.5rem;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-  /* Sombra interna para profundidad */
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
+  transition: transform 0.3s var(--ease-out-back), background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Estilo para las barras/items del reverso */
-.subskill-item {
-  background: rgba(255, 255, 255, 0.1);
-  margin: 5px 0;
-  padding: 8px 12px;
-  border-radius: 8px;
+.skill-tech:hover .skill-tech__badge {
+  transform: translateY(-4px) scale(1.08);
+  background: oklch(0.63 0.16 285 / 0.3);
+  border-color: oklch(0.63 0.16 285 / 0.6);
+}
+
+.skill-tech__icon {
   width: 100%;
-  font-size: 0.85rem;
-  text-align: center;
-  border-left: 4px solid #6a5acd;
-  /* Detalle de color */
+  height: 100%;
+  object-fit: contain;
+}
+
+.skill-tech__label {
+  font-size: 0.7rem;
+  color: var(--ink-dim);
+  display: block;
 }
 
 @media (max-width: 768px) {
   .skill-card.large-card {
-    width: 90% !important;
-    min-width: 300px !important;
+    width: 100%;
+    min-width: 0;
+    max-width: 340px;
   }
+}
+
+/* ============================================================
+   MODAL DE DETALLE DE TECNOLOGÍA
+   ============================================================ */
+.tech-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: oklch(0.08 0.01 285 / 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tech-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  border-radius: 24px;
+  text-align: left;
+}
+
+.tech-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: oklch(1 0 0 / 0.08);
+  border: 1px solid var(--glass-border);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out-back);
+}
+
+.tech-modal__close:hover {
+  background: var(--danger);
+  transform: rotate(90deg) scale(1.1);
+}
+
+.tech-modal__head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.tech-modal__badge {
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grad-brand);
+  box-shadow: 0 8px 22px var(--brand-glow);
+}
+
+.tech-modal__badge img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.tech-modal__name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.tech-modal__level-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--brand-soft);
+}
+
+.tech-modal__track {
+  height: 10px;
+  border-radius: 999px;
+  background: oklch(0.30 0.01 285 / 0.6);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  box-shadow: inset 0 1px 2px oklch(0 0 0 / 0.4);
+}
+
+.tech-modal__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--grad-brand);
+  box-shadow: 0 0 12px var(--brand-glow);
+}
+
+.tech-modal__desc {
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 300;
 }

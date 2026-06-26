@@ -358,7 +358,9 @@ const Proyectos: React.FC = () => {
                                     if (!tech) return null;
                                     return (
                                       <span key={key} className="proj-group__chip" title={tech.name}>
-                                        <img src={tech.logo} alt={tech.name} className="icon-white" />
+                                        <span className="proj-group__chip-logo">
+                                          <img src={tech.logo} alt={tech.name} />
+                                        </span>
                                         <span>{tech.name}</span>
                                       </span>
                                     );

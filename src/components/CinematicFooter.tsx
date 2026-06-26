@@ -145,12 +145,7 @@ const CinematicFooter: React.FC = () => {
       </div>
 
       {/* Barra inferior */}
-      <div className="cine-bottom">
-        <span className="cine-badge">
-          {t("footer_crafted")} <span className="cine-heart">❤</span> {t("footer_by")}
-          <strong>Diuza</strong>
-        </span>
-
+      <div className="cine-bottom cine-bottom--end">
         <MagneticButton
           as="button"
           onClick={scrollToTop}

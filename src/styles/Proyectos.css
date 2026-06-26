@@ -818,19 +818,33 @@
 .proj-group__chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px 4px 6px;
+  gap: 7px;
+  padding: 3px 12px 3px 3px;
   border-radius: 999px;
   background: oklch(0.63 0.16 285 / 0.16);
   border: 1px solid oklch(0.63 0.16 285 / 0.3);
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: var(--ink);
 }
 
-.proj-group__chip img {
-  width: 16px;
-  height: 16px;
+/* Badge claro para que el logo se vea en su color real (incluso los oscuros) */
+.proj-group__chip-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.3);
+}
+
+.proj-group__chip-logo img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 

@@ -253,6 +253,11 @@
   flex-wrap: wrap;
 }
 
+/* Sin badge: el botón "volver arriba" se alinea a la derecha */
+.cine-bottom--end {
+  justify-content: flex-end;
+}
+
 .cine-copy {
   font-size: 0.7rem;
   font-weight: 600;

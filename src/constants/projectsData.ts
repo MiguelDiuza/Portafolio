@@ -164,8 +164,8 @@ export const PROJECTS: Project[] = [
         label: { es: "Frontend & animación", en: "Frontend & animation" },
         techs: ["html", "css", "js"],
         note: {
-          es: "Landing moderna con animaciones fluidas y galería de portafolio interactiva; estilos organizados con SCSS y maquetación responsive.",
-          en: "Modern landing with fluid animations and an interactive portfolio gallery; styles organized with SCSS and responsive layout.",
+          es: "Landing del estudio creativo con Bootstrap 5, animaciones al hacer scroll (AOS), carruseles (Owl Carousel) y galería con lightbox; estilos organizados con SCSS y maquetación mobile-first.",
+          en: "Creative-studio landing with Bootstrap 5, scroll animations (AOS), sliders (Owl Carousel) and a lightbox gallery; styles organized with SCSS and a mobile-first layout.",
         },
       },
       {
@@ -198,10 +198,10 @@ export const PROJECTS: Project[] = [
     groups: [
       {
         label: { es: "Motor & juego", en: "Engine & gameplay" },
-        techs: ["unity", "cpp"],
+        techs: ["unity"],
         note: {
-          es: "Mecánicas, físicas, iluminación dinámica y shaders (C#/HLSL) en Unity, con build desplegado en la web mediante WebGL.",
-          en: "Mechanics, physics, dynamic lighting and shaders (C#/HLSL) in Unity, with a build deployed to the web via WebGL.",
+          es: "Mecánicas, físicas, iluminación dinámica y shaders programados en C# y HLSL/ShaderLab dentro de Unity (el 92% del código es C#), con build desplegado en la web mediante WebGL.",
+          en: "Mechanics, physics, dynamic lighting and shaders written in C# and HLSL/ShaderLab inside Unity (92% of the code is C#), with a build deployed to the web via WebGL.",
         },
       },
       {

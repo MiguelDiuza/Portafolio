@@ -754,7 +754,7 @@
 
 /* --- DETALLES EXPANDIBLES --- */
 .project-details {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .project-details__inner {

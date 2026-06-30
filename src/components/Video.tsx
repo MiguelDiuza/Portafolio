@@ -4,7 +4,7 @@ import { useLanguage } from "./idiomas";
 
 const Video: React.FC = () => {
   const { t } = useLanguage();
-  const videoId = "oOkRGhgylb8"; // Reemplázalo con el ID de tu video
+  const videoId = "NhvcRuhTvh8";
 
   return (
     <div className="video-container">
